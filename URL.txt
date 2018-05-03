@@ -1,0 +1,18 @@
+http://139.199.28.148:8080/smart-sso-demo/user/login            用户登录
+http://139.199.28.148:8080/smart-sso-demo/user/findByName       AJAX验证是否用户名重复
+http://139.199.28.148:8080/smart-sso-demo/user/register         注册
+http://139.199.28.148:8080/smart-sso-demo/user/logout           退出
+http://139.199.28.148:8080/smart-sso-demo/user/update           修改个人信息
+http://139.199.28.148:8080/smart-sso-demo/data/findByDate/{time}    根据日期查询
+http://139.199.28.148:8080/smart-sso-demo/data/findByDateRange/{start}/{end}    根据日期范围
+http://139.199.28.148:8080/smart-sso-demo/data/findNew          查询最新的数据
+http://139.199.28.148:8080/smart-sso-demo/data/findByEquipmentId/{eid}          根据设备id查询
+http://139.199.28.148:8080/smart-sso-demo/equipment/findByUId/{uid}/{pageNo}/{pageSize}   根据用户id查询 页码 一页显示几个
+http://139.199.28.148:8080/smart-sso-demo/equipment/findByName/{name}           根据名字查询
+http://139.199.28.148:8080/smart-sso-demo/equipment/delete     删除设备根据id
+http://139.199.28.148:8080/smart-sso-demo/equipment/update     更新设备
+http://139.199.28.148:8080/smart-sso-demo/equipment/add        添加设备
+http://139.199.28.148:8080/smart-sso-demo/equipment/get/{id}   根据id获取设备
+http://139.199.28.148:8080/smart-sso-demo/photo/get/{id}       根据id获取图片
+
+传感器操作待续。。。。。
