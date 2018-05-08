@@ -81,7 +81,6 @@ $().ready(function() {
 
     $(".confirmButton").click(function () {
         if($validator.form()) {
-            alert("注册成功！");
             /*将数据传递给后台*/
             var dataInfo = $("#registerForm").serializeArray();
             var values={};
@@ -92,15 +91,22 @@ $().ready(function() {
             delete values.confirmPassword;
             console.log(values);
             //将数据发出去
-            $.post("http://139.199.28.148:8080/smart-sso-demo/user/register", values)
-                //.error(function(){
-                //    alert("请稍后重试");
-                //})
-            ;
-            //window.location.href = "login.html";
+            $.post(ip+"/user/register", values,function(json){
+                console.log(json)
+                if(json.type === "COMMON_SUC"){
+                    window.location.href = "login.html";
+                }else if(json.type === "USER_REGISTER_REQ_ERROR"){
+                    alert("注册参数请求错误");
+                }else if(json.type === "USER_NAME_EXIT"){
+                    alert("用户名已存在");
+                }else if(json.type === "USER_REGISTER_ERROR"){
+                    alert("注册失败");
+                }
+            }).fail(function(json){
+                alert("注册失败，请稍后再试");
+            });
         } else {
             alert("信息填写有错误哦，再仔细检查一下吧！");
-
         }
     });
 

@@ -23,7 +23,7 @@ ul,ol {list-style: none;}
 /* img border */
 fieldset,img{border: 0}
 /* table */
-table {border-collapse: collapse;border-spacing: 0;font:inherit;}
+/*table {border-collapse: collapse;border-spacing: 0;font:inherit;}*/
 /* margin */
 .alpha {margin-left: 0;}
 .omega {margin-right: 0;}

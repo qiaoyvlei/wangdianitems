@@ -18,7 +18,7 @@
         <a class="toRegister" href="register.html">立即注册</a>
         <div class="formGroups">
             <span class="icon-user iconStyle"></span>
-            <input class="info" type="text" name="username" id="username"
+            <input class="info" type="text" name="name" id="name"
                    placeholder="请输入用户名"/>
         </div>
         <label></label>
@@ -36,11 +36,12 @@
 
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script src="../js/jquery.validate.min.js"></script>
+<script src="../common.js"></script>
 <script>
     $(function () {
         var $validator = $("#loginForm").validate({
             rules: {
-                username: {
+                name: {
                     required: true
                 },
                 password: {
@@ -49,7 +50,7 @@
             },
 
             messages: {
-                username: {
+                name: {
                     required: "请输入用户名"
                 },
                 password: {
@@ -73,23 +74,22 @@
                 });
 //                removeCookie('userName');m
                 console.log(values);
-                $.post("http://139.199.28.148:8080/smart-sso-demo/user/login", values, function (data) {
-                    if(data.status == true) {
-                        alert("登录成功");
+                $.post(ip+"/user/login", values, function (json) {
+                    if(json.type === "COMMON_SUC") {
+                        console.log(json.data)
                         //cookie存储用户名，密码，用户ID
-                        setCookie('userName',values.username,30);
-                        setCookie('userPass',values.password,30);
-                        setCookie('userId',data.userId,30);
+                        setCookie('userName',json.data.name,30);
+                        setCookie('userPass',json.data.password,30);
+                        setCookie('userId',json.data.id,30);
                         //
-                        window.close("login.html");
-                        window.open("FiberLink.html");
-
+//                        window.close("login.html");
+                        window.open("homePage.html",'_self');
+                    }else if(json.type === "USER_NAME_EXIT"){
+                        alert("用户名已存在");
                     }
-                }, "json")
-//                        .error(function(){
-//                    alert("账号或密码错误");
-//                });
-
+                }, "json").fail(function(json){
+                    alert("登录失败，请稍后再试");
+                });
             } else {
                 alert("信息填写不完整，再补充一下吧！");
             }

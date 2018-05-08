@@ -5,9 +5,9 @@
   <title>管理设备-电力通信的“全科医生”</title>
   <link href="../css/init.css" rel="stylesheet">
   <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <!-- 导航和底部样式-->
+   <!--导航和底部样式-->
   <link href="../css/headerAndFooter.css" rel="stylesheet">
-  <!-- 图标-->
+   <!--图标-->
   <link href="../Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
   <!-- jquery ui-->
   <link href="../css/jquery-ui.css" rel="stylesheet">
@@ -30,14 +30,21 @@
       /*background: rgb(252,249,242);*/
       cursor: url("https://webapi.amap.com/theme/v1.3/openhand.cur"),default;
     }
-    #table {width:100%; font-family: "宋体"; font-weight:lighter; font-size: 10px;margin-top: 10px;}
-    .thead{ width:100%;height:40px;float: left; line-height: 40px;}
-    .t1{background: white; color:#767676; width:100%;height:40px;float: left; line-height: 40px;}
-    .t2{background: #f2efef; color:#767676; width:100%;height:40px;float:left; line-height: 40px;}
-    .t40{width:400px;text-align: center;}
-    .t30{width:300px;text-align: center;}
-    .t20{width:200px; text-align: center;}
-    .t10{width:100px;padding-left:16px;text-align: center;}
+    #table {width:100%; font-weight:lighter;table-layout:fixed;  font-size: 10px;margin-top: 10px;}
+    td{
+      white-space:nowrap; text-overflow:ellipsis;overflow: hidden;
+    }
+    #mid{
+      vertical-align: middle;
+    }
+     #info{
+       background: #f5f5f5;
+       vertical-align: middle;
+     }
+    .t40{width:200px;text-align: center;}
+    .t30{width:150px;text-align: center;}
+    .t20{width:100px;text-align: center;}
+    .t10{width:50px;padding-left:16px;}
     .tr1{background: #f2efef;color:#767676;height:40px;line-height: 30px;}
     .tr2{background: white;color:#767676;height:40px;line-height: 30px;}
     .map{
@@ -58,6 +65,7 @@
     }
     #deviceslist{
       font-size: small;
+      /*overflow: auto;*/
     }
     .margin20_0{
       margin: 20px 0;
@@ -104,7 +112,7 @@
         <div class="logined">
             <a class="developerBtn" href="equipmentList.html">我的设备</a>
             <a class="developerBtn" href="userManage.html">开发者中心</a>
-            <a class="icon-bell bell"></a>
+            <a class="icon-bell bell" href="newMessage.html"></a>
             <a class="icon-user user" href="userDocument.html"></a>
         </div>
     </nav>
@@ -156,17 +164,32 @@
             <div class="tab-content">
               <!-- 设备列表-->
               <div role="tabpanel" class="tab-pane active" id="deviceslist">
-                <table id="table" cellpadding="0" cellspacing="0">
+                <table id="table" cellpadding="0" cellspacing="0" class="table">
                   <thead>
                     <tr class="thead">
                       <td class="t30">设备ID</td>
                       <td class="t30">名称</td>
                       <td class="t20">创建时间</td>
-                      <td class="t40">传感器类型</td>
-                      <td class="t20">操作</td>
+                      <td class="t20">简介</td>
+                      <td class="t40">操作</td>
                     </tr>
                   </thead>
                   <tbody class="showDevicesList"></tbody>
+                  <script  type="text/jsrender" id="showDevicesList">
+                    {{for equipments}}
+                        <tr class="t1">
+                          <td class="t30" id="mid">{{:equipmentId}}</td>
+                          <td class="t30" id="mid">{{:name}}</td>
+                          <td class="t20" id="mid">{{:createTime}}</td>
+                          <td class="t30" id="info">{{:info}}</td>
+                          <td class="t40">
+                               <button class="btn btn-default btn-sm edit-device"  onclick=editDevice('{{:equipmentId}}',this)>编辑</button>
+                               <button class="btn btn-default btn-sm show_dataTypes"  onclick=showDataTypes('{{:equipmentId}}',this)>查看传感器</button>
+                               <input class="btn btn-default btn-sm" type="button" value="删除" onclick=deleteDevice('{{:equipmentId}}','{{:name}}',this)>
+                          </td>
+                         </tr>
+                    {{/for}}
+                  </script>
                 </table>
                 <!-- 分页-->
                 <div class="page">
@@ -177,7 +200,6 @@
               <div role="tabpanel" class="tab-pane" id="adddevices">
                 <div class="adddevice" style="font-size: 14px;padding:20px;font-weight: lighter;">
                   <form id="form1" method="post" >
-                        <!--action="http://139.199.28.148:8080/smart-sso-demo/equipment/add"-->
                     <table width="100%" cellspacing="1" class="data">
                       <tbody>
                       <tr class="tr1">
@@ -187,15 +209,10 @@
                         </td>
                       </tr>
                       <tr class="tr1">
-                        <td>传感器类型</td>
+                        <td>上传图片</td>
                         <td>
-                          <div class="type_select" style="padding:8px 0;">
-                            <select id ="sela"
-                                    title="传感器类型"
-                                    multiple="multiple" size="20">
-                            </select>
-                            <span class="requiredType" style="display: none;color:red;">   *必填字段</span>
-                          </div>
+                          <input type="file" id="uploadImg" name="imgUrl" value="" onchange="selectImg(this)" required/>
+                          <img id="showImg" src=""/>
                         </td>
                       </tr>
                       <tr class="tr2">
@@ -205,9 +222,17 @@
                         </td>
                       </tr>
                       <tr class="tr2">
+                        <td>是否公开</td>
+                        <td>
+                          <input type="radio" name="isPublic" checked value="true" ><label>是</label>
+                          <input type="radio" name="isPublic" value="false" ><label>否</label>
+                        </td>
+                      </tr>
+                      <tr class="tr2">
                         <td>地理位置</td>
                         <td>
-                          <input id="location" name="location" type="hidden" value="">
+                          <input id="location_X" name="location_X" type="hidden" value="">
+                          <input id="location_Y" name="location_Y" type="hidden" value="">
                           <div class = 'panel'>选择切换省市：<select open id = 'subDistricts'></select></div>
                           <div id="mapDiv" class="map" tabindex="0"></div>
                         </td>
@@ -306,33 +331,16 @@
         </div>
         <!-- 弹出的内容-->
         <div id="edit_device" title="设备设置" style="display: none;">
-
-
-
         </div>
         <script id="edit_device_data" type="text/x-jsrender">
             <div class="editdevice" style="font-size: 14px;padding:20px;font-weight: lighter;">
                   <form id="form_edit" method="post" >
-                        <!--action="http://139.199.28.148:8080/smart-sso-demo/equipment/update"-->
                     <table width="100%" cellspacing="1" class="data">
                       <tbody>
                       <tr class="tr1">
                         <td>名称</td>
                         <td>
                           <input id="Name" name="name" size="50" type="text" value="{{:name}}" required>
-                        </td>
-                      </tr>
-                      <tr class="tr1">
-                        <td>传感器类型</td>
-                        <td>
-                          <div class="type_select" style="padding:8px 0;">
-                            <select id ="sela_edit"
-                                    title="传感器类型"
-                                    multiple="multiple" size="20">
-
-                            </select>
-                            <span class="requiredType" style="display: none;color:red;">   *必填字段</span>
-                          </div>
                         </td>
                       </tr>
                       <tr class="tr2">
@@ -342,22 +350,58 @@
                         </td>
                       </tr>
                       <tr class="tr2">
+                        <td>是否公开</td>
+                        <td>
+                            <input type="radio" name="isPublic" {{if isPublic === true}} checked="checked" {{/if}} value="true"/><label>是</label>
+                            <input type="radio" name="isPublic" {{if isPublic === false}} checked="checked" {{/if}} value="false"/><label>否</label>
+                        </td>
+                      </tr>
+                      <tr class="tr2">
                         <td>地理位置</td>
                         <td>
-                          <input id="location_edit" name="location" type="hidden" value="{{:location}}">
+                          <input id="location_X" name="location_X" type="hidden" value="">
+                          <input id="location_Y" name="location_Y" type="hidden" value="">
                           <div class = 'panel'>选择切换省市：<select open id = 'subDistricts_edit'></select></div>
                           <div id="mapDiv_edit" class="map" tabindex="0"></div>
                         </td>
                       </tr>
                       <tr class="tr1">
                         <td colspan="2" align="center" style="padding-top: 30px;">
-                          <input type="button"  class="btn btn-default" value="保存" onclick="updateDevice('{{:id}}')" >
+                          <input type="button"  class="btn btn-default" value="保存" onclick="updateDevice('{{:equipmentId}}')" >
                         </td>
                       </tr>
                       </tbody>
                     </table>
                   </form>
 
+                </div>
+        </script>
+        <div id="showDataTypes" title="传感器类型" style="display: none;">
+        </div>
+        <script id="showDataTypes_Data" type="text/x-jsrender">
+            <div class="showDataTypes" style="font-size: 14px;padding:20px;font-weight: lighter;">
+                    <div >
+                        <button type="button" class="btn btn-info" onclick="addDataTypes()">添加</button>
+                    </div>
+                    <table width="100%" cellspacing="0" class="data" class="table">
+                      <thead>
+                        <tr class="thead">
+                          <td class="t30">传感器名称</td>
+                          <td class="t30">传感器类型</td>
+                          <td class="t40">操作</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr class="t1">
+                              <td class="t30" id="mid">{{:#data}}</td>
+                              <td class="t30" id="mid">{{:#data}}</td>
+                              <td class="t40">
+                                   <button class="btn btn-default btn-sm edit-device"  onclick=editDevice('{{:~root.equipmentId}}',this)>编辑</button>
+                                   <input class="btn btn-default btn-sm" type="button" value="删除" onclick=deleteDevice('{{:~root.equipmentId}}','{{:name}}',this)>
+                              </td>
+                           </tr>
+                      </tbody>
+                    </table>
                 </div>
         </script>
       </div>
@@ -384,6 +428,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>
   <!--jqPaginator jquery分页插件-->
   <script src="../js/jqPaginator.js"></script>
+  <script src="../common.js"></script>
 <script src="../js/userManage.js"></script>
 </body>
 </html>

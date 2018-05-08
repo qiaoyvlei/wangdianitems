@@ -1,4 +1,14 @@
 $(function () {
+    //判断是否登录状态
+    var userId = getCookie("userId");
+    console.log(userId);
+    //if(userId){
+    //    $('.logined').css('display','block');
+    //    $('.unlogin').css('display','none');
+    //}else{
+    //    $('.unlogin').css('display','block');
+    //    $('.logined').css('display','none');
+    //}
 
     function carousel() {
         var $prev = $(".prev");
@@ -169,7 +179,7 @@ $(function () {
     });
 
     $("#locationBox").on("click", function () {
-        window.open("homePageLocation.html");
+        window.open("equipmentExplore.html");
     });
 
     //图片懒加载
@@ -228,3 +238,14 @@ $(function () {
     });
 
 });
+function getCookie(cookieName) {
+    var strCookie = document.cookie;
+    var arrCookie = strCookie.split("; ");
+    for(var i = 0; i < arrCookie.length; i++){
+        var arr = arrCookie[i].split("=");
+        if(cookieName == arr[0]){
+            return arr[1];
+        }
+    }
+    return "";
+}

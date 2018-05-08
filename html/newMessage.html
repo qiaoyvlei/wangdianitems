@@ -8,7 +8,7 @@
     <link href="../Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/userDocument.css"/>
     <link rel="stylesheet" href="../css/headerAndFooter.css">
-    <title>Document</title>
+    <title>消息中心</title>
     <link rel="stylesheet" href="../css/newMessage.css">
 </head>
 <body>
@@ -34,9 +34,36 @@
         </nav>
     </header>
 
-<div class="content">
-    <div class="news">111111</div>
-    <div class="news">11111</div>
-</div>
+<div class="showMessage"></div>
+<script type="text/jsrender" id="showMessage">
+    {{for messageContent}}
+        <div class="news">{{:data}}</div>
+    {{/for}}
+</script>
+<script src="../js/jquery.min.js"></script>
+<script src="../common.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>
+<script>
+   $(function(){
+       userId = '4657c0733c5048a79e7555574a1dc564';
+       var params = {};
+       params.userId = userId;
+       function showNews(){
+           console.log(1);
+           $.post(ip+'user/message',params,function(json){
+               console.log(json);
+               if(json.type === "COMMON_SUC"){
+                   var template1 = $.templates("#showMessage");
+                   var htmlOutput1 = template1.render(message);
+                   $(".showMessage").html(htmlOutput1);
+               }else if(json.type === ""){
+
+               }
+           })
+       }
+       showNews();
+       setInterval(showNews,60000);
+   })
+</script>
 </body>
 </html>

@@ -43,27 +43,26 @@
       <!--</div>-->
     </div>
     <!-- 设备列表-->
-    <div class="row">
-      <!-- 每一个设备-->
-      <ul render-loop="equipmentList">
-        <li>
-          <div class="col-sm-6 col-md-4 col-xs-12 col-lg-3">
+    <div class="row showEveryEquipment"></div>
+    <!-- 每一个设备-->
+    <script id="showEveryEquipment" type="text/jsrender">
+      {{for equipments}}
+        <div class="col-sm-6 col-md-4 col-xs-12 col-lg-3">
             <div class="thumbnail">
               <div class="imgHere">
-                <a render-href="equipmentList.id">
-                  <img render-src="equipmentList.imgUrl" alt="...">
+                <a href={{:equipmentId}}>
+                  <img src="../images/machineRoom-display1.png" alt="...">
+                  <!--<img src={{:imgUrl}} alt="...">-->
                 </a>
               </div>
               <div class="caption">
-                <h4 render-fun="show_equipment" render-key="equipmentList.name"></h4>
-                <div render-fun="show_equipment" render-key="equipmentList.info" class="info"></div>
+                <h4>{{:name}}</h4>
+                <div class="info">{{:info}}</div>
               </div>
             </div>
           </div>
-        </li>
-      </ul>
-
-    </div>
+      {{/for}}
+     </script>
   </div>
   <!--分页 -->
   <div class="page">
@@ -95,249 +94,48 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <!--使用json数据动态生成结构 ，，html模板引擎-->
-<script src="../js/jrender.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>
 <!--jqPaginator jquery分页插件-->
 <script src="../js/jqPaginator.js"></script>
+<script src="../common.js"></script>
 <script>
-
-  var equipment = {
-    "equipmentList": [
-      {
-        "name":"老朋友的颗粒物检测",
-        "id":"df4d7ff823234c6291522951ae7ee10b",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"C id elit non mi porta gravida at eged nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"大气质量检测站点",
-        "id":"D002",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"项目总目标为研究一种基于物联云平台的的电力通信辅助检测系统，系统研究内容包括三大部分，分别为光缆线路微气象及光缆运行状态监测子系统（含微气象监测、光缆振动监测、无人机辅助光缆巡视）、机房智能巡检子系统（含机房综合检测平台、机器人辅助巡视、防小动物智监测、人工巡检辅助APP等），以及物联云平台（含微气象预警、光缆状态预警、巡检记录查询等各类高级功能）.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"客厅颗粒物检测",
-        "id":"D003",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cras jurta gravida at eget mericies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"室内空气实时监控",
-        "id":"D004",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Crasd elit non mm id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      },
-      {
-        "name":"空气检测器",
-        "id":"D005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "info":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-        "datas":[
-          { "name":"温度","id":"T"},
-          { "name":"湿度","id":"H"},
-          { "name":"光照强度","id":"S"},
-          { "name":"二氧化碳浓度","id":"C"}
-        ]
-      }
-    ]
-  };
-
   $(function(){
-       // 创建分页
-       //将num值传给后台
-      $("#Pagination").jqPaginator({
-        totalPages: 6,
-        visiblePages: 5,
-        currentPage: 1,
-        onPageChange: function (num, type) {
-          pageIndex = num;
-        },
-        first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
-        prev: '<li class="prev"><a href="javascript:void(0);"><i class="arrow arrow2"><\/i>上一页<\/a><\/li>',
-        next: '<li class="next"><a href="javascript:void(0);">下一页<i class="arrow arrow3"><\/i><\/a><\/li>',
-        last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
-        page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>'
-      });
-    console.log(pageIndex)
-    userId = '4657c0733c5048a79e7555574a1dc564'
-    var params = {}
+    userId = '4657c0733c5048a79e7555574a1dc564';
+    var params = {};
     params.userId = userId;
     params.pageNo = 1 || pageIndex;
-    $.post('http://192.168.1.185:8080/equipment/find',params,function(json){
+    $.post(ip+'/equipment/find',params,function(json){
         if(json.type === "COMMON_SUC"){
           var equipment = json.data;
-          console.log(equipment);
-          $(".row").renderValues(equipment,{
-            'show_equipment':function(item,value){
-              console.log(equipment)
-    //        console.log(item);
-    //        console.log(value)
-              $(item).html(value);
-            }
-          })
+          var template1 = $.templates("#showEveryEquipment");
+          var htmlOutput1 = template1.render(equipment);
+          $(".showEveryEquipment").html(htmlOutput1);
 
-        }else{
+          // 创建分页
+          //将num值传给后台
+          $("#Pagination").jqPaginator({
+            totalPages: equipment.pageNum,
+            visiblePages: 5,
+            currentPage: 1,
+            onPageChange: function (num, type) {
+              pageIndex = num;
+              return pageIndex;
+            },
+            first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
+            prev: '<li class="prev"><a href="javascript:void(0);"><i class="arrow arrow2"><\/i>上一页<\/a><\/li>',
+            next: '<li class="next"><a href="javascript:void(0);">下一页<i class="arrow arrow3"><\/i><\/a><\/li>',
+            last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
+            page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>'
+          });
 
+        }else if(json.type === "Equipment_REQ_ERROR"){
+          alert("设备请求参数错误！")
+        }else if(json.type === "Equipment_FIND_ERROR"){
+          alert("设备信息查询失败！")
         }
-    },'json')
-//            .error(function(){
-//      console.error("请求出错");
-//    })
+    },'json').fail(function(json){
+      alert("请求失败，请稍后再试")
+    });
   });
 </script>
 </body>

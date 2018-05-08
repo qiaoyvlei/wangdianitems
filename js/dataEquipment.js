@@ -3,7 +3,7 @@ $(function () {
     var params = {};
     params.equipmentId = equipmentId;
     //这个设备的基本信息
-    $.post('http://192.168.1.185:8080/equipment/find',params,function(json){
+    $.post(ip+'/equipment/find',params,function(json){
         //console.log(json)
         var template = $.templates("#equipmentInfo");
         var htmlOutput = template.render(json.data.equipments);
@@ -88,7 +88,7 @@ $(function () {
                     }
                     return tmps.join('&');
                 };
-                var url="http://192.168.1.185:8080/data/dataLoad?"+encodeParam(params);
+                var url=ip+"/data/dataLoad?"+encodeParam(params);
                 const elink = document.createElement('a');// 创建a标签
                 elink.style.display = 'none';
                 elink.href = url;
@@ -103,7 +103,7 @@ $(function () {
     });
 
     //这个设备支持的传感器类型
-    $.post('http://192.168.1.185:8080/sensor/findDataType',params,function(json){
+    $.post(ip+'/sensor/findDataType',params,function(json){
         //遍历设备传感器，将其填入option中
         $.each(json.data.dataTypes,function(index,html){
             switch(html){
@@ -140,7 +140,7 @@ $(function () {
 
     });
     //根据json数据绘制折线图
-    $.post('http://192.168.1.185:8080/sensor/findDataType',params,function(json){
+    $.post(ip+'/sensor/findDataType',params,function(json){
         $.each(json.data.dataTypes,function(index,data){
             drawChart(equipmentId,data,0);
         });
@@ -196,7 +196,7 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
     }
     parmas.endTime=new Date().getTime();
     $("#" + containerId).html('<img src="../images/loading.gif" align="center" style="margin-top:80px;" />');
-    $.post('http://192.168.1.185:8080/data/find',parmas,function(json){
+    $.post(ip+'/data/find',parmas,function(json){
         if(json.type === "COMMON_SUC"){
             var data = json.data;
             res = [];
@@ -312,6 +312,8 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
         }else if(json.type === "DATA_FIND_ERROR"){
             alert("数据查询失败,请稍后再试")
         }
+    }).fail(function(json){
+        alert("请求失败，请稍后再试")
     });
 }
 function getDate(index){

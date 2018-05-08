@@ -6,7 +6,7 @@
     background:  #2A9F96;
     opacity: 1;
     padding: 0;
-    z-index: 1;
+    z-index: 999;
     min-width: 1200px;
 }
 

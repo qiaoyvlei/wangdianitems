@@ -1,5 +1,11 @@
 var map;var marker;var pos;
+var image = '';
+var canvas;
+var base64;//将canvas压缩为base64格式
 $(document).ready(function(){
+    $( ".edit-device").click(function(){
+        $( "#edit_device" ).dialog( "open" );
+    });
     /** 通过点击展开左边栏 **/
     $("#sideslip").click(function(){
         if($(".sidebar").css("left") == "0px") {
@@ -9,42 +15,40 @@ $(document).ready(function(){
             $("#sideslip").animate({left:"190px"});
         }
     });
+    var params = {};
+    params.userId = '4657c0733c5048a79e7555574a1dc564';
+    params.pageNo = 1 || pageIndex;
     //显示devices列表
-    var showlist = everyDevices(equipment.equipmentList);
-    for(var i=0;i<equipment.equipmentList.length;i++){
-        $(".showDevicesList").append(showlist[i]);
-    }
-    //这里使用ajax获取数据之后进行渲染
-    //用户id从cookie中获取,首次查询，使用页码号1
-//    $.get("http://139.199.28.148:8080/smart-sso-demo/equipment/findByUId/"+uid+"/1/",function(data){
-//      var showlist = everyDevices(data.devicesList);
-//      for(var i=0;i<data.devicesList.length;i++){
-//        $(".showDevicesList").append(showlist[i]);
-//      }
-//    });
+    $.post(ip+'/equipment/find',params,function(json){
+        console.log(json);
+        if(json.type === "COMMON_SUC"){
+            var template1 = $.templates("#showDevicesList");
+            var htmlOutput1 = template1.render(json.data);
+            $(".showDevicesList").html(htmlOutput1);
 
-    //我的设备分页
-    // 创建分页
-    //将num值传给后台
-    $("#Pagination_mydevice").jqPaginator( {
-        //返回页码数
-        totalPages: 6,
-        visiblePages: 5,
-        currentPage: 1,
-        onPageChange: function (num, type) {
-            //uid获取自cookie
-//        $.post("http://139.199.28.148:8080/smart-sso-demo/equipment/findByUId/"+uid+"/"+num+"",function(data){
-//          var showlist = everyDevices(data.devicesList);
-//          for(var i=0;i<data.devicesList.length;i++){
-//            $(".showDevicesList").append(showlist[i]);
-//          }
-//        });
-        },
-        first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
-        prev: '<li class="prev"><a href="javascript:void(0);"><i class="arrow arrow2"><\/i>上一页<\/a><\/li>',
-        next: '<li class="next"><a href="javascript:void(0);">下一页<i class="arrow arrow3"><\/i><\/a><\/li>',
-        last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
-        page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>'
+            $("#Pagination_mydevice").jqPaginator( {
+                //返回页码数
+                totalPages: json.data.pageNum,
+                visiblePages: 5,
+                currentPage: 1,
+                onPageChange: function (num, type) {
+                    pageIndex = num;
+                    return pageIndex;
+                },
+                first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
+                prev: '<li class="prev"><a href="javascript:void(0);"><i class="arrow arrow2"><\/i>上一页<\/a><\/li>',
+                next: '<li class="next"><a href="javascript:void(0);">下一页<i class="arrow arrow3"><\/i><\/a><\/li>',
+                last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
+                page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>'
+            });
+
+        }else if(json.type === "Equipment_REQ_ERROR"){
+            alert("设备请求参数错误！")
+        }else if(json.type === "Equipment_FIND_ERROR"){
+            alert("设备信息查询失败！")
+        }
+    },'json').fail(function(json){
+        alert("请求失败，请稍后再试")
     });
 
     //显示实时设备信息table
@@ -83,6 +87,7 @@ $(document).ready(function(){
         last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
         page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>'
     });
+
     //编辑设备弹出框
     $( "#edit_device" ).dialog({
         autoOpen: false,
@@ -95,27 +100,6 @@ $(document).ready(function(){
                 $(this).dialog('close');
             }
         }
-    });
-    //编辑设备弹框
-    $( ".edit-device").click(function(){
-        $( "#edit_device" ).dialog( "open" );
-    });
-
-
-    //传感器
-    $.each(sensorList,function(index,html){
-        $('#sela').append(
-            $('<option></option>')
-                .text(html)
-                .val(html)
-        );
-    });
-    $("#sela").multiselect({
-        noneSelectedText: "==请选择设备支持的传感器类型==",
-        checkAllText: "全选",
-        uncheckAllText: '全不选'
-        ,selectedList:10
-        ,minWidth:450
     });
 
 
@@ -155,29 +139,12 @@ $(document).ready(function(){
     var clickEventListener=AMap.event.addListener(map,'click',function(e){
         var lng =e.lnglat.getLng();
         var lat =e.lnglat.getLat();
-        console.log(lng,lat);
         addPoint(lng,lat);
     });
 
 
 });
 
-//显示设备详细信息
-function everyDevices(data){
-    var list=[];
-    for(var i=0;i<data.length;i++){
-        list[i]='<tr class="t1">'
-        +'<td class="t30">'+data[i].id+'</td>'
-        +'<td class="t30">'+data[i].name+'</td>'
-        +'<td class="t20">'+data[i].createTime+'</td>'
-        +'<td class="t40" style="font-size:3px;">'+data[i].sensor+'</td>'
-        +'<td class="t20">'
-        +'<button class="btn btn-default btn-sm edit-device"  onclick=editDevice("'+data[i].id+'",this)>'+'编辑'+'</button>'
-        +'<input class="btn btn-default btn-sm" type="button" value="删除" onclick=deleteDevice("'+data[i].id+'","'+data[i].name+'",this)>'
-        +'</td>'+'</tr>'
-    }
-    return list;
-}
 //删除设备
 function deleteDevice(id,name,obj){
     var con = confirm("确认删除 "+name+" 及其全部信息吗？");
@@ -187,95 +154,125 @@ function deleteDevice(id,name,obj){
         var tbody=tr.parentNode;
         tbody.removeChild(tr);
 
-        var param = {"id":id};
-        $.post("http://139.199.28.148:8080/smart-sso-demo/equipment/delete",param);
+        var params = {"equipmentId":id};
+        $.post(ip+"/equipment/del",params,function(json){
+            console.log(json);
+            if(json.typpe === "COMMPN_SUC"){
+                var url=window.location.href;
+                window.location.href = url;
+            }else if(json.type === "Equipment_DEL_ERROR"){
+                alert("设备信息删除失败");
+            }
+        }).fail(function(){
+            alert("请求错误，请稍后再试");
+        });
     }
 }
 //编辑设备
 function editDevice(id,obj){
-    console.log(id);
-    console.log(obj);
-
     //将数据填人编辑设备中
-    var template = $.templates("#edit_device_data");
-    var htmlOutput = template.render(equipment.equipmentList[3]);
-    $("#edit_device").html(htmlOutput);
-    //传感器类型
-    //将后台传过来的值附进去，让其选中
-    $.each(sensorList,function(index,html){
-        $('#sela_edit').append(
-            $('<option></option>')
-                .text(html)
-                .val(html)
-        );
-    });
-    var arrSensor = [];
-    for(var i=0;i<equipment.equipmentList[0].sensor.length;i++){
-        (function(){
-            arrSensor.push(equipment.equipmentList[0].sensor[i]);
-        })(i);
-    }
-    $("#sela_edit").val(arrSensor);
-    $("#sela_edit").multiselect({
-        noneSelectedText: "==请选择设备支持的传感器类型==",
-        checkAllText: "全选",
-        uncheckAllText: '全不选'
-        ,selectedList:10
-        ,minWidth:450
-    });
-    //地图
+    $.post(ip+'/equipment/find',{equipmentId:id},function(json){
+        var data = json.data.equipments[0];
+        console.log(data);
+        if(json.type === "COMMON_SUC"){
+            var template = $.templates("#edit_device_data");
+            var htmlOutput = template.render(data);
+            $("#edit_device").html(htmlOutput);
 
-    var location  = equipment.equipmentList[0].location;
-    console.log(location);
-    map = new AMap.Map('mapDiv_edit', {
-        resizeEnable: true,
-        center: new AMap.LngLat(0,0),
-        zoom:10
-    });
-    var districtSearch = new AMap.DistrictSearch();
-    districtSearch.search('中国',function(status, result){
-        var subDistricts = result.districtList[0].districtList;
-        var select = document.getElementById('subDistricts_edit');
-        for(var i = 0;i < subDistricts.length; i += 1){
-            var name = subDistricts[i].name;
-            var option = document.createElement('option');
-            option.value = option.innerHTML = name;
-            select.appendChild(option);
-        }
-        select.onchange = function(){map.setCity(this.value)};
-        select.value = subDistricts[0].name;
+            //编辑设备弹框
+            $( ".edit-device").click(function(){
+                $( "#edit_device" ).dialog( "open" );
+            });
+            //地图
+            var location  = data.location_X + ','+ data.location_Y;
+            console.log(location);
+            map = new AMap.Map('mapDiv_edit', {
+                resizeEnable: true,
+                center: new AMap.LngLat(0,0),
+                zoom:10
+            });
+            var districtSearch = new AMap.DistrictSearch();
+            districtSearch.search('中国',function(status, result){
+                var subDistricts = result.districtList[0].districtList;
+                var select = document.getElementById('subDistricts_edit');
+                for(var i = 0;i < subDistricts.length; i += 1){
+                    var name = subDistricts[i].name;
+                    var option = document.createElement('option');
+                    option.value = option.innerHTML = name;
+                    select.appendChild(option);
+                }
+                select.onchange = function(){map.setCity(this.value)};
+                select.value = subDistricts[0].name;
 //      select.onchange();
-        thisLocation(location);
+                thisLocation(location);
+            });
+
+            map.plugin(["AMap.ToolBar"], function () {
+                var toolBar = new AMap.ToolBar();
+                map.addControl(toolBar);
+            });
+            if(false){
+                pos = new AMap.LngLat(0, 0);
+                map.setZoom(12);
+            }
+            else
+            {// showCityInfo();
+            }
+            map.setCenter(pos);
+            addMarker();
+            addPoint(data.location_X ,data.location_Y );
+            var clickEventListener=AMap.event.addListener(map,'click',function(e){
+                var lng =e.lnglat.getLng();
+                var lat =e.lnglat.getLat();
+                console.log(lng,lat);
+                addPoint(lng,lat);
+            });
+        }else if(json.type === "Equipment_REQ_ERROR"){
+            alert("设备请求参数错误！")
+        }else if(json.type === "Equipment_FIND_ERROR"){
+            alert("设备信息查询失败！")
+        }
+    }).fail(function(){
+        alert("请求错误，请稍后再试")
     });
+}
 
+function showDataTypes(id){
+    $.post(ip+'/sensor/findDataType',{equipmentId:id},function(json){
+        var firstData = json.data;
+        if(json.type === "COMMON_SUC"){
+            var template = $.templates("#showDataTypes_Data");
+            var htmlOutput = template.render(firstData);
+            $("#showDataTypes").html(htmlOutput);
 
-    map.plugin(["AMap.ToolBar"], function () {
-        var toolBar = new AMap.ToolBar();
-        map.addControl(toolBar);
+            //查看传感器类型
+            $( "#showDataTypes" ).dialog({
+                autoOpen: false,
+                height: 500,
+                width: 800,
+                modal: true,
+                resizable:false,
+                buttons:{
+                    "取消":function(){
+                        $(this).dialog('close');
+                    }
+                }
+            });
+            //编辑设备弹框
+            $( ".show_dataTypes").click(function(){
+                $( "#showDataTypes" ).dialog( "open" );
+            });
+
+        }else if(json.type === "Equipment_REQ_ERROR"){
+            alert("设备请求参数错误！")
+        }else if(json.type === "Equipment_FIND_ERROR"){
+            alert("设备信息查询失败！")
+        }else if(json.type === "SENSOR_NULL_ERROR"){
+            alert("该设备未添加任何传感器")
+        }
+    }).fail(function(){
+        alert("请求错误，请稍后再试")
     });
-    if(false){
-        pos = new AMap.LngLat(0, 0);
-        map.setZoom(12);
-    }
-    else
-    {// showCityInfo();
-    }
-    map.setCenter(pos);
-    addMarker();
-    var clickEventListener=AMap.event.addListener(map,'click',function(e){
-        var lng =e.lnglat.getLng();
-        var lat =e.lnglat.getLat();
-        addPoint(lng,lat);
-    });
-
-
-//    $.get("http://139.199.28.148:8080/smart-sso-demo/data/findByEquipmentId/{"+id+"}",function(data){
-//
-//    });
-//    var values={};
-//    $.post("http://139.199.28.148:8080/smart-sso-demo/equipment/update",values);
-//    var url=window.location.href;
-//    window.location.href = url;
 }
 
 //保存编辑好的设备
@@ -290,14 +287,19 @@ function updateDevice(id){
         $.each(params,function(i,val){
             values[val.name] = val.value;
         });
-        console.log(1)
-        var sensor = $('#sela_edit').val();
-        values['sensor'] = sensor;
-        values['id']= id;
+        values['equipmentId']= id;
         console.log(values);
-//    $.post("http://139.199.28.148:8080/smart-sso-demo/equipment/update",values);
-//    var url=window.location.href;
-//    window.location.href = url;
+        $.post(ip+'/equipment/update',values,function(json){
+            console.log(json);
+            if(json.type === "COMMON_SUC"){
+                var url=window.location.href;
+                window.location.href = url;
+            }else if(json.type === "Equipment_UPDATE_ERROR"){
+                alert("设备信息更新失败")
+            }
+        }).fail(function(){
+            alert("请求错误，请稍后再试")
+        });
     }
 }
 //保存新添加的设备信息
@@ -312,12 +314,18 @@ function saveDevice(){
         $.each(params,function(i,val){
             values[val.name] = val.value;
         });
-        var sensor = $('#sela').val();
-        values['sensor'] = sensor;
         console.log(values);
-//      $.post("http://139.199.28.148:8080/smart-sso-demo/equipment/add",values);
-//      var url=window.location.href;
-//      window.location.href = url;
+
+        $.post(ip+'/equipment/add',values,function(json){
+            console.log(json);
+            if(json.type === "COMMON_SUC"){
+                var url=window.location.href;
+                window.location.href = url;
+            }
+
+        }).fail(function(){
+            alert("请求错误，请稍后再试")
+        });
     }
 
 }
@@ -332,7 +340,9 @@ function cancelAddDevice(){
 function addPoint(lng,lat) {
     var point =  new AMap.LngLat(lng, lat);  // 创建标注
     marker.setPosition(point);            // 将标注添加到地图中
-    $("#location").val(lng + "," + lat);
+    //$("#location").val(lng + "," + lat);
+    $("#location_X").val(lng);
+    $("#location_Y").val(lat);
 }
 //标记
 function addMarker() {
@@ -382,7 +392,48 @@ function thisLocation(location){
     });
 
 }
+function selectImg(file){
+    if(!file.files || !file.files[0]){
+        return;
+    }
+    var reader = new FileReader();//读取文件
+    reader.onload = function(event){//文件读取完成的回调函数
+        image = document.getElementById('showImg');
+        image.src = event.target.result;//读入文件的base64数据(可直接作为src属性来显示图片)
+        image.style.width = '200px';
+        image.style.height = '200px';
+        //alert(event.target.result);
+        //图片读取完成的回调函数（必须加上否则数据读入不完整导致出错！）
+        image.onload = function(){
+            canvas = convertImageToCanvas(image); //图片转canvas
+            base64 = canvas.toDataURL('image/jpeg'); //将图片数据转为base64.
+            alert(base64);
+            $.post(
+                ip+"/server_interface_url/", //服务器接口(返回图片路径)
+                {data:base64},
+                function(data) {
+                    alert(data.target);
+                    alert(2)
+                    //alert(eval(data));
+                    //修改上传文件的路径名字(图片完整路径)
+                    $('#img').val('http://path/'+data.target);
+                }, "json");
+        }
+    };
+    //将文件已Data URL的形式读入页面
+    reader.readAsDataURL(file.files[0]);
+}
+// 把image 转换为 canvas对象
+function convertImageToCanvas(image) {
+    // 创建canvas DOM元素，并设置其宽高和图片一样
+    var canvas = document.createElement("canvas");
+    canvas.width = image.width;
+    canvas.height = image.height;
+    // 坐标(0,0) 表示从此处开始绘制，相当于偏移。
+    canvas.getContext("2d").drawImage(image, 0, 0);
 
+    return canvas;
+}
 
 var sensorList = ['温度','湿度','二氧化碳浓度','光照强度','烟雾浓度','PM2.5'];
 var equipment = {
@@ -416,7 +467,7 @@ var equipment = {
             "createTime":"20171112",
             "imgUrl":"../images/machineRoom-display1.png",
             "sensor":['温度','湿度','二氧化碳','烟雾浓度'],
-            "info":"asdds2",
+            "info":"温湿度监控温湿度监控温湿度监控asdds2asdds2s2",
             "location":"",
             "data":[
                 {
@@ -443,7 +494,7 @@ var equipment = {
             "createTime":"20171113",
             "imgUrl":"../images/machineRoom-display1.png",
             "sensor":['温度','二氧化碳','光照强度','烟雾浓度'],
-            "info":"asdds3",
+            "info":"asddsdds3asdds3",
             "location":"",
             "data":[
                 {

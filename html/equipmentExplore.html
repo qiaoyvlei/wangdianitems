@@ -93,12 +93,12 @@
       <a href="javascript: return false;">地址：陕西省西安市长安区西安邮电大学信工实验室</a>
     </div>
   </footer>
+<script src="../common.js"></script>
   <script>
 
 //所有用户的设备都显示，不能点击，没有实时数据，只能看
     var mapObj, cluster;
     var markers = [];
-
     $(document).ready(function () {
       mapObj = new AMap.Map("mapShow", {
         //二维地图显示视口
@@ -111,233 +111,41 @@
         var toolBar = new AMap.ToolBar();
         mapObj.addControl(toolBar);
       });
-
-//      $.getJSON("/home/PublicDeviceData?online=", function (data) {
-//        $.each(data, function (i, item) {
-//          var ss = '设备名称：<a style="font-size:14px;text-decoration:underline;" href="/u/g/' + item.id + '" target="_blank">' + item.name + '</a><br><div id="g'+item.id+'">加载中...</div>';
-
-//          //$.each(item.sensors, function (j, jtem) {
-//          //    ss = ss + jtem.name + ':<b>' + jtem.lastValue + jtem.unit + '</b><br/>';
-//          //});
-//          //'测量设备名称：<a href="/home/sensorstatus/' + item.id + '" target="_blank">' + item.name + '</a><br/>测量设备类型：' + item.type + '<br/>最近更新：' + item.lastUpdateTime
-
-//          addPoint(item.lng, item.lat, ss, item.typeIcon,item.id);
-//        });
-//        mapObj.plugin(["AMap.MarkerClusterer"], function () {
-//          cluster = new AMap.MarkerClusterer(mapObj, markers);
-//          cluster.setGridSize(20);
-//        });
-//      });
-      $.each(devices.devicesList, function (i, item) {
-        var ss = '设备名称：<a style="font-size:14px;text-decoration:underline;" href="/u/g/' + item.id + '" target="_blank">' + item.name + '</a><br><div id="g'+item.id+'">加载中...</div>';
-        //$.each(item.sensors, function (j, jtem) {
-        //    ss = ss + jtem.name + ':<b>' + jtem.lastValue + jtem.unit + '</b><br/>';
-        //});
-        //'测量设备名称：<a href="/home/sensorstatus/' + item.id + '" target="_blank">' + item.name + '</a><br/>测量设备类型：' + item.type + '<br/>最近更新：' + item.lastUpdateTime
-        lng = item.location.split(',')[0];
-        lat = item.location.split(',')[1];
-        addPoint(lng,lat, ss, item.createTime,item.id);
+      //请求所有数据，展示每个设备
+      $.post(ip+"/equipment/findLocation",function(json){
+        $.each(json.data, function (i, item) {
+          var ss = '设备名称：<span style="font-size:14px;text-decoration:underline;" >' + item.name + '</span>';
+          lng = item.location_X;
+          lat = item.location_Y;
+          addPoint(lng,lat, ss,item.equipmentId);
+        });
+        //当出现两个以上位置很相近的，采用聚集点标记
+        mapObj.plugin(["AMap.MarkerClusterer"], function () {
+          cluster = new AMap.MarkerClusterer(mapObj, markers);
+          cluster.setGridSize(20);
+        });
       });
-      mapObj.plugin(["AMap.MarkerClusterer"], function () {
-        cluster = new AMap.MarkerClusterer(mapObj, markers);
-        cluster.setGridSize(20);
-      });
-
-
     });
-
+    //展示窗口信息
     var showSensors = function (infoWindow, marker,gid) {
       infoWindow.open(mapObj, marker.getPosition());
-      //根据每个id获取其最新数据。
-//      $.getJSON("/home/publicsensordata/" + gid, function (data) {
-//        var ss = "";
-//        $.each(data, function (j, jtem) {
-//          ss = ss + jtem.name + ':<b>' + jtem.lastValue + jtem.unit + '</b><br/>';
-//        });
-//        $("#g" + gid).html(ss);
-//      });
-        var ss = "";
-        for(var i=0;i<devices.devicesList.length;i++){
-          for(var j=0;j<devices.devicesList[i].data.length;j++){
-            console.log(ss);
-            ss = ss + devices.devicesList[i].data[j].key + ':<b>' + devices.devicesList[i].data[j].value +  '</b><br/>';
-
-          }
-          $("#g" + gid).html(ss);
-        }
-//      console.log(ss);
-
-
-      //先显示加载中，然后获取json数据，重新设置infowindow
     };
-
     function addPoint(lng, lat, content, typeIcon,gid) {
       var marker = new AMap.Marker({
         position: new AMap.LngLat(lng, lat),
         draggable: false, //点标记可拖拽
-
         raiseOnDrag: true//鼠标拖拽点标记时开启点标记离开地图的效果
-
       });
-
-
       var infoWindow = new AMap.InfoWindow({
-
         content: content,
         offset: new AMap.Pixel(0, 0)//-113, -140
       });
-
       AMap.event.addListener(marker, 'click', function () { //鼠标点击marker弹出自定义的信息窗体
         showSensors(infoWindow, marker,gid);
-        //infoWindow.open(mapObj, marker.getPosition());
       });
-
       marker.setMap(mapObj);
       markers.push(marker);
-
     }
-    var devices = {
-      "devicesList":[
-        {
-          "id":"8646aee7229e48f4810966b93e4450c1",
-          "name":"温湿度监控",
-          "createTime":"20171111",
-          "imgUrl":"../images/machineRoom-display1.png",
-          "sensor":['温度','湿度','烟雾浓度'],
-          "info":"asdds1",
-          "location":"106.353202,29.584348",
-          "data":[
-            {
-              key:"温度",
-              value:"23"
-            },
-            {
-              key:"湿度",
-              value:"23"
-            },
-            {
-              key:"烟雾浓度",
-              value:123
-            }
-          ]
-        },
-        {
-          "id":"8646aee7229e48f4810966b93e4450c2",
-          "name":"温湿度监控",
-          "imgUrl":"../images/machineRoom-display1.png",
-          "sensor":['温度','湿度','二氧化碳','烟雾浓度'],
-          "info":"asdds2",
-          "location":"100.353202,35.584348",
-          "data":[
-            {
-              key:"温度",
-              value:"23"
-            },
-            {
-              key:"湿度",
-              value:"23"
-            },
-            {
-              key:"二氧化碳",
-              value:23
-            },
-            {
-              key:"烟雾浓度",
-              value:123
-            }
-          ]
-        }
-        ,{
-          "id":"8646aee7229e48f4810966b93e4450c3",
-          "name":"小伊利温湿度监控",
-          "imgUrl":"../images/machineRoom-display1.png",
-          "sensor":['温度','二氧化碳','光照强度','烟雾浓度'],
-          "info":"asdds3",
-          "location":"101.353202,30.584348",
-          "data":[
-            {
-              key:"温度",
-              value:"23"
-            },
-            {
-              key:"光照强度",
-              value:23
-            },
-            {
-              key:"二氧化碳",
-              value:23
-            },
-            {
-              key:"烟雾浓度",
-              value:123
-            }
-          ]
-        }
-        ,{
-          "id":"8646aee7229e48f4810966b93e4450c4",
-          "name":"小蒙牛温湿度监控",
-          "imgUrl":"../images/machineRoom-display1.png",
-          "sensor":['温度','湿度','二氧化碳','光照强度','烟雾浓度'],
-          "info":"asdds4",
-          "location":"100.353202,30.584348",
-          "data":[
-            {
-              key:"温度",
-              value:"23"
-            },
-            {
-              key:"湿度",
-              value:"23"
-            },
-            {
-              key:"光照强度",
-              value:23
-            },
-            {
-              key:"二氧化碳",
-              value:23
-            },
-            {
-              key:"烟雾浓度",
-              value:123
-            }
-          ]
-        }
-        ,{
-          "id":"8646aee7229e48f4810966b93e4450c5",
-          "name":"温湿度监控",
-          "imgUrl":"../images/machineRoom-display1.png",
-          "sensor":['温度','湿度','二氧化碳','光照强度','烟雾浓度'],
-          "info":"asdds5",
-          "location":"103.353202,39.584348",
-          "data":[
-            {
-              key:"温度",
-              value:"23"
-            },
-            {
-              key:"湿度",
-              value:"23"
-            },
-            {
-              key:"光照强度",
-              value:23
-            },
-            {
-              key:"二氧化碳",
-              value:23
-            },
-            {
-              key:"烟雾浓度",
-              value:123
-            }
-          ]
-        }
-      ]
-    };
-
-
-
 
   </script>
 </body>

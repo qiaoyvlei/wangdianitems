@@ -143,9 +143,8 @@ $(function () {
 
     $(".submitButton").click(function () {
         if($validator.form()) {
-            alert("修改信息成功！");
              var data = $("#form").serializeArray();
-             $.post("http://139.199.28.148:8080/smart-sso-demo/user/update", data);//将数据发出去
+             $.post(ip+"/user/update", data);//将数据发出去
              window.location.href = "userDocument.html";
         } else {
             alert("信息填写有误！再仔细检查一下吧>_<");
