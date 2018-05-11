@@ -49,10 +49,10 @@
       <a class="items" href="equipmentExplore.html">设备探索</a>
       <a class="items" href="hardwaresShow.html">硬件展示</a>
       <a class="items" href="userHelp.html">帮助文档</a>
-      <!-- <div class="unlogin">
+      <div class="unlogin">
           <a id="registerBtn" href="register.html">注册</a>
           <a id="loginBtn" href="login.html">登录</a>
-      </div> -->
+      </div>
 
       <div class="logined">
           <a class="developerBtn" href="equipmentList.html">我的设备</a>
@@ -95,7 +95,14 @@
   </footer>
 <script src="../common.js"></script>
   <script>
-
+    var userId = getCookie("userId");
+    if(userId){
+      $('.logined').css('display','inline-block');
+      $('.unlogin').css('display','none');
+    }else{
+      $('.unlogin').css('display','inline-block');
+      $('.logined').css('display','none');
+    }
 //所有用户的设备都显示，不能点击，没有实时数据，只能看
     var mapObj, cluster;
     var markers = [];

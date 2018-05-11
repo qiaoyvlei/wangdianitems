@@ -39,8 +39,8 @@
 
 /*未登录*/
 .header .unlogin {
-    margin-left: 50%;
-    display: none;
+    margin-left: 45%;
+    display: inline-block;
 }
 /*登录和注册按钮*/
 .header .unlogin a{

@@ -20,11 +20,11 @@
       <a class="items" href="equipmentExplore.html">设备探索</a>
       <a class="items" href="hardwaresShow.html">硬件展示</a>
       <a class="items" href="userHelp.html">帮助文档</a>
-<!-- 
+
       <div class="unlogin">
           <a id="registerBtn" href="register.html">注册</a>
           <a id="loginBtn" href="login.html">登录</a>
-      </div> -->
+      </div>
 
       <div class="logined">
           <a class="developerBtn" href="equipmentList.html">我的设备</a>
@@ -37,10 +37,6 @@
 <!--主要内容-->
   <div class="main">
     <div class="mainShow">
-      <!--<div class="manageequipment">-->
-        <!--&lt;!&ndash; 这里需要再加一个添加设备的页面&ndash;&gt;-->
-        <!--<button class="btn btn-default" type="button">管理设备</button>-->
-      <!--</div>-->
     </div>
     <!-- 设备列表-->
     <div class="row showEveryEquipment"></div>
@@ -50,7 +46,7 @@
         <div class="col-sm-6 col-md-4 col-xs-12 col-lg-3">
             <div class="thumbnail">
               <div class="imgHere">
-                <a href={{:equipmentId}}>
+                <a href="dataEquipment.html?id={{:equipmentId}}">
                   <img src="../images/machineRoom-display1.png" alt="...">
                   <!--<img src={{:imgUrl}} alt="...">-->
                 </a>
@@ -100,7 +96,16 @@
 <script src="../common.js"></script>
 <script>
   $(function(){
-    userId = '4657c0733c5048a79e7555574a1dc564';
+//    userId = '4657c0733c5048a79e7555574a1dc564';
+    var userId = getCookie("userId");
+    if(userId){
+      $('.logined').css('display','inline-block');
+      $('.unlogin').css('display','none');
+    }else{
+      $('.unlogin').css('display','inline-block');
+      $('.logined').css('display','none');
+    }
+
     var params = {};
     params.userId = userId;
     params.pageNo = 1 || pageIndex;

@@ -93,6 +93,9 @@
     #realtimedata .intro{
       text-align: center;
     }
+    #edit_dataType{
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -352,15 +355,15 @@
                       <tr class="tr2">
                         <td>是否公开</td>
                         <td>
-                            <input type="radio" name="isPublic" {{if isPublic === true}} checked="checked" {{/if}} value="true"/><label>是</label>
-                            <input type="radio" name="isPublic" {{if isPublic === false}} checked="checked" {{/if}} value="false"/><label>否</label>
+                            <input type="radio" name="isPublic" {{if isPublic == "true"}} checked="checked" {{/if}} value="true"/><label>是</label>
+                            <input type="radio" name="isPublic" {{if isPublic == "false"}} checked="checked" {{/if}} value="false"/><label>否</label>
                         </td>
                       </tr>
                       <tr class="tr2">
                         <td>地理位置</td>
                         <td>
-                          <input id="location_X" name="location_X" type="hidden" value="">
-                          <input id="location_Y" name="location_Y" type="hidden" value="">
+                          <input id="location_X_edit" name="location_X" type="hidden" value="">
+                          <input id="location_Y_edit" name="location_Y" type="hidden" value="">
                           <div class = 'panel'>选择切换省市：<select open id = 'subDistricts_edit'></select></div>
                           <div id="mapDiv_edit" class="map" tabindex="0"></div>
                         </td>
@@ -383,7 +386,7 @@
                     <div >
                         <button type="button" class="btn btn-info" onclick="addDataTypes()">添加</button>
                     </div>
-                    <table width="100%" cellspacing="0" class="data" class="table">
+                    <table width="100%" cellspacing="0" class="data" class="table table-striped">
                       <thead>
                         <tr class="thead">
                           <td class="t30">传感器名称</td>
@@ -392,14 +395,19 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {{for sensorTypeResps}}
                           <tr class="t1">
-                              <td class="t30" id="mid">{{:#data}}</td>
-                              <td class="t30" id="mid">{{:#data}}</td>
+                              <td class="t30" id="mid">
+                                {{:name}}
+                                <input type="text" value={{:name}} id="edit_dataType"/>
+                              </td>
+                              <td class="t30" id="mid">{{:dataType}}</td>
                               <td class="t40">
                                    <button class="btn btn-default btn-sm edit-device"  onclick=editDevice('{{:~root.equipmentId}}',this)>编辑</button>
                                    <input class="btn btn-default btn-sm" type="button" value="删除" onclick=deleteDevice('{{:~root.equipmentId}}','{{:name}}',this)>
                               </td>
                            </tr>
+                        {{/for}}
                       </tbody>
                     </table>
                 </div>

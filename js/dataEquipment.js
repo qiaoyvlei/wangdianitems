@@ -1,5 +1,14 @@
 $(function () {
-    equipmentId = 'df4d7ff823234c6291522951ae7ee10b';
+    var userId = getCookie("userId");
+    if(userId){
+        $('.logined').css('display','inline-block');
+        $('.unlogin').css('display','none');
+    }else{
+        $('.unlogin').css('display','inline-block');
+        $('.logined').css('display','none');
+    }
+    var equipmentId = window.location.href.split('?')[1].split('=')[1];
+    //equipmentId = 'df4d7ff823234c6291522951ae7ee10b';
     var params = {};
     params.equipmentId = equipmentId;
     //这个设备的基本信息
@@ -8,6 +17,7 @@ $(function () {
         var template = $.templates("#equipmentInfo");
         var htmlOutput = template.render(json.data.equipments);
         $(".equipmentInfo").html(htmlOutput);
+        document.title = json.data.equipments.name;
         //数据导出弹框
         $( "#data-export").click(function(){
             $( "#data_export" ).dialog( "open" );
@@ -105,28 +115,11 @@ $(function () {
     //这个设备支持的传感器类型
     $.post(ip+'/sensor/findDataType',params,function(json){
         //遍历设备传感器，将其填入option中
-        $.each(json.data.dataTypes,function(index,html){
-            switch(html){
-                case "tem":
-                    name = "温度";
-                    break;
-                case "hum":
-                    name = "湿度";
-                    break;
-                case "vol":
-                    name = "电压";
-                    break;
-                case "ele":
-                    name = "电流";
-                    break;
-                case "lev":
-                    name = "液位";
-                    break;
-            }
+        $.each(json.data.sensorTypeResps,function(index,html){
             $('#sela').append(
                 $('<option></option>')
-                    .text(name)
-                    .val(html)
+                    .text(html.name)
+                    .val(html.dataType)
             );
         });
         //数据类型选择
@@ -141,9 +134,11 @@ $(function () {
     });
     //根据json数据绘制折线图
     $.post(ip+'/sensor/findDataType',params,function(json){
-        $.each(json.data.dataTypes,function(index,data){
-            drawChart(equipmentId,data,0);
+        $.each(json.data.sensorTypeResps,function(index,data){
+            console.log(data.dataType)
+            drawChart(equipmentId,data.dataType,0);
         });
+        console.log(json.data)
         var template1 = $.templates("#showEveryEquipmentData");
         var htmlOutput1 = template1.render(json.data);
         $(".showEveryEquipmentData").html(htmlOutput1);
@@ -204,7 +199,7 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
                 var item = [];
                 var it=[];
                 for (var j in data[i]) item.push(data[i][j]);
-                for(var k =0;k<1;k++) it.push(new Date(item[item.length-2]).getTime(),Number(item[1]))
+                for(var k =0;k<1;k++) it.push(new Date(item[item.length-2]).getTime(),Number(item[0]))
                 res.push(it)
             }
             var unit = data[0].unit;
@@ -213,6 +208,7 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
                 $("#" + containerId).html('<div style="color:gray;padding-top:80px;">No data.</div>');
                 return;
             }
+            console.log(data)
             Highcharts.setOptions({ global: { useUTC: false } });
             chart = new Highcharts.Chart({
                 chart: {

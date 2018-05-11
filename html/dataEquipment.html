@@ -31,10 +31,10 @@
       <a class="items" href="hardwaresShow.html">硬件展示</a>
       <a class="items" href="userHelp.html">帮助文档</a>
 
-      <!-- <div class="unlogin">
+      <div class="unlogin">
           <a id="registerBtn" href="register.html">注册</a>
           <a id="loginBtn" href="login.html">登录</a>
-      </div> -->
+      </div>
 
       <div class="logined">
           <a class="developerBtn" href="equipmentList.html">我的设备</a>
@@ -88,23 +88,11 @@
     <!--每一个数据的展示-->
     <div class="showEveryEquipmentData"></div>
     <script id="showEveryEquipmentData" type="text/jsrender">
-      {{for dataTypes}}
+      {{for sensorTypeResps}}
       <div class="data_show">
         <div class="left_con">
           <div class="left_con_title">
-              {{if #data == 'tem'}}
-                  <span>温度</span>
-              {{else #data == 'hum'}}
-                  <span>湿度</span>
-              {{else #data == 'lev'}}
-                  <span>液位</span>
-              {{else #data == 'vol'}}
-                  <span>电压</span>
-              {{else #data == 'ele'}}
-                  <span>电流</span>
-              {{else}}
-                <span></span>
-              {{/if}}
+             <span>{{:name}}</span>
           </div>
           <div class="left_con_pic">
             <img src="https://cdn.lewei50.com/content/images/defaultsensor.png">
@@ -113,21 +101,21 @@
             <h3></h3>
             <div style="text-align: center;">{{:equipmentId}}</div>
             <form>
-              <input type="hidden" id="{{:~root.equipmentId}}" value="{{:#data}}"
+              <input type="hidden" id="{{:~root.equipmentId}}" value="{{:dataType}}"
             </form>
           </div>
         </div>
         <div class="right_con">
           <div class="filter" >
             <ul>
-              <li><a href="javascript:drawChart('{{:~root.equipmentId}}','{{:#data}}',0)">实时</a></li>
-              <li><a href="javascript:drawChart('{{:~root.equipmentId}}','{{:#data}}',1)">最近一天</a></li>
-              <li><a href="javascript:drawChart('{{:~root.equipmentId}}','{{:#data}}',2)">最近一周</a></li>
-              <li><a href="javascript:drawChart('{{:~root.equipmentId}}','{{:#data}}',3)">最近一月</a></li>
+              <li><a href="javascript:drawChart('{{:~root.equipmentId}}','{{:dataType}}',0)">实时</a></li>
+              <li><a href="javascript:drawChart('{{:~root.equipmentId}}','{{:dataType}}',1)">最近一天</a></li>
+              <li><a href="javascript:drawChart('{{:~root.equipmentId}}','{{:dataType}}',2)">最近一周</a></li>
+              <li><a href="javascript:drawChart('{{:~root.equipmentId}}','{{:dataType}}',3)">最近一月</a></li>
             </ul>
           </div>
           <div class="chart_show">
-            <div id="{{:~root.equipmentId}}{{:#data}}" style="width:90%;min-width:400px;height:260px;margin: 0 auto;">
+            <div id="{{:~root.equipmentId}}{{:dataType}}" style="width:90%;min-width:400px;height:260px;margin: 0 auto;">
             </div>
           </div>
         </div>

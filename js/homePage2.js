@@ -1,14 +1,13 @@
 $(function () {
     //判断是否登录状态
     var userId = getCookie("userId");
-    console.log(userId);
-    //if(userId){
-    //    $('.logined').css('display','block');
-    //    $('.unlogin').css('display','none');
-    //}else{
-    //    $('.unlogin').css('display','block');
-    //    $('.logined').css('display','none');
-    //}
+    if(userId){
+        $('.logined').css('display','inline-block');
+        $('.unlogin').css('display','none');
+    }else{
+        $('.unlogin').css('display','inline-block');
+        $('.logined').css('display','none');
+    }
 
     function carousel() {
         var $prev = $(".prev");

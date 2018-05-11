@@ -1,6 +1,14 @@
 $(function () {
     //打开用户文档界面的时候需要从后台调取需要显示信息的数据
-
+//判断是否登录状态
+    var userId = getCookie("userId");
+    if(userId){
+        $('.logined').css('display','inline-block');
+        $('.unlogin').css('display','none');
+    }else{
+        $('.unlogin').css('display','inline-block');
+        $('.logined').css('display','none');
+    }
 
 
     /*编辑*/
@@ -35,6 +43,9 @@ $(function () {
     $("#quitAccount").click(function () {
         if(confirm("您确定要退出当前页面吗？")) {
             //清空cookie,显示首页
+            removeCookie('userId');
+            removeCookie('userName');
+            removeCookie('userPass');
             window.open("homePage.html", "_self");
         }
     });

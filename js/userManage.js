@@ -2,6 +2,15 @@ var map;var marker;var pos;
 var image = '';
 var canvas;
 var base64;//将canvas压缩为base64格式
+//var userId = '4657c0733c5048a79e7555574a1dc564';
+var userId = getCookie("userId");
+if(userId){
+    $('.logined').css('display','inline-block');
+    $('.unlogin').css('display','none');
+}else{
+    $('.unlogin').css('display','inline-block');
+    $('.logined').css('display','none');
+}
 $(document).ready(function(){
     $( ".edit-device").click(function(){
         $( "#edit_device" ).dialog( "open" );
@@ -15,8 +24,9 @@ $(document).ready(function(){
             $("#sideslip").animate({left:"190px"});
         }
     });
+
     var params = {};
-    params.userId = '4657c0733c5048a79e7555574a1dc564';
+    params.userId = userId;
     params.pageNo = 1 || pageIndex;
     //显示devices列表
     $.post(ip+'/equipment/find',params,function(json){
@@ -225,7 +235,7 @@ function editDevice(id,obj){
                 var lng =e.lnglat.getLng();
                 var lat =e.lnglat.getLat();
                 console.log(lng,lat);
-                addPoint(lng,lat);
+                addPointEdit(lng,lat);
             });
         }else if(json.type === "Equipment_REQ_ERROR"){
             alert("设备请求参数错误！")
@@ -239,6 +249,7 @@ function editDevice(id,obj){
 
 function showDataTypes(id){
     $.post(ip+'/sensor/findDataType',{equipmentId:id},function(json){
+        console.log(json.data)
         var firstData = json.data;
         if(json.type === "COMMON_SUC"){
             var template = $.templates("#showDataTypes_Data");
@@ -288,6 +299,7 @@ function updateDevice(id){
             values[val.name] = val.value;
         });
         values['equipmentId']= id;
+        values.imgUrl = "";
         console.log(values);
         $.post(ip+'/equipment/update',values,function(json){
             console.log(json);
@@ -314,8 +326,9 @@ function saveDevice(){
         $.each(params,function(i,val){
             values[val.name] = val.value;
         });
+        values.imgUrl = "";
+        values.userId = userId;
         console.log(values);
-
         $.post(ip+'/equipment/add',values,function(json){
             console.log(json);
             if(json.type === "COMMON_SUC"){
@@ -343,6 +356,13 @@ function addPoint(lng,lat) {
     //$("#location").val(lng + "," + lat);
     $("#location_X").val(lng);
     $("#location_Y").val(lat);
+}
+function addPointEdit(lng,lat) {
+    var point =  new AMap.LngLat(lng, lat);  // 创建标注
+    marker.setPosition(point);            // 将标注添加到地图中
+    //$("#location").val(lng + "," + lat);
+    $("#location_X_edit").val(lng);
+    $("#location_Y_edit").val(lat);
 }
 //标记
 function addMarker() {

@@ -20,11 +20,11 @@
             <a class="items" href="hardwaresShow.html">硬件展示</a>
             <a class="items" href="userHelp.html">帮助文档</a>
     
-            <!-- <div class="unlogin">
+            <div class="unlogin">
                 <a id="registerBtn" href="register.html">注册</a>
                 <a id="loginBtn" href="login.html">登录</a>
             </div>
-     -->
+
             <div class="logined">
                 <a class="developerBtn" href="equipmentList.html">我的设备</a>
                 <a class="developerBtn" href="userManage.html">开发者中心</a>
@@ -45,6 +45,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>
 <script>
    $(function(){
+       var userId = getCookie("userId");
+       if(userId){
+           $('.logined').css('display','inline-block');
+           $('.unlogin').css('display','none');
+       }else{
+           $('.unlogin').css('display','inline-block');
+           $('.logined').css('display','none');
+       }
        userId = '4657c0733c5048a79e7555574a1dc564';
        var params = {};
        params.userId = userId;
