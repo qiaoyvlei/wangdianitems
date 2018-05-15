@@ -11,6 +11,10 @@
     background-color: #E1EED2;
     border-radius: 10px;
     box-sizing: border-box;
-    padding: 5px 5px;
+    padding: 5px 15px;
     margin-top: 10px;
+    line-height: 40px;
+}
+.content .news .news_time{
+   float: right;
 }

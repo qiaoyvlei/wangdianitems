@@ -17,7 +17,8 @@ $(function () {
         var template = $.templates("#equipmentInfo");
         var htmlOutput = template.render(json.data.equipments);
         $(".equipmentInfo").html(htmlOutput);
-        document.title = json.data.equipments.name;
+        //title名称
+        document.title = json.data.equipments[0].name;
         //数据导出弹框
         $( "#data-export").click(function(){
             $( "#data_export" ).dialog( "open" );
@@ -303,11 +304,13 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
                     }
                 }
             });
-        }else if(json.type ==="DATA_REQ_ERROR"){
-            alert("数据请求参数错误,请检查参数");
-        }else if(json.type === "DATA_FIND_ERROR"){
-            alert("数据查询失败,请稍后再试")
         }
+        else if(json.type ==="DATA_REQ_ERROR"){
+            alert("数据请求参数错误,请检查参数");
+        }
+        //else if(json.type === "DATA_FIND_ERROR"){
+        //    alert("数据查询失败,请稍后再试")
+        //}
     }).fail(function(json){
         alert("请求失败，请稍后再试")
     });
