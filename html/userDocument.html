@@ -47,7 +47,7 @@
        <div class="form-row">
            <label>用户名：</label>
            <div class="d">
-               <span id="showName">hongkui</span>
+               <span id="showName"></span>
                <a id="changePassword">&emsp;修改密码</a>
            </div>
        </div>
@@ -56,7 +56,7 @@
            <div class="d">
                <span id="showPhone">无</span>
            </div>
-           <input type="hidden" name="phoneNumber" id="phoneNumber"/>
+           <input type="hidden" name="phone" id="phone"/>
        </div>
        <label class="error"></label>
 
@@ -67,6 +67,7 @@
            </div>
            <input type="hidden" name="email" id="email"/>
        </div>
+       <!--<input type="hidden" name="password" id="password"/>-->
        <label class="error"></label>
 
        <div id="buttonContainer">
@@ -77,10 +78,7 @@
 
    <div class="changePassword">
        <form id="changePasswordForm">
-           <h2 style="text-align: center">账号管理</h2>
-           <div class="row">
-               <span class="label">用户名：hongkui</span>
-           </div>
+           <h2 style="text-align: center">修改密码</h2>
            <div class="row">
                <span class="label">旧密码：</span>
                <input id='oldPW' name="oldPw" type="password" placeholder="请输入原始密码"/>

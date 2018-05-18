@@ -86,6 +86,8 @@
                         window.open("homePage.html",'_self');
                     }else if(json.type === "USER_NAME_EXIT"){
                         alert("用户名已存在");
+                    }else if(json.type === "USER_LOGIN_ERROR"){
+                        alert("用户名或密码错误");
                     }
                 }, "json").fail(function(json){
                     alert("登录失败，请稍后再试");

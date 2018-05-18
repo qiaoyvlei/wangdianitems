@@ -46,7 +46,7 @@
     <section class="example">
       <section class="hashTabber-sandstone-wrapper">
         <ol class="hashTabber-nav hashTabber-sandstone" data-hashtabber-id="dinosaurs" data-hashtabber-default="pterosaur">
-          <h2>Species:</h2>
+          <h2>开发者文档</h2>
           <li data-hashtabber-pair="trilobite" class=" active">
             <a href="#dinosaurs=trilobite">平台概述</a>
           </li>
@@ -54,46 +54,83 @@
             <a href="#dinosaurs=velociraptor">协议指南</a>
           </li>
           <li data-hashtabber-pair="pterosaur" class="">
-            <a href="#dinosaurs=pterosaur">帮助文档</a>
+            <a href="#dinosaurs=pterosaur">传感器使用说明</a>
           </li>
           <li data-hashtabber-pair="lambeosaurus" class="">
-            <a href="#dinosaurs=lambeosaurus">Lambeosaurus magnicristatus</a>
+            <a href="#dinosaurs=lambeosaurus">设备接入</a>
           </li>
           <li data-hashtabber-pair="eoraptor" class="">
-            <a href="#dinosaurs=eoraptor">Eoraptor</a>
+            <a href="#dinosaurs=eoraptor">问题说明</a>
           </li>
         </ol><!--
  --><ol class="hashTabber-data hashTabber-sandstone" data-hashtabber-id="dinosaurs">
         <li data-hashtabber-pair="trilobite" class=" active">
           <article>
-            <h3>Trilobite</h3>
-            <p>Trilobites are a well-known fossil group of extinct marine arthropods that form the class Trilobita. Trilobites form one of the earliest known groups of arthropods. The first appearance of trilobites in the fossil record defines the base of the Atdabanian stage of the Early Cambrian period (521 million years ago), and they flourished throughout the lower Paleozoic era before beginning a drawn-out decline to extinction when, during the Devonian, all trilobite orders except Proetida died out. Trilobites finally disappeared in the mass extinction at the end of the Permian about 250 million years ago. The trilobites were among the most successful of all early animals, roaming the oceans for over 270 million years.</p>
+            <h3>平台概述</h3>
+              <p>结合移动互联网，以物联网、云平台为基础构建智能化的通信运维辅助检测系统，
+                  具体包括智能化的光缆线路微气象及光缆运行状态监测子系统
+                  （含微气象监测、光缆振动监测、无人机辅助光缆巡视）、
+                  以及物联云平台（含微气象预警、光缆状态预警、
+                  巡检记录查询）。使用该项目提供的系统平台后，可以精准掌握光缆运行微环
+                  境及状态及机房动力环境信息，并为巡检人员提供智能化的巡检手段，规范专
+                  业运维人员巡检流程，提升专业运维人员工作效率和智能化运维水平，及时
+                  发现潜在的安全问题。</p>
+              <p>针对电力环境特殊的数据安全性，设计一套私有云端管理软件，采用Java语言开发，
+                  利用MQTT等协议，实现业务逻辑、数据换算、数据转储及用户管理，
+                  并实现对各子系统的管理。研究云平台网络数据传输及加密、
+                  数据的存储及加密、UI界面的架构、后台服务和心跳连接等技术，
+                  基于安卓系统开发APP客户端。</p>
+              <p>
+                  使用物联网云平台技术、服务分布技术和消息中间件等高新技术，
+                  提出了一个电网设备巡检智能化的解决方案，并且研制一套设备巡检终端及云服务器后台系统，
+                  实现了从设备环境数据采集，到多协议数据传输，到数据处理，以及数据展示和数据预测等功能。
+              </p>
           </article>
         </li>
         <li data-hashtabber-pair="velociraptor" class="">
           <article>
-            <h3>Velociraptor</h3>
-            <p>Velociraptor is a genus of dromaeosaurid theropod dinosaur that lived approximately 75 to 71 million years ago during the later part of the Cretaceous Period.Two species are currently recognized, although others have been assigned in the past. The type species is V. mongoliensis; fossils of this species have been discovered in Mongolia. A second species, V. osmolskae, was named in 2008 for skull material from Inner Mongolia, China.</p>
+            <h3>协议指南</h3>
+              <p>HTTP协议是基于TCP的应用层协议，HTTP的意思是超文本传输协议，也就是该协议可以请求后端从后端获取到超文本。获取的超文本通过浏览器解析可以进行展示。该协议是请求-响应式的，后端无法之前发送数据给请求端，请求端必须发出请求，后端才能响应，并且无法保存请求状态，每次都要重新请求。</p>
+              <p>MQTT是一种发布/订阅模式的数据传输协议，该协议构是在TCP/IP协议上，是基于TCP的一种协议。对于MQTT来说，发布者和订阅者都是客户端，订阅者只收到已经订阅主题的消息，消息的交互是建立在MQTT服务器上面，发布者和订阅者连接到MQTT服务器上面，之后再进行数据的传输。MQTT协议是轻量级、实现简单的一种传输协议。</p>
+              <p>TCP位于传输层，在IP层之上，是一种面向连接、基于字节流的传输协议，由于是面向连接的，所以TCP具有可靠性。TCP建立连接时，要进行三次握手，进行三次握手保证了连接的正常建立，断开连接时进行四次挥手，四次的挥手操作，保证了正常断开，不出现半连接状态。</p>
+              <p>CoAP协议中文是受限制的应用协议。CoAP作为上层应用层协议，它与MQTT和HTTP不同之处在于它运行于UDP协议之上。CoAP协议特点是数据包小，最小的数据包仅有4个字节。TCP /IP协议簇中的协议特点之一就是数据包中含有数据头，CoAP协议数据包也包括数据头和正文也称负载，而正文和CoAP头之间使用0xFF分离用以区分正文和数据头。</p>
           </article>
         </li>
 
         <li data-hashtabber-pair="pterosaur" class="">
           <article>
-            <h3>Pterosaur</h3>
-            <p>Pterosaurs were flying reptiles of the clade or order Pterosauria. They existed from the late Triassic to the end of the Cretaceous Period (228 to 66 million years ago). Pterosaurs are the earliest vertebrates known to have evolved powered flight. Their wings were formed by a membrane of skin, muscle, and other tissues stretching from the ankles to a dramatically lengthened fourth finger. Early species had long, fully toothed jaws and long tails, while later forms had a highly reduced tail, and some lacked teeth. Many sported furry coats made up of hair-like filaments known as pycnofibres, which covered their bodies and parts of their wings. Pterosaurs spanned a wide range of adult sizes, from the very small Nemicolopterus to the largest known flying creatures of all time, including Quetzalcoatlus and Hatzegopteryx.</p>
+            <h3>传感器使用说明</h3>
+              <p>温湿度传感器DHT11有三个管脚分别是VDD、GND和DATA，DATA管脚输出的数据一共有40位数据，
+                  数据组成为：湿度整数数据、湿度小数数据、温度整数数据、
+                  温度小数数据和校验位，各占8bit。</p>
+              <p>电流传感器ASC712量程规格为-5A到+5A。在规定的量程范围内，输入与输出具有比较好的线性关系，其线性系数大约为185 mV/A，
+                  线性关系的表达式为Vout=0.5Vcc+Ip*Sensitivity。ACS712的供电电源采用5V。</p>
+              <p>电压传感器电压输入范围为0到25V，电压可以进行检测范围为0.02445V到25V之间，
+                  该传感器一共有三个引脚，分别为正极VCC，负极GND和输出接口，
+                  输出接口接STM32的AD引脚。</p>
+              <p>液位传感器在电压为3到5V的情况下正常工作，额定电流要小于20mA，该传感器一共有三个引脚，
+                  分别为正极VCC，负极GND和输出接口，输出接口接STM32的AD引脚。</p>
           </article>
         </li>
         <li data-hashtabber-pair="lambeosaurus" class="">
           <article>
-            <h3>Lambeosaurus magnicristatus</h3>
-            <p>Lambeosaurus is a genus of hadrosaurid dinosaur that lived about 76 to 75 million years ago, in the Late Cretaceous period (Campanian) of North America. This bipedal/quadrupedal, herbivorous dinosaur is known for its distinctive hollow cranial crest, which in the best-known species resembled a hatchet. Several possible species have been named, from Canada, the United States, and Mexico, but only the two Canadian species are currently recognized as valid.</p>
+            <h3>设备接入</h3>
+              <p>硬件模块以微处理单元STM32F103为核心，使用DHT11传感器模块进行获取环境中的温度和湿度，
+                  使用ACS712传感器模块和voltage sensor传感器模块获取设备的电压和电流数据
+                  ，液位传感器来获取设备中的油的多少。单片机进行AD转换，将模拟信号转为数字信号，
+                  单片机处理数据之后通过ESP8266WIFI模块连接WIFI，将数据发到云平台。</p>
+              <p>在平台登录后，可以在开发者中心添加设备，设置名称，简介，是否公开，地理位置，上传图片等，
+                  并且自定义添加可监测的传感器类型，单位等。当设备监测端采集到数据后，会通过TCP传输到服务器端
+              ，服务器进行数据处理和传输后，前端展示部分通过请求字段就可以对返回的数据进行解析，
+                  绘制出实时折线图和历史走势。</p>
           </article>
         </li>
 
         <li data-hashtabber-pair="eoraptor" class="">
           <article>
-            <h3>Eoraptor</h3>
-            <p>Eoraptor was one of the world's earliest dinosaurs that lived ca. 231.4 million years ago, during the latter part of the Triassic Period in Western Gondwana, what is now the northwestern region of Argentina. It was a small sized (1 m (3.3 ft) long), lightly-built, ground-dwelling, two-legged bipedal saurischian, close to the ancestry of both theropods and sauropodomorphs. It is known from several well-preserved skeletons. When first described in 1993, it was considered to be one of the earliest, if not the earliest known dinosaur. Eoraptor has heterodont dentition, suggesting that it was omnivorous, and that this feeding strategy had evolved early on in dinosaurs.</p>
+            <h3>问题说明</h3>
+              <p>如在使用中有任何问题，请发送邮件到<a href="mailto:zr1450995198@163.com">zr1450995198@163.com</a>，描述您的问题和拍照或截图。我们将在24小时之内回复您，给出解决方案。</p>
+              <p>或请致电029-88166000，工作时间：工作日早9:00——晚19:00</p>
           </article>
         </li>
       </ol>
@@ -141,7 +178,6 @@
           $(".hashTabber-data li:eq("+index+")").addClass("active");
         })
       })
-    })
   </script>
 </body>
 </html>

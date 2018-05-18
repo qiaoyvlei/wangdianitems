@@ -43,7 +43,7 @@
     }
     .page .pagination{
       position: absolute;
-      width:460px;
+      width:360px;
       margin: 0 auto;
       left:0;
       right:0;
@@ -137,50 +137,38 @@
       {
         "name":"STM32",
         "id":"H001",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "intro":"C id elit non mi porta gravida at eged nibh ultricies vehicula ut id elit."
+        "imgUrl":"../images/STM32.png",
+        "intro":"微处理器选用STM32F103，STM32F103使用高性能的ARMCortex-M3 32位内核，内部有高速存储器，有很多引脚，包括多个I/O引脚和12位ADC转换引脚，有三个通用的定时器和一个PWM定时器，还包括多种标准的通信接口."
       },
       {
-        "name":"xxxx",
+        "name":"温湿度传感器",
         "id":"H002",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "intro":"Cras j. Donet metus. Nullam id dolor id nibh ultricies vehicula ut id elit."
+        "imgUrl":"../images/DHT11.png",
+        "intro":"DHT11数字温湿度传感器，可以进行温度和湿度的检测，并且对输出的数字信号进行了校准。检测湿度部分是通过电阻式感湿元件来进行检测，温度是通过NTC 测温元件进行检测。由于两个元件和8位单片机连接，正因为如此该模块有着快速的响应、优秀的抗干扰能力、性价高等特点"
       },
       {
-        "name":"llll",
+        "name":"电流传感器",
         "id":"H003",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "intro":"Cras jurta gravida at eget mericies vehicula ut id elit."
+        "imgUrl":"../images/ASC712.png",
+        "intro":"该传感器原理使用的是霍尔感应，该传感器具有高精确度的线性霍尔元件。通过将电流转化的成比例电压的磁场靠近霍尔元件，霍尔元件进行感应，从而测得电流大小，通过采用霍尔感应的原理实现了器件的精确度"
       },
       {
-        "name":"bbbb",
+        "name":"电压传感器",
         "id":"H004",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "intro":"Crasd elit non mm id dolor id nibh ultricies vehicula ut id elit."
+        "imgUrl":"../images/dianya.png",
+        "intro":"该传感器是基于电阻分压原理设计，基于这种设计可以使输入的电压减小5倍"
       },
       {
-        "name":"yyyy",
+        "name":"液位传感器",
         "id":"H005",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "intro":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit."
+        "imgUrl":"../images/yewei.png",
+        "intro":"该传感器是通过裸露在外面的多条平行导线测量，根据浸没导线的多少，从而判断水位的高低，这是一款原理简单、易用、性价高的传感器"
       },
       {
-        "name":"zzzz",
+        "name":"WIFI模块",
         "id":"H006",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "intro":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit."
-      },
-      {
-        "name":"aaaa",
-        "id":"H007",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "intro":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit."
-      },
-      {
-        "name":"cccc",
-        "id":"H008",
-        "imgUrl":"../images/machineRoom-display1.png",
-        "intro":"Cra Donec id elietus. Nullam id dolor id nibh ultricies vehicula ut id elit."
+        "imgUrl":"../images/wifi.png",
+        "intro":"WIFI作为一种网络传输标准。相较于传统使用线路来进行通信连接和网络传输的方式，这种方式的优点是使用方便，节约成本等特点，这样可以灵活的添加或者减少网络设备。和蓝牙相比的话，WIFI的辐射范围更广、数据传输速度更高。本设计WIFI模块选用ESP8266，是一款集成度高，性能优越，低功耗的WIFI模块"
       }
     ]
   };
@@ -193,7 +181,7 @@
       // 创建分页
       //将num值传给后台
       $("#Pagination").jqPaginator( {
-        totalPages: 6,
+        totalPages: 1,
         visiblePages: 5,
         currentPage: 1,
         onPageChange: function (num, type) {

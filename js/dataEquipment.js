@@ -1,4 +1,5 @@
 $(function () {
+    //userId = '4657c0733c5048a79e7555574a1dc564';
     var userId = getCookie("userId");
     if(userId){
         $('.logined').css('display','inline-block');

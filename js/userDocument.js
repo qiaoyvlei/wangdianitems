@@ -14,8 +14,8 @@ $(function () {
     /*编辑*/
     var button = document.getElementsByClassName("button")[0];
     var divs = document.getElementsByClassName("d");
+    console.log(divs);
     button.onclick = function () {
-        $("#avatarPreview").attr("title", "上传头像");
         for(var j = 1; j < divs.length; j++) {
             divs[j].style.display = "none";
             divs[j].nextElementSibling.type = "text";
@@ -24,21 +24,19 @@ $(function () {
         document.getElementsByClassName("button")[0].style.display = "none";
         document.getElementById("buttonContainer").style.display = "block";
     };
-
-    //点击图片更改用户头像
-    $("#avatarSelect").change(function () {
-        var obj = $("#avatarSelect")[0].files[0];
-        var fr = new FileReader();
-
-        fr.onload = function () {
-            $("#avatarPreview").attr("src", this.result);
-            console.log(this.result);
-            $("#avatar").val(this.result);
-        };
-
-        fr.readAsDataURL(obj);
+    //获取用户信息
+    $.post(ip+'/user/get',{userId:userId},function(data){
+        if(data.type === "COMMON_SUC"){
+            //$('#name').val(data.data.name);
+            $('#showPhone').text(data.data.phone);
+            $('#showName').text(data.data.name);
+            $('#showEmail').text(data.data.email);
+        }else if(data.type === "USER_FIND_ERROR"){
+            alert("用户信息查询失败")
+        }
+    }).fail(function(){
+        alert("请求失败，请稍后再试")
     });
-
     /*退出当前账号*/
     $("#quitAccount").click(function () {
         if(confirm("您确定要退出当前页面吗？")) {
@@ -53,7 +51,9 @@ $(function () {
     /*修改密码*/
     $("#changePassword").click(function () {
         $(".changePassword").css("display", "block");
+
     });
+
 
     var $changePW = $('#changePasswordForm').validate({
         rules: {
@@ -69,10 +69,10 @@ $(function () {
             },
             confirmPW: {
                 required: true,
-                equalTo: '#newPW'
+                equalTo: '#newPw'
             }
         },
-        message: {
+        messages: {
             oldPW: {
                 required: '请输入旧密码',
                 isEqual: '密码错误'
@@ -94,6 +94,39 @@ $(function () {
 
     });
 
+    $("#changePasswordSubmit").click(function () {
+        if($changePW.form()) {
+            var data = $("#changePasswordForm").serializeArray();
+            var values={};
+            var params = {};
+            $.each(data,function(i,val){
+                values[val.name] = val.value;
+            });
+            params.name = getCookie('userName');
+            params.password = values.oldPw;
+            $.post(ip+"/user/login", params, function (json) {
+                if(json.type === "COMMON_SUC") {
+                    $.post(ip+"/user/update", {userId:userId,password:values.newPW},function(data){
+                        if(data.type === "COMMON_SUC"){
+                            console.log(data);
+                            window.location.href = "userDocument.html";
+                            $(".changePassword").css("display", "none");
+                        }else if(data.type==="USER_UPDATE_ERROR"){
+                            alert("用户信息更新失败")
+                        }
+                    });//将数据发出去
+                }else if(json.type === "USER_LOGIN_ERROR"){
+                    alert("密码错误，请输入正确的密码");
+                }
+            }, "json").fail(function(json){
+                alert("请求失败，请稍后再试");
+            });
+
+        } else {
+            alert("信息填写有误！再仔细检查一下吧>_<");
+        }
+    });
+
     /*退出修改密码的页面*/
     $("#changePasswordCancel").click(function () {
         $(".changePassword").css("display", "none");
@@ -102,31 +135,23 @@ $(function () {
     //用插件对表单信息进行验证
     var $validator = $("#form").validate({
         rules: {
-            phoneNumber:{
+            phone:{
                 required:true,
                 isMobile:true
             },
             email: {
                 required:true,
                 isEmail:true
-            },
-            QQ: {
-                required:true,
-                isQQ:true
             }
         },
         messages: {
-            phoneNumber:{
+            phone:{
                 required:"请输入手机号",
                 isMobile:"请输入有效的手机号"
             },
             email: {
                 required:"请输入邮箱",
                 isEmail:"请输入正确的邮箱"
-            },
-            QQ: {
-                required:"请输入QQ号",
-                isQQ:"请输入正确的QQ号"
             }
         },
         errorPlacement: function (error, element) {
@@ -147,16 +172,22 @@ $(function () {
         return this.optional(element) || email.test(value);
     }, "请正确填写您的邮箱");
 
-    jQuery.validator.addMethod("isQQ", function(value, element) {
-        var QQ = /^[1-9][0-9]{4,}/;
-        return this.optional(element) || QQ.test(value);
-    }, "请正确填写您的QQ号");
 
     $(".submitButton").click(function () {
         if($validator.form()) {
-             var data = $("#form").serializeArray();
-             $.post(ip+"/user/update", data);//将数据发出去
-             window.location.href = "userDocument.html";
+            var data = $("#form").serializeArray();
+            var values={};
+            $.each(data,function(i,val){
+                values[val.name] = val.value;
+            });
+            values.userId = userId;
+             $.post(ip+"/user/update", values,function(data){
+                 if(data.type === "COMMON_SUC"){
+                     window.location.href = "userDocument.html";
+                 }else if(data.type==="USER_UPDATE_ERROR"){
+                     alert("用户信息更新失败")
+                 }
+             });//将数据发出去
         } else {
             alert("信息填写有误！再仔细检查一下吧>_<");
         }

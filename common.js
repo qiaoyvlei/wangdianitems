@@ -1,7 +1,8 @@
-//var ip = "http://192.168.1.185:8080"; //±¦±¦
-//var ip = "http://139.199.28.148:8080"; //¹«¹²
-var ip = "http://192.168.1.199:8080"; //¿ü¿ü
-/* »ñÈ¡Ö¸¶¨cookie */
+var ip = "http://192.168.1.185:8080"; //å®å®
+//var ip = "http://139.199.28.148:8080"; //å…¬å…±
+//var ip = "http://192.168.1.199:8080"; //å¥å¥
+//var ip = "http://localhost:8080";  //æœ¬åœ°æœåŠ¡å™¨
+/* è·å–æŒ‡å®šcookie */
 function getCookie(name) {
     var strCookie = document.cookie;
     var arrCookie = strCookie.split("; ");
@@ -12,13 +13,13 @@ function getCookie(name) {
     }
     return "";
 }
-//ÉèÖÃcookie
+//è®¾ç½®cookie
 function setCookie(name,value,iday){
     var oDate = new Date();
     oDate.setDate(oDate.getDate()+iday);
     document.cookie = name+'='+value+';expires='+oDate;
 }
-//É¾³ıcookie
+//åˆ é™¤cookie
 function removeCookie(name){
     setCookie(name,"1",-1);
 }
