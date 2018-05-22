@@ -117,13 +117,17 @@ $(function () {
     //这个设备支持的传感器类型
     $.post(ip+'/sensor/findDataType',params,function(json){
         //遍历设备传感器，将其填入option中
-        $.each(json.data.sensorTypeResps,function(index,html){
-            $('#sela').append(
-                $('<option></option>')
-                    .text(html.name)
-                    .val(html.dataType)
-            );
-        });
+        if(json.type === "COMMON_SUC"){
+            $.each(json.data.sensorTypeResps,function(index,html){
+                $('#sela').append(
+                    $('<option></option>')
+                        .text(html.name)
+                        .val(html.dataType)
+                );
+            });
+        }else if(json.type === "SENSOR_NULL_ERROR"){
+            alert("该设备未添加任何传感器，请先添加传感器！");
+        }
         //数据类型选择
         $("#sela").multiselect({
             noneSelectedText: "==请选择要导出的数据==",
@@ -132,18 +136,17 @@ $(function () {
             ,selectedList:8
             ,minWidth:325
         });
-
     });
     //根据json数据绘制折线图
     $.post(ip+'/sensor/findDataType',params,function(json){
-        $.each(json.data.sensorTypeResps,function(index,data){
-            console.log(data.dataType)
-            drawChart(equipmentId,data.dataType,0);
-        });
-        console.log(json.data)
-        var template1 = $.templates("#showEveryEquipmentData");
-        var htmlOutput1 = template1.render(json.data);
-        $(".showEveryEquipmentData").html(htmlOutput1);
+        if(json.type === "COMMON_SUC") {
+            $.each(json.data.sensorTypeResps, function (index, data) {
+                drawChart(equipmentId, data.dataType, 0);
+            });
+            var template1 = $.templates("#showEveryEquipmentData");
+            var htmlOutput1 = template1.render(json.data);
+            $(".showEveryEquipmentData").html(htmlOutput1);
+        }
     });
 
 });
@@ -210,7 +213,6 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
                 $("#" + containerId).html('<div style="color:gray;padding-top:80px;">No data.</div>');
                 return;
             }
-            console.log(data)
             Highcharts.setOptions({ global: { useUTC: false } });
             chart = new Highcharts.Chart({
                 chart: {
@@ -309,9 +311,9 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
         else if(json.type ==="DATA_REQ_ERROR"){
             alert("数据请求参数错误,请检查参数");
         }
-        //else if(json.type === "DATA_FIND_ERROR"){
-        //    alert("数据查询失败,请稍后再试")
-        //}
+        else if(json.type === "DATA_FIND_ERROR"){
+            alert("数据查询失败,请稍后再试")
+        }
     }).fail(function(json){
         alert("请求失败，请稍后再试")
     });

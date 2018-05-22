@@ -19,7 +19,7 @@ $(function () {
         var $containerBox = $(".container");
         var containerWidth = $containerBox.width();
         var changeImgTime = 1000; //切换图片所需时间为1000ms
-        var carouselInterval = 5000; //轮播图的时间间隔为3000ms
+        var carouselInterval = 10000; //轮播图的时间间隔为3000ms
         var liLen = $lis.length;
 
         //初始化图片列表的尺寸

@@ -46,10 +46,10 @@
 }
 .page .pagination{
     position: absolute;
-    width:460px;
+    width: 300px;
     margin: 0 auto;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
 }
 .page .pagination li a{
     color:#2A9F96;
