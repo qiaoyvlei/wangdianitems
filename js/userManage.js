@@ -94,10 +94,18 @@ $(document).ready(function(){
     findNewData();
     setInterval(function(){findNewData();},20000);
     function findNewData(){
-        $.post(ip+'/equipment/findEData',{userId:userId},function(data){
-          var template = $.templates("#theTmpl");
-          var htmlOutput = template.render(data);
-          $("#realtimeDataList").html(htmlOutput);
+        $.post(ip+'/equipment/findEData',{userId:userId},function(json){
+            if(json.type === "COMMON_SUC") {
+                var template = $.templates("#theTmpl");
+                var htmlOutput = template.render(json);
+                $("#realtimeDataList").html(htmlOutput);
+            }else if(json.type === "Equipment_REQ_ERROR"){
+                alert("设备请求参数错误！")
+            }else if(json.type === "Equipment_FIND_ERROR"){
+                alert("设备信息查询失败！")
+            }
+        }).fail(function(json){
+            alert("请求失败，请稍后再试")
         });
     }
 
@@ -625,148 +633,3 @@ function addPoint1(lng, lat, content, typeIcon,gid) {
     marker1.setMap(mapObj);
     markers.push(marker1);
 }
-
-
-var equipment = {
-    "equipmentList":[
-        {
-            "id":"8646aee7229e48f4810966b93e4450c1",
-            "name":"温湿度监控",
-            "createTime":"20171111",
-            "imgUrl":"../images/machineRoom-display1.png",
-            "sensor":['温度','湿度','烟雾浓度'],
-            "info":"asdds1",
-            "location":"106.353202,29.584348",
-            "data":[
-                {
-                    key:"温度",
-                    value:"23"
-                },
-                {
-                    key:"湿度",
-                    value:"23"
-                },
-                {
-                    key:"烟雾浓度",
-                    value:123
-                }
-            ]
-        },
-        {
-            "id":"8646aee7229e48f4810966b93e4450c2",
-            "name":"温湿度监控",
-            "createTime":"20171112",
-            "imgUrl":"../images/machineRoom-display1.png",
-            "sensor":['温度','湿度','二氧化碳','烟雾浓度'],
-            "info":"温湿度监控温湿度监控温湿度监控asdds2asdds2s2",
-            "location":"",
-            "data":[
-                {
-                    key:"温度",
-                    value:"23"
-                },
-                {
-                    key:"湿度",
-                    value:"23"
-                },
-                {
-                    key:"二氧化碳",
-                    value:23
-                },
-                {
-                    key:"烟雾浓度",
-                    value:123
-                }
-            ]
-        }
-        ,{
-            "id":"8646aee7229e48f4810966b93e4450c3",
-            "name":"小伊利温湿度监控",
-            "createTime":"20171113",
-            "imgUrl":"../images/machineRoom-display1.png",
-            "sensor":['温度','二氧化碳','光照强度','烟雾浓度'],
-            "info":"asddsdds3asdds3",
-            "location":"",
-            "data":[
-                {
-                    key:"温度",
-                    value:"23"
-                },
-                {
-                    key:"光照强度",
-                    value:23
-                },
-                {
-                    key:"二氧化碳",
-                    value:23
-                },
-                {
-                    key:"烟雾浓度",
-                    value:123
-                }
-            ]
-        }
-        ,{
-            "id":"8646aee7229e48f4810966b93e4450c4",
-            "name":"小蒙牛温湿度监控",
-            "createTime":"20171114",
-            "imgUrl":"../images/machineRoom-display1.png",
-            "sensor":['温度','湿度','二氧化碳','光照强度','烟雾浓度'],
-            "info":"asdds4",
-            "location":"",
-            "data":[
-                {
-                    key:"温度",
-                    value:"23"
-                },
-                {
-                    key:"湿度",
-                    value:"23"
-                },
-                {
-                    key:"光照强度",
-                    value:23
-                },
-                {
-                    key:"二氧化碳",
-                    value:23
-                },
-                {
-                    key:"烟雾浓度",
-                    value:123
-                }
-            ]
-        }
-        ,{
-            "id":"8646aee7229e48f4810966b93e4450c5",
-            "name":"温湿度监控",
-            "createTime":"20171115",
-            "imgUrl":"../images/machineRoom-display1.png",
-            "sensor":['温度','湿度','二氧化碳','光照强度','烟雾浓度'],
-            "info":"asdds5",
-            "location":"",
-            "data":[
-                {
-                    key:"温度",
-                    value:"23"
-                },
-                {
-                    key:"湿度",
-                    value:"23"
-                },
-                {
-                    key:"光照强度",
-                    value:23
-                },
-                {
-                    key:"二氧化碳",
-                    value:23
-                },
-                {
-                    key:"烟雾浓度",
-                    value:123
-                }
-            ]
-        }
-    ]
-};

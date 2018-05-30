@@ -76,13 +76,10 @@
                 console.log(values);
                 $.post(ip+"/user/login", values, function (json) {
                     if(json.type === "COMMON_SUC") {
-                        console.log(json.data)
                         //cookie存储用户名，密码，用户ID
                         setCookie('userName',json.data.name,30);
                         setCookie('userPass',json.data.password,30);
                         setCookie('userId',json.data.id,30);
-                        //
-//                        window.close("login.html");
                         window.open("homePage.html",'_self');
                     }else if(json.type === "USER_NAME_EXIT"){
                         alert("用户名已存在");

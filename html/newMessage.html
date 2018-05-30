@@ -13,7 +13,6 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="../js/bootstrap.min.js"></script>
     <link href="../Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../css/userDocument.css"/>
     <link rel="stylesheet" href="../css/headerAndFooter.css">
     <title>消息中心</title>
     <link rel="stylesheet" href="../css/newMessage.css">
@@ -45,19 +44,17 @@
     <div class="content">
         <span class="glyphicon glyphicon-stop"></span>
         <span>消息提醒</span>
-        <div class="news" >
-            您的设备 xupt 温度传感器数据持续上升，已超过规定温度30℃，请及时处理！
-            <span class="news_time">2018-05-14 17:50:30</span>
-        </div>
-        <div class="news" >
-            您的设备 xupt 输出电压传感器数据持续上升，已超过规定电压3.3V，请及时处理！
-            <span class="news_time">2018-05-12 9:16:39</span>
+        <div class="showMessageData">
+            <p style="text-align: center;margin:0 auto;">加载中，请稍后</p>
         </div>
     </div>
 </div>
 <script type="text/jsrender" id="showMessage">
-    {{for messageContent}}
-        <div class="news">{{:data}}</div>
+    {{for}}
+        <div class="news">
+            您的设备  {{:equipmentName}}  {{:name}}数据为 {{:data}}{{:unit}}，处于<span style="color:red;">警戒状态</span>，请及时处理！
+        <span class="news_time">{{:time}}</span>
+        </div>
     {{/for}}
 </script>
 <script src="../js/jquery.min.js"></script>
@@ -76,21 +73,81 @@
        var params = {};
        params.userId = userId;
        function showNews(){
-           console.log(1);
-           console.log(params);
-           $.post(ip+'user/message',params,function(json){
-               console.log(json);
+           $.post(ip+'/equipment/findEData',params,function(json){
                if(json.type === "COMMON_SUC"){
+                   var res = json.data;
+                   var message = [];
+                   $.each(res,function(index,obj){
+                       var it = [];
+                       $.each(obj.list,function(index,obj2){
+                           switch (obj2.dataType){
+                               case 'ele':
+                                   if(obj2.data>=1){
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                   }
+                                   break;
+                               case 'vol':
+                                   if(obj2.data>=3.3){
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                   }
+                                   break;
+                               case 'tem':
+                                   if(obj2.data>=30){
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                   }
+                                   break;
+                               case 'lev':
+                                   if(obj2.data>=1){
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                   }
+                                   break;
+                               case 'hum':
+                                   if(obj2.data>=10){
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                   }
+                                   break;
+                               case 'in_vol':
+                                   if(obj2.data>=3.4){
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                   }
+                                   break;
+                               case 'out_ele':
+                                   if(obj2.data>=1){
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                   }
+                                   break;
+                               case 'out_vol':
+                                   if(obj2.data>=20){
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                   }
+                                   break;
+                               case 'in_ele':
+                                   if(obj2.data>=1){
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                   }
+                                   break;
+                           }
+                       });
+                       message.push(it);
+                   });
+                   var messageData = [];
+                   for(var i=1;i<message.length;i++){
+                       messageData = message[0].concat(message[i]);
+                   }
                    var template1 = $.templates("#showMessage");
                    var htmlOutput1 = template1.render(message);
-                   $(".showMessage").html(htmlOutput1);
-               }else if(json.type === ""){
-
+                   $(".showMessageData").html(htmlOutput1);
+               }else if(json.type === "Equipment_REQ_ERROR"){
+                   alert("设备请求参数错误！")
+               }else if(json.type === "Equipment_FIND_ERROR"){
+                   alert("设备信息查询失败！")
                }
-           })
+           }).fail(function(json){
+               alert("请求失败，请稍后再试")
+           });
        }
        showNews();
-       setInterval(showNews,60000);
+       setInterval(showNews,1000);
    })
 </script>
 </body>
