@@ -24,29 +24,19 @@
       <file leaf-file-name="userManage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/userManage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.3913044">
-              <caret line="96" column="39" selection-start-line="96" selection-start-column="30" selection-end-line="96" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="482" column="43" selection-start-line="482" selection-start-column="43" selection-end-line="482" selection-end-column="43" />
               <folding>
-                <element signature="e#4719#5249#0" expanded="false" />
+                <element signature="e#4812#5342#0" expanded="false" />
                 <element signature="n#!!block;n#editDataType#0" expanded="false" />
                 <element signature="n#!!block;n#deleteDataType#0" expanded="false" />
                 <element signature="n#!!block;n#cancelAddDevice#0" expanded="false" />
                 <element signature="n#!!block;n#showCityInfo#0" expanded="false" />
                 <element signature="n#!!block;n#selectImg#0" expanded="false" />
-                <element signature="e#20332#20387#0" expanded="false" />
-                <marker date="1527680462411" expanded="true" signature="6295:6311" placeholder="..." />
-                <marker date="1527680462411" expanded="true" signature="6358:6399" placeholder="..." />
+                <element signature="e#20301#20356#0" expanded="false" />
+                <marker date="1527748553174" expanded="true" signature="6388:6404" placeholder="..." />
+                <marker date="1527748553174" expanded="true" signature="6451:6492" placeholder="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userManage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/userManage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.454545">
-              <caret line="285" column="66" selection-start-line="285" selection-start-column="66" selection-end-line="285" selection-end-column="66" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -55,52 +45,20 @@
         <entry file="file://$PROJECT_DIR$/common.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+              <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="userManage.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/userManage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.727273">
+              <caret line="179" column="49" selection-start-line="179" selection-start-column="49" selection-end-line="179" selection-end-column="49" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newMessage.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/html/newMessage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.142857">
-              <caret line="48" column="14" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
-              <folding>
-                <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newMessage.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/newMessage.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userDocument.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/userDocument.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="17" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataEquipment.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/dataEquipment.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.3636365">
-              <caret line="136" column="65" selection-start-line="136" selection-start-column="65" selection-end-line="136" selection-end-column="65" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -108,32 +66,34 @@
       <file leaf-file-name="equipmentList.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/equipmentList.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="54.545456">
-              <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataEquipment.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/dataEquipment.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="202" column="33" selection-start-line="202" selection-start-column="33" selection-end-line="202" selection-end-column="33" />
+            <state vertical-scroll-proportion="-5.818182">
+              <caret line="42" column="64" selection-start-line="42" selection-start-column="64" selection-end-line="42" selection-end-column="64" />
               <folding>
-                <marker date="1527210855388" expanded="true" signature="6713:6729" placeholder="..." />
-                <marker date="1527210855388" expanded="true" signature="7366:7394" placeholder="..." />
+                <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hardwaresShow.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html/hardwaresShow.html">
+      <file leaf-file-name="newMessage.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/newMessage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+            <state vertical-scroll-proportion="-9.454545">
+              <caret line="125" column="150" selection-start-line="125" selection-start-column="150" selection-end-line="125" selection-end-column="150" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dataEquipment.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/dataEquipment.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.2960894">
+              <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+              <folding>
+                <marker date="1527761052717" expanded="true" signature="6986:7002" placeholder="..." />
+                <marker date="1527761052717" expanded="true" signature="7706:7734" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -191,19 +151,19 @@
         <option value="$PROJECT_DIR$/html/test.html" />
         <option value="$PROJECT_DIR$/js/userDocument.js" />
         <option value="$PROJECT_DIR$/html/userDocument.html" />
-        <option value="$PROJECT_DIR$/html/userManage.html" />
-        <option value="$PROJECT_DIR$/html/equipmentList.html" />
         <option value="$PROJECT_DIR$/html/login.html" />
-        <option value="$PROJECT_DIR$/common.js" />
         <option value="$PROJECT_DIR$/css/headerAndFooter.css" />
         <option value="$PROJECT_DIR$/html/dataEquipment.html" />
-        <option value="$PROJECT_DIR$/js/dataEquipment.js" />
         <option value="$PROJECT_DIR$/css/equipmentList.css" />
         <option value="$PROJECT_DIR$/html/hardwaresShow.html" />
         <option value="$PROJECT_DIR$/js/homePage2.js" />
-        <option value="$PROJECT_DIR$/js/userManage.js" />
         <option value="$PROJECT_DIR$/css/newMessage.css" />
+        <option value="$PROJECT_DIR$/js/userManage.js" />
+        <option value="$PROJECT_DIR$/html/equipmentList.html" />
+        <option value="$PROJECT_DIR$/html/userManage.html" />
         <option value="$PROJECT_DIR$/html/newMessage.html" />
+        <option value="$PROJECT_DIR$/common.js" />
+        <option value="$PROJECT_DIR$/js/dataEquipment.js" />
       </list>
     </option>
   </component>
@@ -215,9 +175,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1358" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
+    <option name="width" value="1376" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -259,7 +219,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -323,6 +282,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -390,10 +350,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
-    <editor active="false" />
+    <frame x="1358" y="-8" width="1376" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20223881" sideWeight="0.48511383" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17691155" sideWeight="0.48511383" order="2" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -695,7 +655,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="45" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -703,7 +662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -719,38 +677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/dataEquipment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="202" column="33" selection-start-line="202" selection-start-column="33" selection-end-line="202" selection-end-column="33" />
-          <folding>
-            <marker date="1527210855388" expanded="true" signature="6713:6729" placeholder="..." />
-            <marker date="1527210855388" expanded="true" signature="7366:7394" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/equipmentList.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="54.545456">
-          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -770,44 +696,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/userManage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3913044">
-          <caret line="96" column="39" selection-start-line="96" selection-start-column="30" selection-end-line="96" selection-end-column="39" />
-          <folding>
-            <element signature="e#4719#5249#0" expanded="false" />
-            <element signature="n#!!block;n#editDataType#0" expanded="false" />
-            <element signature="n#!!block;n#deleteDataType#0" expanded="false" />
-            <element signature="n#!!block;n#cancelAddDevice#0" expanded="false" />
-            <element signature="n#!!block;n#showCityInfo#0" expanded="false" />
-            <element signature="n#!!block;n#selectImg#0" expanded="false" />
-            <element signature="e#20332#20387#0" expanded="false" />
-            <marker date="1527680462411" expanded="true" signature="6295:6311" placeholder="..." />
-            <marker date="1527680462411" expanded="true" signature="6358:6399" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/dataEquipment.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.3636365">
-          <caret line="136" column="65" selection-start-line="136" selection-start-column="65" selection-end-line="136" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/userDocument.css">
-      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="17" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/userManage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.454545">
-          <caret line="285" column="66" selection-start-line="285" selection-start-column="66" selection-end-line="285" selection-end-column="66" />
+          <caret line="136" column="65" selection-start-line="136" selection-start-column="65" selection-end-line="136" selection-end-column="65" />
           <folding />
         </state>
       </provider>
@@ -820,12 +712,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/css/userDocument.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="17" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/equipmentList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.818182">
+          <caret line="42" column="64" selection-start-line="42" selection-start-column="64" selection-end-line="42" selection-end-column="64" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/userManage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.727273">
+          <caret line="179" column="49" selection-start-line="179" selection-start-column="49" selection-end-line="179" selection-end-column="49" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/html/newMessage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.142857">
-          <caret line="48" column="14" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
+        <state vertical-scroll-proportion="-9.454545">
+          <caret line="125" column="150" selection-start-line="125" selection-start-column="150" selection-end-line="125" selection-end-column="150" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/userManage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="482" column="43" selection-start-line="482" selection-start-column="43" selection-end-line="482" selection-end-column="43" />
           <folding>
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#4812#5342#0" expanded="false" />
+            <element signature="n#!!block;n#editDataType#0" expanded="false" />
+            <element signature="n#!!block;n#deleteDataType#0" expanded="false" />
+            <element signature="n#!!block;n#cancelAddDevice#0" expanded="false" />
+            <element signature="n#!!block;n#showCityInfo#0" expanded="false" />
+            <element signature="n#!!block;n#selectImg#0" expanded="false" />
+            <element signature="e#20301#20356#0" expanded="false" />
+            <marker date="1527748553174" expanded="true" signature="6388:6404" placeholder="..." />
+            <marker date="1527748553174" expanded="true" signature="6451:6492" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/dataEquipment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.2960894">
+          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+          <folding>
+            <marker date="1527761052717" expanded="true" signature="6986:7002" placeholder="..." />
+            <marker date="1527761052717" expanded="true" signature="7706:7734" placeholder="..." />
           </folding>
         </state>
       </provider>

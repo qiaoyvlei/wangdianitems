@@ -52,7 +52,7 @@
 <script type="text/jsrender" id="showMessage">
     {{for}}
         <div class="news">
-            您的设备  {{:equipmentName}}  {{:name}}数据为 {{:data}}{{:unit}}，处于<span style="color:red;">警戒状态</span>，请及时处理！
+            您的设备  <a href="dataEquipment.html?id={{:equipmentId}}" target="view_window">{{:equipmentName}}</a>  {{:name}}数据为 {{:data}}{{:unit}}，处于<span style="color:red;">警戒状态</span>，请及时处理！
         <span class="news_time">{{:time}}</span>
         </div>
     {{/for}}
@@ -83,47 +83,47 @@
                            switch (obj2.dataType){
                                case 'ele':
                                    if(obj2.data>=1){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
                                    }
                                    break;
                                case 'vol':
                                    if(obj2.data>=3.3){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
                                    }
                                    break;
                                case 'tem':
                                    if(obj2.data>=30){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
                                    }
                                    break;
                                case 'lev':
                                    if(obj2.data>=1){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
                                    }
                                    break;
                                case 'hum':
                                    if(obj2.data>=10){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
                                    }
                                    break;
                                case 'in_vol':
                                    if(obj2.data>=3.4){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
                                    }
                                    break;
                                case 'out_ele':
                                    if(obj2.data>=1){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
                                    }
                                    break;
                                case 'out_vol':
                                    if(obj2.data>=20){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
                                    }
                                    break;
                                case 'in_ele':
                                    if(obj2.data>=1){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
                                    }
                                    break;
                            }
@@ -142,8 +142,6 @@
                }else if(json.type === "Equipment_FIND_ERROR"){
                    alert("设备信息查询失败！")
                }
-           }).fail(function(json){
-               alert("请求失败，请稍后再试")
            });
        }
        showNews();

@@ -270,7 +270,9 @@
         <!-- 实时数据-->
         <div role="tabpanel" class="tab-pane" id="realtimedata">
           <!-- 各个设备实时数据-->
-          <div id="realtimeDataList"></div>
+          <div id="realtimeDataList">
+            <p style="text-align: center;margin:0 auto;">加载中，请稍后</p>
+          </div>
         </div>
         <script id="theTmpl" type="text/x-jsrender">
           <ul class="realtime_list">
@@ -337,8 +339,8 @@
                       <tr class="tr2">
                         <td>地理位置</td>
                         <td>
-                          <input id="location_X_edit" name="location_X" type="hidden" value="">
-                          <input id="location_Y_edit" name="location_Y" type="hidden" value="">
+                          <input id="location_X_edit" name="location_X" type="hidden" value="{{:location_X}}">
+                          <input id="location_Y_edit" name="location_Y" type="hidden" value="{{:location_Y}}">
                           <div class = 'panel'>选择切换省市：<select open id = 'subDistricts_edit'></select></div>
                           <div id="mapDiv_edit" class="map" tabindex="0"></div>
                         </td>

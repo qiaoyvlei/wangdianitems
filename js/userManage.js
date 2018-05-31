@@ -38,20 +38,21 @@ $(document).ready(function(){
         var foemd = new FormData();
         foemd.append("file",$(".front")[0].files[0]);
         var xhr = new XMLHttpRequest();
-        xhr.open("POST",ip+'/upload/uploadimg', true);
-        xhr.send(foemd);
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState == 4 && xhr.status == 200) {
-                var obj = JSON.parse(xhr.responseText);
-                if(obj.path) {
-                    $('.frontBtn').css('background-color','green');
-                    $('.frontBtn').html('已上传');
-                } else {
-                    alert('上传失败，请再试一次');
-
-                }
-            }
-        }
+        //xhr.open("POST",ip+'/upload/uploadimg', true);
+        ////xhr.setRequestHeader("Content-Type", "www.")
+        //xhr.send(foemd);
+        //xhr.onreadystatechange = function() {
+        //    if(xhr.readyState == 4 && xhr.status == 200) {
+        //        var obj = JSON.parse(xhr.responseText);
+        //        if(obj.path) {
+        //            $('.frontBtn').css('background-color','green');
+        //            $('.frontBtn').html('已上传');
+        //        } else {
+        //            alert('上传失败，请再试一次');
+        //
+        //        }
+        //    }
+        //}
     });
 
     var params = {};
@@ -248,7 +249,6 @@ function editDevice(id,obj){
             });
             //地图
             var location  = data.location_X + ','+ data.location_Y;
-            console.log(location);
             map = new AMap.Map('mapDiv_edit', {
                 resizeEnable: true,
                 center: new AMap.LngLat(0,0),
@@ -448,16 +448,13 @@ function updateDevice(id){
         return false;
     }else{
         var params = $("#form_edit").serializeArray();
-        console.log(params);
         var values={};
         $.each(params,function(i,val){
             values[val.name] = val.value;
         });
         values['equipmentId']= id;
         values.imgUrl = "";
-        console.log(values);
         $.post(ip+'/equipment/update',values,function(json){
-            console.log(json);
             if(json.type === "COMMON_SUC"){
                 var url=window.location.href;
                 window.location.href = url;

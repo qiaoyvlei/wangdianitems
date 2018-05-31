@@ -143,6 +143,13 @@ $(function () {
             $.each(json.data.sensorTypeResps, function (index, data) {
                 drawChart(equipmentId, data.dataType, 0);
             });
+            //setInterval(
+            //    function(){
+            //        $.each(json.data.sensorTypeResps, function (index, data){
+            //            drawChart(equipmentId, data.dataType, 0);
+            //        })
+            //    },
+            //10000);
             var template1 = $.templates("#showEveryEquipmentData");
             var htmlOutput1 = template1.render(json.data);
             $(".showEveryEquipmentData").html(htmlOutput1);
@@ -197,6 +204,7 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
     parmas.endTime=new Date().getTime();
     $("#" + containerId).html('<img src="../images/loading.gif" align="center" style="margin-top:80px;" />');
     $.post(ip+'/data/find',parmas,function(json){
+        console.log(json);
         if(json.type === "COMMON_SUC"){
             var data = json.data;
             res = [];
@@ -209,17 +217,47 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
             }
             var unit = data[0].unit;
             data = res;
+            var data1 = data.reverse();
             if (data == "" || data == undefined || data == null) {
                 $("#" + containerId).html('<div style="color:gray;padding-top:80px;">No data.</div>');
                 return;
             }
+            console.log(data);
             Highcharts.setOptions({ global: { useUTC: false } });
             chart = new Highcharts.Chart({
                 chart: {
                     renderTo: containerId,
                     type: ctype,
                     animation: false,
-                    zoomType: 'x'
+                    zoomType: 'x',
+                    events:{
+                        load:function(){
+                            var series = this.series[0],
+                                chart = this;
+                            activeLastPointToolip(chart);
+                            var as = 0;
+                            var x,y = 0;
+                            $.post(ip+'/data/find',parmas,function(json) {
+                                if(json.type === "COMMON_SUC") {
+                                    as = new Date(json.data[0].time).getTime();// 当前时间
+                                }
+                            });
+                            //绘制实时更新的数据
+                            setInterval(function () {
+                                $.post(ip+'/data/find',parmas,function(json) {
+                                    if(json.type === "COMMON_SUC") {
+                                            x = new Date(json.data[0].time).getTime();// 当前时间
+                                            y = Number(json.data[0].data);
+                                        if(as !== x){
+                                            series.addPoint([x, y], true, true);
+                                            activeLastPointToolip(chart);
+                                        }
+                                    }
+                                });
+                                as = x;
+                            }, 5000);
+                        }
+                    }
                 },
                 legend: {
                     enabled: false
@@ -288,9 +326,7 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
                     }
                 },
                 series: [{
-                    data: data,
-                    step: step
-
+                    data: data1
                 }],
                 credits: {
                     enabled: false     //去掉highcharts网站url
@@ -317,6 +353,10 @@ function drawChart(id,dataType,no,ctype,ytitle,unit){
     }).fail(function(json){
         alert("请求失败，请稍后再试")
     });
+}
+function activeLastPointToolip(chart) {
+    var points = chart.series[0].points;
+    chart.tooltip.refresh(points[points.length -1]);
 }
 function getDate(index){
     var date = new Date(); //当前日期
