@@ -13,6 +13,7 @@ $(function () {
     var params = {};
     params.equipmentId = equipmentId;
     //这个设备的基本信息
+    //woshi
     $.post(ip+'/equipment/find',params,function(json){
         //console.log(json)
         var template = $.templates("#equipmentInfo");
