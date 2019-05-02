@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
 		<title>增删查改</title>
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
 			/*导航栏*/
 			html,body{
@@ -210,15 +211,38 @@
 
 			.nav_right{
 				position: absolute;
+				width: 85%;
 				right: 0;
 				height:100%;
 				width:85%;
-				background-color: #cccccc;
+				background-color:rgb(245, 246, 247);
 			}
-			.nav1{
-				height:60px;
-				width:100%;
-				background-color:#00AA88;
+			.nav_right .middle_shebeigailan{
+				margin-top: 20px;
+				padding: 20px;
+				width: 100%;
+				height:20px;
+				line-height: 20px;
+				background: #fff;
+			}
+			.nav_right .middle_shebeigailan .table_shebei{
+				position: relative;
+				top: 40px;
+				left:40px;
+				height: 160px;
+				background-color: #fff;
+				overflow: hidden;
+			}
+			.middle_shebeigailan .table_shebei .td_data{
+				display: inline-block;
+				width: 24%;
+				height: 100%;
+				padding-top: 20px;
+				border-right:solid 1px gainsboro;
+				text-align: center;
+			}
+			.middle_shebeigailan .table_shebei .td_data:last-child{
+				border: none;
 			}
 		</style>
 	</head>
@@ -269,7 +293,29 @@
 				</ul>
 			</div>
 			<div class="nav_right">
-				<div class="nav1"></div>
+				<div class="middle_shebeigailan">
+					<p>设备概览</p>
+					<div class="table_shebei" style="width:85%">
+						<div class="td_data">
+							<p>设备总数（台)</p>
+							<p>{{message1}}</p>
+						</div>
+							<div class="td_data">
+							<p>今天API调用（次）</p>
+							<p>{{message2}}</p>
+							
+						</div>
+						<div class="td_data">
+							<p>今天推送调用（次）</p>
+							<p>{{message3}}</p>
+						</div>
+						<div class="td_data">
+							<p>今天下发命令（次）</p>
+							<p>{{message4}}</p>
+						</div>
+					</div>			
+				</div>
+				
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -282,6 +328,9 @@
 				})
 				
 			});
+			var data={
+				message:23
+			}
 		</script>
 
 	</body>

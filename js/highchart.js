@@ -1,63 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-</head>
-<body>
-<div class="container0" class='dfg' style="width: 800px; height: 400px; margin: 0 auto"></div>
-<div class="container1" class='dfg' style="width: 800px; height: 400px; margin: 0 auto"></div>
-<script>
-    var datas=[],names=[];
-    setInterval(function(){
-        datas=[],names=[];
-        $.ajax({
-            url: "http://47.100.6.42/electric/get_data.php",
-            type: 'post',
-            dataType: "json",
-            async: false,
-            cache: false,
-            success: function (res) {
-                for (var i = 0; i < res.length; i++) {
-                    var nn = res[i].split("");
-                    var len = res[i].split("").length;
-                    for (var j = 0; j < len; j++) {
-                        if (res[i].split("")[j] == ':') {
-                            var dd = nn.slice(j + 1, len).join('');
-                            var na = nn.slice(0, j).join('');
-                            datas.push(dd);
-                            names.push(na);
-                            break;
-                        }
-                    }
-                }
-                console.log(names[0]);
-            }
-        });
-    },1000);
+/**
+ * Created by Administrator on 2018/11/1.
+ */
+var datas=[],names=["temperature","illumination","speed","direction","rainfall","isRain","mq135","mq2", "humidity","pressure","altitude","voltage","pitch","roll","yaw"];
+var cname=['温度传感器(℃)','光照传感器(lux)','风速传感器(m/s)',
+    '风向传感器','风向传感器','是否下雨传感器','有害气体传感器(Nm3/h)',
+    '烟雾传感器(Nm3/h)','湿度传感器(%RH)','大气压强传感器(Pa)','海拔高度传感器(m)']
+$(".dfg").ready(function() {
     var chart = {
         type: 'spline',
         animation: Highcharts.svg,// don't animate in IE < IE 10.
         marginRight: 10,
+        marginTop:60,
         events: {
             load: function () {
                 // set up the updating of the chart each second
                 var series = this.series[0];
                 setInterval(function () {
+                    $.ajax({
+                        url: "http://47.100.6.42/electric/get_data.php",
+                        type: 'post',
+                        dataType: "json",
+                        async: false,
+                        cache: false,
+                        success: function (res){
+                            //console.log(res);
+                            for(var i=0;i<res.length;i++){
+                                var nn=res[i].split("");
+                                var len=res[i].split("").length;
+                                for(var j=0;j<len;j++){
+                                    if(res[i].split("")[j]==':'){
+                                        var dd=nn.slice(j+1,len).join('');
+                                        datas.push(dd);
+                                        break;
+                                    }
+                                }
+                            }
                             var x=(new Date()).getTime();
-                            var y=Number(datas[0]);
-                            series.addPoint([x, y], true, true);
+                            for(var i=0;i<2;i++){
+                                var y=Number(datas[i]);
+                                series.addPoint([x, y], true, true);
+                            }
+                        }
+                    });
                 }, 1000);
             }
         }
     };
-    console.log(names[0]);
-    /*var title = {
-        text: 'Live random data'
-        //text: names[0]
-    };*/
     var xAxis = {
         type: 'datetime',
         tickPixelInterval: 150//横轴的间距
@@ -77,8 +65,8 @@
         formatter: function () {
             //console.log(this.x);
             return '<b>' + this.series.name + '</b><br/>' +
-                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                    Highcharts.numberFormat(this.y, 2);
+                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                Highcharts.numberFormat(this.y, 2);
         }
     };
     //以平滑的曲线展现
@@ -111,7 +99,7 @@
         data: (function () {
             // generate an array of random data
             var data = [],time = (new Date()).getTime(),i;
-            for (i = -9; i <= 0; i += 1) {//代表有多少个点
+            for (i = -6; i <= 0; i += 1) {//代表有多少个点
                 data.push({
                     x: time + i * 1000,
                     y:(Math.random() * (1.1 - 1) + 1)*20
@@ -121,7 +109,11 @@
             return data;
         }())
     }];
-    $(".dfg").ready(function() {
+    for(var i=0;i<2;i++){
+        var title = {
+            //text: 'Live random data'
+            text: names[i]+cname[i]
+        };
         var json = {};
         json.chart = chart;
         json.title = title;
@@ -133,16 +125,12 @@
         json.series = series;
         json.plotOptions = plotOptions;
         json.credits=credits;
-
-
         Highcharts.setOptions({
             global: {
                 useUTC: false
             }
         });
-        $('.container0').highcharts(json);
-        $('.container1').highcharts(json);
-    });
-</script>
-</body>
-</html>
+        $('.container'+i).highcharts(json);
+    }
+
+});
