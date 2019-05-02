@@ -29,6 +29,7 @@
             padding: 0;
             z-index: 1;
             min-width: 1200px;
+            position: fixed;
         }
         /*logo*/
 
@@ -142,7 +143,7 @@
             width: 60%;
             margin-left: 20%;
             background-color: #FFFFFF;
-            margin-top: 40px;
+            margin-top: 110px;
             color:rgb(81, 90, 110);
             font-size:14px;
             position: relative;
@@ -271,7 +272,7 @@
         }
         .hideup>span{
             /*position: absolute;*/
-            margin-left: 380px;
+            margin-left: 25%;
             margin-top: 10px;
             font-size: 20px;
             cursor: pointer;
@@ -324,7 +325,7 @@
         .hidecenter{
             margin-top: 20%;
             margin-left: 30px;
-            height: 600px;
+            height:80%;
             overflow: auto;
             color: #cccccc;
             font-size:12px;
@@ -343,8 +344,7 @@
         }
 
         .hidecenter>form>input{
-            margin-left: 30px;
-            margin-top:25px;
+            margin:2.5%;
         }
         /*底部*/
         .footer {
@@ -406,7 +406,6 @@
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
-<div class="mainpage">
     <!--我是开发者中心的增删查改-->
     <nav class="header">
         <img class="logo" src="../images/homePage-logo.png" />
@@ -428,35 +427,12 @@
             <a class="icon-user user" href="userDocument.html"></a>
         </div>
     </nav>
+    <div class="mainpage">
     <div class="add">
         <label class="labadd">产品数量（个）</label>
         <span style="position: absolute ;left:70px; top: 55px; font-size:25px;color: #000;">0</span>
         <button class="addbtn">添加产品</button>
     </div>
-    <!--<div class="back">-->
-        <!--<div>-->
-        <!--<h1>jahajaj</h1>-->
-        <!--<div>-->
-            <!--<span>智能机器人</span>-->
-            <!--<span>编辑</span>-->
-            <!--<span>删除</span>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="son">-->
-            <!--<a>协议</a><br/><br/>-->
-            <!--<span>HTTP</span>-->
-        <!--</div>-->
-        <!--<div class="son">-->
-            <!--<a>设备数量</a><br/><br/>-->
-            <!--<span>0</span>-->
-        <!--</div>-->
-
-        <!--<div class="son">-->
-            <!--<a>创建时间</a><br/><br/>-->
-            <!--<span>&#45;&#45;</span>-->
-        <!--</div>-->
-    <!--</div>-->
     <div class="addblack"></div>
     <div class="addhide">
         <div class="hideup">
@@ -559,7 +535,7 @@
             //动态创建一个div
             if(sum<4){
                 var str="";
-                str+="<div class='back'><div><h1></h1><div><span></span><span>编辑</span><span>删除</span></div></div> <div class='son'><a>协议</a><br><br><sapn>HTTP</sapn></div> <div class='son'><a>设备数量</a><br><br><sapn>0</sapn></div><div class='son'><a>创建时间</a><br><br><sapn></sapn></div></div>";
+                str+="<div class='back'><div><h1></h1><div><span></span><span class='edit'>编辑</span><span class='del'>删除</span></div></div> <div class='son'><a>协议</a><br><br><sapn>HTTP</sapn></div> <div class='son'><a>设备数量</a><br><br><sapn>0</sapn></div><div class='son'><a>创建时间</a><br><br><sapn class='time'></sapn></div></div>";
                 // $(".back").show();
                 $(".mainpage").append(str);
                 //向里面动态添加东西
@@ -567,7 +543,7 @@
                 $(".back:nth-last-child(1)>div>div>span:nth-child(1)").html($("#job").val());
                 var data=new Date();
                 //有问题的代码
-                $(".back:nth-last-child(1)>.son:nth-child(4)>span").html(data.getFullYear()+"-"+(data.getMonth()+1)+"-"+data.getDate()+" "+data.getHours()+":"+data.getMinutes()+":"+data.getSeconds());
+                $(".time").html(data.getFullYear()+"-"+(data.getMonth()+1)+"-"+data.getDate()+" "+data.getHours()+":"+data.getMinutes()+":"+data.getSeconds());
                 //清空所有的值
                 $("input").val("");
                 $("#job").val("");
@@ -575,11 +551,19 @@
             }else{
                 alert("对不起，您的账户非公司注册，最多只能建立三个产品");
             }
-            for(var i=0;i<sum;i++){
-                $(".back:eq(i)>div:eq(3)>span:eq(4)").on("click",function(){
-                   $(".back:eq(i)").remove();
+
+                $(".del").on("click",function(){
+                   $(this).parent("div").parent("div").parent("div").remove();
+                });
+
+                $(".edit").on("click",function(){
+                    //点击显示
+                    $(".addhide").show();
+                    $(".addblack").show();
+                    $("#name").val($(".back:nth-last-child(1)>div>h1").html());
+                    $("#job").val($(".back:nth-last-child(1)>div>div>span:nth-child(1)").html());
+                    $(this).parent("div").parent("div").parent("div").remove();
                 })
-            }
 
         })
     })
