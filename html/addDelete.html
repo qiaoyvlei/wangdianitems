@@ -5,23 +5,31 @@
 		<meta charset="UTF-8">
 		<title>增删查改</title>
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="../js/highcharts.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
 			/*导航栏*/
-			html,body{
-				height:100%;
-			}
+			
+			html,
 			body {
-				overflow: hidden;
+				height: 100%;
 			}
-			*{
+			
+			body {
+				/*overflow: hidden;*/
+			}
+			
+			* {
 				padding: 0;
 				margin: 0;
 			}
-			.mainpage{
+			
+			.mainpage {
 				height: 100%;
 			}
+			
 			.header {
+				position: fixed;
 				width: 100%;
 				height: 70px;
 				line-height: 70px;
@@ -111,7 +119,7 @@
 				border-radius: 25px;
 				border: solid 2px #FCFCFD;
 				right: 50px;
-				top:20px;
+				top: 20px;
 				position: absolute;
 			}
 			
@@ -156,6 +164,7 @@
 				margin-bottom: 10px;
 				font-size: 20px;
 			}
+			
 			.footer a {
 				font-size: 16px;
 				display: block;
@@ -167,18 +176,21 @@
 			.footer a:hover {
 				color: #FCFCFD;
 			}
-			.nav_left{
-				width: 15%;
-				padding-bottom:9999px ;
-				background-color: rgba(42,159,150,0.8);
+			
+			.nav_left {
+				position: fixed;
 				float: left;
-				
+				width: 15%;
+				padding-bottom: 9999px;
+				background-color: rgba(42, 159, 150, 0.8);
 			}
+			
 			.oneLevel {
 				display: inline-block;
 				width: 160px;
 				line-height: 32px;
-				cursor: pointer;;
+				cursor: pointer;
+				;
 				text-align: center;
 			}
 			
@@ -189,60 +201,80 @@
 			.oneLevelList {
 				display: none;
 			}
-			 ul li{
+			
+			ul li {
 				list-style-type: none;
 				line-height: 60px;
-				
 			}
-			.selected{
-				background-color:rgb(42,155,159);
-
+			
+			.selected {
+				background-color: rgb(42, 155, 159);
 			}
-			ul li a{
+			
+			ul li a {
 				color: #fff;
 				text-decoration: none;
-				
 			}
+			
 			.oneLevelList ul li {
-				position:absolute;
+				position: absolute;
 				padding-left: 30px;
 				line-height: 30px;
 			}
-
-			.nav_right{
-				position: absolute;
-				width: 85%;
-				right: 0;
-				height:100%;
-				width:85%;
-				background-color:rgb(245, 246, 247);
-			}
-			.nav_right .middle_shebeigailan{
-				margin-top: 20px;
-				padding: 20px;
-				width: 100%;
-				height:20px;
-				line-height: 20px;
-				background: #fff;
-			}
-			.nav_right .middle_shebeigailan .table_shebei{
+			
+			.nav_right {
 				position: relative;
-				top: 40px;
-				left:40px;
+				float: left;
+				width: 85%;
+				height: 100%;
+				left: 15%;
+				background-color: rgb(245, 246, 247);
+			}
+			
+			.nav_right .middle_shebeigailan .table_shebei {
+				position: relative;
+				top: 70px;
+				left: 8%;
 				height: 160px;
 				background-color: #fff;
 				overflow: hidden;
 			}
-			.middle_shebeigailan .table_shebei .td_data{
+			
+			.middle_shebeigailan .table_shebei .td_data {
 				display: inline-block;
 				width: 24%;
 				height: 100%;
 				padding-top: 20px;
-				border-right:solid 1px gainsboro;
+				border-right: solid 1px gainsboro;
 				text-align: center;
 			}
-			.middle_shebeigailan .table_shebei .td_data:last-child{
+			
+			.middle_shebeigailan .table_shebei .td_data:last-child {
 				border: none;
+			}
+			
+			.data {
+				padding-top: 60px;
+			}
+			
+			.main_chart {
+				position: relative;
+				top: 100px;
+				left: 8%;
+				width: 85%;
+				height: 360px;
+				background-color: #fff;
+				background-color: rgb(245, 246, 247);
+				border: 1px solid black;
+			}
+			
+			.barChart,
+			.sectorChart {
+				display: inline-block;
+				width: 45%;
+				background-color: white;
+				height: 80%;
+				margin: 1.5% 1.5% 1.5% 2.5%;
 			}
 		</style>
 	</head>
@@ -293,44 +325,212 @@
 				</ul>
 			</div>
 			<div class="nav_right">
-				<div class="middle_shebeigailan">
+				<div class="middle_shebeigailan" id="shebei">
 					<p>设备概览</p>
-					<div class="table_shebei" style="width:85%">
+					<div class="table_shebei" style="width: 85%;">
 						<div class="td_data">
 							<p>设备总数（台)</p>
-							<p>{{message1}}</p>
+							<p class="data">{{message1}}次</p>
 						</div>
-							<div class="td_data">
+						<div class="td_data">
 							<p>今天API调用（次）</p>
-							<p>{{message2}}</p>
-							
+							<p class="data">{{message2}}次</p>
+
 						</div>
 						<div class="td_data">
 							<p>今天推送调用（次）</p>
-							<p>{{message3}}</p>
+							<p class="data">{{message3}}次</p>
 						</div>
 						<div class="td_data">
 							<p>今天下发命令（次）</p>
-							<p>{{message4}}</p>
+							<p class="data">{{message4}}次</p>
 						</div>
-					</div>			
+					</div>
 				</div>
-				
+				<div class="main_chart">
+					<div class="sectorChart ">
+						
+					</div>
+					<div class="barChart container1 dfg">
+					</div>
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('.bMenuTitle').on('click', function(){
+				$('.bMenuTitle').on('click', function() {
 					$('.bMenuTitle').removeClass("selected");
 					$(this).children('ul').slideDown();
 					$(this).siblings().children('ul').slideUp();
 					$(this).addClass("selected");
 				})
-				
+
 			});
-			var data={
-				message:23
-			}
+			var devies = new Vue({
+				el: "#shebei",
+				data: {
+					message1: Math.floor(Math.random() * 1000),
+					message2: Math.floor(Math.random() * 1000),
+					message3: Math.floor(Math.random() * 1000),
+					message4: Math.floor(Math.random() * 1000)
+				}
+			})
+			//数据展示——曲线统计图
+			var datas = [],
+				names = ["temperature", "活跃", "speed", "direction", "rainfall", "isRain", "mq135", "mq2", "humidity", "pressure", "altitude", "voltage", "pitch", "roll", "yaw"];
+			var cname = ['温度传感器(℃)', '设备数', '风速传感器(m/s)',
+				'风向传感器', '风向传感器', '是否下雨传感器', '有害气体传感器(Nm3/h)',
+				'烟雾传感器(Nm3/h)', '湿度传感器(%RH)', '大气压强传感器(Pa)', '海拔高度传感器(m)'
+			]
+			$(".dfg").ready(function() {
+				var chart = {
+					type: 'spline',
+					animation: Highcharts.svg, // don't animate in IE < IE 10.
+					marginRight: 10,
+					marginTop: 60,
+					events: {
+						load: function() {
+							// set up the updating of the chart each second
+							var series = this.series[0];
+							//console.log(series);
+							setInterval(function() {
+								$.ajax({
+									//url: "http://47.100.6.42/electric/get_data.php",
+									type: 'post',
+									dataType: "json",
+									async: false,
+									cache: false,
+									success: function(res) {
+										console.log(res);
+										for(var k = 0; k < res.length; i++) {
+											var nn = res[k].split("");
+											var len = res[k].split("").length;
+											for(var j = 0; j < len; j++) {
+												if(res[k].split("")[j] == ':') {
+													var dd = nn.slice(j + 1, len).join('');
+													datas.push(dd);
+													break;
+												}
+											}
+										}
+										var x = (new Date()).getTime();
+										var y = Number(datas[0]);
+										series.addPoint([x, y], true, true);
+									}
+								});
+							}, 1000);
+						}
+					}
+				};
+				var xAxis = {
+					title: {
+						text: '时间'
+					},
+					type: 'datetime',
+					tickPixelInterval: 150 //横轴的间距
+				};
+				var yAxis = {
+					title: {
+						text: '活跃设备数/台'
+					},
+					plotLines: [{
+						value: 0,
+						width: 3,
+						color: '#808080' //横轴的线颜色
+					}]
+				};
+				//标注
+				var tooltip = {
+					formatter: function() {
+						//console.log(this.x);
+						return '<b>' + this.series.name + '</b><br/>' +
+							Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+							Highcharts.numberFormat(this.y, 2);
+					}
+				};
+				//以平滑的曲线展现
+				var plotOptions = {
+					area: {
+						pointStart: 1940,
+						marker: {
+							enabled: false,
+							symbol: 'circle',
+							radius: 2,
+							states: {
+								hover: {
+									enabled: true
+								}
+							}
+						}
+					}
+				};
+				var legend = {
+					enabled: false
+				};
+				var credits = {
+					enabled: false
+				};
+				var exporting = {
+					enabled: false
+				};
+
+				for(var i = 0; i < 2; i++) {
+					var title = {
+						//text: 'Live random data'
+						text: names[i] + cname[i]
+					};
+					var series1 = [{
+						name: 'Random data',
+						data: (function() {
+							// generate an array of random data
+							var data = [],
+								time = (new Date()).getTime(),
+								i;
+							for(j = -6; j <= 0; j += 1) { //代表有多少个点
+								data.push({
+									x: time + j * 1000,
+									y: (Math.random() * (1.1 - 1) + 1) * 20
+								});
+							}
+							return data;
+						}())
+					}];
+					var series2 = [{
+						name: 'Random data',
+						data: (function() {
+							// generate an array of random data
+							var data = [],
+								time = (new Date()).getTime(),
+								i;
+							for(j = -6; j <= 0; j += 1) { //代表有多少个点
+								data.push({
+									x: time + j * 1000,
+									y: (Math.random() * (1.09 - 1) + 1) * 400
+								});
+							}
+							return data;
+						}())
+					}];
+					var json = {};
+					json.chart = chart;
+					json.title = title;
+					json.tooltip = tooltip;
+					json.xAxis = xAxis;
+					json.yAxis = yAxis;
+					json.legend = legend;
+					json.exporting = exporting;
+					json.series = (i == 0) ? series1 : series2;
+					json.plotOptions = plotOptions;
+					json.credits = credits;
+					Highcharts.setOptions({
+						global: {
+							useUTC: false
+						}
+					});
+					$('.container' + i).highcharts(json);
+				}
+
+			});
 		</script>
 
 	</body>
