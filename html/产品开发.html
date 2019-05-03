@@ -507,7 +507,6 @@
 </footer>
 <script>
     $(function(){
-
         $(".addbtn").on("click",function () {
             //点击显示
             $(".addhide").show();
@@ -533,17 +532,17 @@
             $(".addhide").hide();
             $(".addblack").hide();
             //动态创建一个div
-            if(sum<4){
-                var str="";
-                str+="<div class='back'><div><h1></h1><div><span></span><span class='edit'>编辑</span><span class='del'>删除</span></div></div> <div class='son'><a>协议</a><br><br><sapn>HTTP</sapn></div> <div class='son'><a>设备数量</a><br><br><sapn>0</sapn></div><div class='son'><a>创建时间</a><br><br><sapn class='time'></sapn></div></div>";
+            if(sum<4) {
+                var str = "";
+                str += "<div class='back'><div><h1></h1><div><span></span><span class='edit'>编辑</span><span class='del'>删除</span></div></div> <div class='son'><a>协议</a><br><br><sapn>HTTP</sapn></div> <div class='son'><a>设备数量</a><br><br><sapn>0</sapn></div><div class='son'><a>创建时间</a><br><br><sapn class='time'></sapn></div></div>";
                 // $(".back").show();
                 $(".mainpage").append(str);
                 //向里面动态添加东西
                 $(".back:nth-last-child(1)>div>h1").html($("#name").val());
                 $(".back:nth-last-child(1)>div>div>span:nth-child(1)").html($("#job").val());
-                var data=new Date();
-                //有问题的代码
-                $(".back:nth-last-child(1) .son:last-child span").html(data.getFullYear()+"-"+(data.getMonth()+1)+"-"+data.getDate()+" "+data.getHours()+":"+data.getMinutes()+":"+data.getSeconds());
+                var data = new Date();
+
+                $(".time:last").html(data.getFullYear() + "-" + (data.getMonth() + 1) + "-" + data.getDate() + " " + data.getHours() + ":" + data.getMinutes() + ":" + data.getSeconds());
                 //清空所有的值
                 $("input").val("");
                 $("#job").val("");
@@ -551,10 +550,11 @@
             }else{
                 alert("对不起，您的账户非公司注册，最多只能建立三个产品");
             }
-
                 $(".del").on("click",function(){
-                   $(this).parent("div").parent("div").parent("div").remove();
+                    $(this).parent("div").parent("div").parent("div").remove();
+                    sum-=1;
                 });
+
 
                 $(".edit").on("click",function(){
                     //点击显示
@@ -563,9 +563,11 @@
                     $("#name").val($(".back:nth-last-child(1)>div>h1").html());
                     $("#job").val($(".back:nth-last-child(1)>div>div>span:nth-child(1)").html());
                     $(this).parent("div").parent("div").parent("div").remove();
+                    sum-=1;
                 })
 
-        })
+        });
+
     })
 </script>
 </body>
