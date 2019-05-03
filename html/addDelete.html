@@ -15,10 +15,6 @@
 				height: 100%;
 			}
 			
-			body {
-				/*overflow: hidden;*/
-			}
-			
 			* {
 				padding: 0;
 				margin: 0;
@@ -263,19 +259,41 @@
 				left: 8%;
 				width: 85%;
 				height: 360px;
-				background-color: #fff;
 				background-color: rgb(245, 246, 247);
-				border: 1px solid black;
 			}
 			
 			.barChart,
-			.sectorChart {
+			#sectorChart {
 				display: inline-block;
 				width: 45%;
 				background-color: white;
 				height: 80%;
-				margin: 1.5% 1.5% 1.5% 2.5%;
+				margin: 1.2% 2.1% 1.5% 2.5%;
 			}
+			
+			.new {
+				top: 900px;
+				height: 1000px;
+				background-color: rgb(245, 246, 247);
+			}
+			
+			#apiChart {
+				position: relative;
+				top: 100px;
+				left: 8%;
+				width: 85%;
+				height: 300px;
+				background-color: #fff;
+			}
+			#orderChart{
+				position: relative;
+				top:180px;
+				left: 8%;
+				width: 85%;
+				height: 300px;
+				background-color: #fff;
+			}
+			
 		</style>
 	</head>
 
@@ -347,14 +365,26 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="main_chart">
-					<div class="sectorChart ">
-						
+					<div id="sectorChart">
+
 					</div>
 					<div class="barChart container1 dfg">
 					</div>
+
 				</div>
+				<div class="mainChart new">
+					<div id="apiChart">
+
+					</div>
+					<div id="orderChart">
+
+					</div>
+				</div>
+
 			</div>
+
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -382,9 +412,12 @@
 				'风向传感器', '风向传感器', '是否下雨传感器', '有害气体传感器(Nm3/h)',
 				'烟雾传感器(Nm3/h)', '湿度传感器(%RH)', '大气压强传感器(Pa)', '海拔高度传感器(m)'
 			]
-			$(".dfg").ready(function() {
+			$(".barChart").ready(function() {
 				var chart = {
 					type: 'spline',
+					subtitle: {
+						text: '网电云管家提供数据'
+					},
 					animation: Highcharts.svg, // don't animate in IE < IE 10.
 					marginRight: 10,
 					marginTop: 60,
@@ -530,6 +563,192 @@
 					$('.container' + i).highcharts(json);
 				}
 
+			});
+			var chart = Highcharts.chart('sectorChart', {
+				chart: {
+					spacing: [40, 0, 40, 0]
+				},
+				title: {
+					floating: true,
+					text: '各种产品设备数'
+				},
+				subtitle: {
+					text: '网电云管家提供数据'
+				},
+				tooltip: {
+					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+							style: {
+								color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+							}
+						},
+						point: {
+							events: {
+								mouseOver: function(e) { // 鼠标滑过时动态更新标题
+									// 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+									chart.setTitle({
+										text: e.target.name + '\t' + e.target.y + ' %'
+									});
+								}
+								//, 
+								// click: function(e) { // 同样的可以在点击事件里处理
+								//     chart.setTitle({
+								//         text: e.point.name+ '\t'+ e.point.y + ' %'
+								//     });
+								// }
+							}
+						},
+					}
+				},
+				series: [{
+					type: 'pie',
+					innerSize: '80%',
+					name: '市场份额',
+					data: [{
+							name: '产品7',
+							y: 45.0,
+							url: 'http://bbs.hcharts.cn'
+						},
+						['产品1', 26.8],
+						{
+							name: '产品6',
+							y: 12.8,
+							sliced: true,
+							selected: true,
+							url: 'http://www.hcharts.cn'
+						},
+						['产品2', 8.5],
+						['产品3', 6.2],
+						['产品4', 0.7]
+					]
+				}]
+			}, function(c) { // 图表初始化完毕后的会掉函数
+				// 环形图圆心
+				var centerY = c.series[0].center[1],
+					titleHeight = parseInt(c.title.styles.fontSize);
+				// 动态设置标题位置
+				c.setTitle({
+					y: centerY + titleHeight / 2
+				});
+			});
+			var chart = Highcharts.chart('apiChart', {
+				title: {
+					text: 'API调用情况'
+				},
+				subtitle: {
+					text: '网电云管家提供数据'
+				},
+				yAxis: {
+					title: {
+						text: 'API调用\次'
+					}
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'middle'
+				},
+				plotOptions: {
+					series: {
+						label: {
+							connectorAllowed: false
+						},
+						pointStart: 15
+					}
+				},
+				series: [{
+					name: '产品1',
+					data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+				}, {
+					name: '产品2',
+					data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+				}, {
+					name: '产品3',
+					data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+				}, {
+					name: '产品4',
+					data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+				}, {
+					name: '产品5',
+					data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+				}],
+				responsive: {
+					rules: [{
+						condition: {
+							maxWidth: 500
+						},
+						chartOptions: {
+							legend: {
+								layout: 'horizontal',
+								align: 'center',
+								verticalAlign: 'bottom'
+							}
+						}
+					}]
+				}
+			});
+				var chart = Highcharts.chart('orderChart', {
+				title: {
+					text: '命令下发次数'
+				},
+				subtitle: {
+					text: '网电云管家提供数据'
+				},
+				yAxis: {
+					title: {
+						text: '命令调用\次'
+					}
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'middle'
+				},
+				plotOptions: {
+					series: {
+						label: {
+							connectorAllowed: false
+						},
+						pointStart: 15
+					}
+				},
+				series: [{
+					name: '产品1',
+					data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+				}, {
+					name: '产品2',
+					data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+				}, {
+					name: '产品3',
+					data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+				}, {
+					name: '产品4',
+					data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+				}, {
+					name: '产品5',
+					data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+				}],
+				responsive: {
+					rules: [{
+						condition: {
+							maxWidth: 500
+						},
+						chartOptions: {
+							legend: {
+								layout: 'horizontal',
+								align: 'center',
+								verticalAlign: 'bottom'
+							}
+						}
+					}]
+				}
 			});
 		</script>
 

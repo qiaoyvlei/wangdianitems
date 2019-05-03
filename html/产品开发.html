@@ -543,7 +543,7 @@
                 $(".back:nth-last-child(1)>div>div>span:nth-child(1)").html($("#job").val());
                 var data=new Date();
                 //有问题的代码
-                $(".time").html(data.getFullYear()+"-"+(data.getMonth()+1)+"-"+data.getDate()+" "+data.getHours()+":"+data.getMinutes()+":"+data.getSeconds());
+                $(".back:nth-last-child(1) .son:last-child span").html(data.getFullYear()+"-"+(data.getMonth()+1)+"-"+data.getDate()+" "+data.getHours()+":"+data.getMinutes()+":"+data.getSeconds());
                 //清空所有的值
                 $("input").val("");
                 $("#job").val("");
