@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4732caba-c40d-4ea4-86f6-47dea4ec469a" name="Default" comment="最后！！！！哈哈哈哈哈">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/equipmentList.html" afterPath="$PROJECT_DIR$/html/equipmentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/hardwaresShow.html" afterPath="$PROJECT_DIR$/html/hardwaresShow.html" />
     </list>
     <ignored path="ElectricSafetySteward.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,12 +83,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="equipmentList.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="equipmentList.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/equipmentList.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="482">
               <caret line="148" column="7" lean-forward="false" selection-start-line="148" selection-start-column="7" selection-end-line="148" selection-end-column="7" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hardwaresShow.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/html/hardwaresShow.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1076">
+              <caret line="219" column="7" lean-forward="false" selection-start-line="219" selection-start-column="7" selection-end-line="219" selection-end-column="7" />
+              <folding>
+                <marker date="1556974394060" expanded="true" signature="7770:7777" ph="×" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -154,7 +166,6 @@
         <option value="$PROJECT_DIR$/html/login.html" />
         <option value="$PROJECT_DIR$/css/headerAndFooter.css" />
         <option value="$PROJECT_DIR$/css/equipmentList.css" />
-        <option value="$PROJECT_DIR$/html/hardwaresShow.html" />
         <option value="$PROJECT_DIR$/js/homePage2.js" />
         <option value="$PROJECT_DIR$/css/newMessage.css" />
         <option value="$PROJECT_DIR$/js/userManage.js" />
@@ -169,6 +180,7 @@
         <option value="$PROJECT_DIR$/html/dataEquipment.html" />
         <option value="$PROJECT_DIR$/html/equipmentExplore.html" />
         <option value="$PROJECT_DIR$/html/equipmentList.html" />
+        <option value="$PROJECT_DIR$/html/hardwaresShow.html" />
       </list>
     </option>
   </component>
@@ -326,7 +338,7 @@
       <workItem from="1556791168679" duration="20000" />
       <workItem from="1556791546467" duration="6687000" />
       <workItem from="1556849365520" duration="204000" />
-      <workItem from="1556974142721" duration="220000" />
+      <workItem from="1556974142721" duration="254000" />
     </task>
     <task id="LOCAL-00001" summary="Default">
       <created>1556687038596</created>
@@ -419,11 +431,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556974330319</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="最后！！！！哈哈哈哈哈">
+      <created>1556974372284</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1556974372284</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17108000" />
+    <option name="totallyTimeSpent" value="17142000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -678,13 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/hardwaresShow.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="42" column="5" lean-forward="false" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/jquery.validate.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -833,6 +845,16 @@
         <state relative-caret-position="482">
           <caret line="148" column="7" lean-forward="false" selection-start-line="148" selection-start-column="7" selection-end-line="148" selection-end-column="7" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/hardwaresShow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1076">
+          <caret line="219" column="7" lean-forward="false" selection-start-line="219" selection-start-column="7" selection-end-line="219" selection-end-column="7" />
+          <folding>
+            <marker date="1556974394060" expanded="true" signature="7770:7777" ph="×" />
+          </folding>
         </state>
       </provider>
     </entry>
