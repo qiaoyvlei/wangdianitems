@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4732caba-c40d-4ea4-86f6-47dea4ec469a" name="Default" comment="最后！！！！哈哈哈哈哈">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/html/dataForecast.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/dataEquipment.html" afterPath="$PROJECT_DIR$/html/dataEquipment.html" />
     </list>
     <ignored path="ElectricSafetySteward.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,11 +51,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dataEquipment.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dataEquipment.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/dataEquipment.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="482">
               <caret line="193" column="7" lean-forward="false" selection-start-line="193" selection-start-column="7" selection-end-line="193" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dataForecast.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/html/dataForecast.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -215,6 +225,9 @@
     <property name="SearchEverywhereHistoryKey" value="width:460px;&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\个人文件\WE\wangdianitems\html" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\wangdianyunguanjia\wangdianitems\html" />
     </key>
@@ -291,7 +304,7 @@
       <workItem from="1556791168679" duration="20000" />
       <workItem from="1556791546467" duration="6687000" />
       <workItem from="1556849365520" duration="204000" />
-      <workItem from="1556974142721" duration="51000" />
+      <workItem from="1556974142721" duration="107000" />
     </task>
     <task id="LOCAL-00001" summary="Default">
       <created>1556687038596</created>
@@ -363,17 +376,23 @@
       <option name="project" value="LOCAL" />
       <updated>1556849500054</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="最后！！！！哈哈哈哈哈">
+      <created>1556974204124</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1556974204124</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16939000" />
+    <option name="totallyTimeSpent" value="16995000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23621461" sideWeight="0.48511383" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23621461" sideWeight="0.48511383" order="2" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -412,9 +431,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Default" />
     <MESSAGE value="修改之后" />
-    <MESSAGE value="最后！！！！哈哈哈哈哈" />
     <MESSAGE value="还缺少部分细节处理" />
-    <option name="LAST_COMMIT_MESSAGE" value="还缺少部分细节处理" />
+    <MESSAGE value="最后！！！！哈哈哈哈哈" />
+    <option name="LAST_COMMIT_MESSAGE" value="最后！！！！哈哈哈哈哈" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -423,13 +442,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html/equipmentExplore.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="42" column="16" lean-forward="false" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html/userHelp.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -771,6 +783,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="482">
           <caret line="193" column="7" lean-forward="false" selection-start-line="193" selection-start-column="7" selection-end-line="193" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/dataForecast.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
