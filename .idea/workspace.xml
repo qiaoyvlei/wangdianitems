@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4732caba-c40d-4ea4-86f6-47dea4ec469a" name="Default" comment="最后！！！！哈哈哈哈哈">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/hardwaresShow.html" afterPath="$PROJECT_DIR$/html/hardwaresShow.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/homePage.html" afterPath="$PROJECT_DIR$/html/homePage.html" />
     </list>
     <ignored path="ElectricSafetySteward.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,13 +93,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hardwaresShow.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hardwaresShow.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/hardwaresShow.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1076">
               <caret line="219" column="7" lean-forward="false" selection-start-line="219" selection-start-column="7" selection-end-line="219" selection-end-column="7" />
               <folding>
                 <marker date="1556974394060" expanded="true" signature="7770:7777" ph="×" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="homePage.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/html/homePage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="482">
+              <caret line="156" column="7" lean-forward="false" selection-start-line="156" selection-start-column="7" selection-end-line="156" selection-end-column="7" />
+              <folding>
+                <element signature="e#2273#2277#1" expanded="true" />
+                <element signature="e#2312#2316#1" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#1;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#2;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -153,7 +169,6 @@
         <option value="$PROJECT_DIR$/html/UserManage.html" />
         <option value="$PROJECT_DIR$/js/register.js" />
         <option value="$PROJECT_DIR$/css/init.css" />
-        <option value="$PROJECT_DIR$/html/homePage.html" />
         <option value="$PROJECT_DIR$/html/register.html" />
         <option value="$PROJECT_DIR$/html/homePageData.html" />
         <option value="$PROJECT_DIR$/js/map.js" />
@@ -181,6 +196,7 @@
         <option value="$PROJECT_DIR$/html/equipmentExplore.html" />
         <option value="$PROJECT_DIR$/html/equipmentList.html" />
         <option value="$PROJECT_DIR$/html/hardwaresShow.html" />
+        <option value="$PROJECT_DIR$/html/homePage.html" />
       </list>
     </option>
   </component>
@@ -338,7 +354,7 @@
       <workItem from="1556791168679" duration="20000" />
       <workItem from="1556791546467" duration="6687000" />
       <workItem from="1556849365520" duration="204000" />
-      <workItem from="1556974142721" duration="254000" />
+      <workItem from="1556974142721" duration="298000" />
     </task>
     <task id="LOCAL-00001" summary="Default">
       <created>1556687038596</created>
@@ -438,11 +454,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556974372284</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="最后！！！！哈哈哈哈哈">
+      <created>1556974405916</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1556974405916</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17142000" />
+    <option name="totallyTimeSpent" value="17186000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -690,13 +713,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/homePage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/jquery.validate.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -854,6 +870,20 @@
           <caret line="219" column="7" lean-forward="false" selection-start-line="219" selection-start-column="7" selection-end-line="219" selection-end-column="7" />
           <folding>
             <marker date="1556974394060" expanded="true" signature="7770:7777" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/homePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="156" column="7" lean-forward="false" selection-start-line="156" selection-start-column="7" selection-end-line="156" selection-end-column="7" />
+          <folding>
+            <element signature="e#2273#2277#1" expanded="true" />
+            <element signature="e#2312#2316#1" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#2;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
