@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4732caba-c40d-4ea4-86f6-47dea4ec469a" name="Default" comment="最后！！！！哈哈哈哈哈">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/homePageData.html" afterPath="$PROJECT_DIR$/html/homePageData.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/homePageMobile.html" afterPath="$PROJECT_DIR$/html/homePageMobile.html" />
     </list>
     <ignored path="ElectricSafetySteward.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -121,11 +121,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="homePageData.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="homePageData.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/homePageData.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="284">
               <caret line="195" column="7" lean-forward="false" selection-start-line="195" selection-start-column="7" selection-end-line="195" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="homePageMobile.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/html/homePageMobile.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="53">
+              <caret line="128" column="16" lean-forward="true" selection-start-line="128" selection-start-column="16" selection-end-line="128" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -181,7 +191,6 @@
         <option value="$PROJECT_DIR$/css/init.css" />
         <option value="$PROJECT_DIR$/html/register.html" />
         <option value="$PROJECT_DIR$/js/map.js" />
-        <option value="$PROJECT_DIR$/html/homePageMobile.html" />
         <option value="$PROJECT_DIR$/css/userDocument.css" />
         <option value="$PROJECT_DIR$/html/img.html" />
         <option value="$PROJECT_DIR$/html/test.html" />
@@ -207,6 +216,7 @@
         <option value="$PROJECT_DIR$/html/hardwaresShow.html" />
         <option value="$PROJECT_DIR$/html/homePage.html" />
         <option value="$PROJECT_DIR$/html/homePageData.html" />
+        <option value="$PROJECT_DIR$/html/homePageMobile.html" />
       </list>
     </option>
   </component>
@@ -364,7 +374,7 @@
       <workItem from="1556791168679" duration="20000" />
       <workItem from="1556791546467" duration="6687000" />
       <workItem from="1556849365520" duration="204000" />
-      <workItem from="1556974142721" duration="360000" />
+      <workItem from="1556974142721" duration="432000" />
     </task>
     <task id="LOCAL-00001" summary="Default">
       <created>1556687038596</created>
@@ -478,11 +488,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556974446699</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="最后！！！！哈哈哈哈哈">
+      <created>1556974526511</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1556974526511</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17248000" />
+    <option name="totallyTimeSpent" value="17320000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -649,13 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="7" column="18" lean-forward="false" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html/homePageMobile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="43" column="5" lean-forward="false" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -902,6 +912,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="284">
           <caret line="195" column="7" lean-forward="false" selection-start-line="195" selection-start-column="7" selection-end-line="195" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/homePageMobile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="128" column="16" lean-forward="true" selection-start-line="128" selection-start-column="16" selection-end-line="128" selection-end-column="16" />
           <folding />
         </state>
       </provider>

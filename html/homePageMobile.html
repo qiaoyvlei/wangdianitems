@@ -27,17 +27,17 @@
       justify-content: flex-start;
     }
     .show p img{
-        width:50%;
-        height:500px;
-        padding: 10px 20px;
+      width:50%;
+      height:500px;
+      padding: 10px 20px;
     }
     .showRight{
       height:661px;
       padding:80px 150px;
     }
     .showRight img{
-        width:330px;
-        height:330px;
+      width:330px;
+      height:330px;
     }
     .footer{
       margin-top: -30px;
@@ -120,17 +120,17 @@
 <script src="../js/bootstrap.min.js"></script>
 <script src="../common.js"></script>
 <script>
-  $(function() {
+    $(function() {
 //    userId = '4657c0733c5048a79e7555574a1dc564';
-    var userId = getCookie("userId");
-    if (userId) {
-      $('.logined').css('display', 'inline-block');
-      $('.unlogin').css('display', 'none');
-    } else {
-      $('.unlogin').css('display', 'inline-block');
-      $('.logined').css('display', 'none');
-    }
-  })
+        var userId = getCookie("userId");
+        if (userId) {
+            $('.logined').css('display', 'inline-block');
+            $('.unlogin').css('display', 'none');
+        } else {
+            $('.unlogin').css('display', 'inline-block');
+            $('.logined').css('display', 'none');
+        }
+    })
 </script>
 </body>
 </html>
