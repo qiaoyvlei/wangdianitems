@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
   <meta charset="UTF-8">
-  <title>管理设备-电力通信的“全科医生”</title>
+  <title>管理设备</title>
   <link href="../css/init.css" rel="stylesheet">
   <link href="../css/bootstrap.min.css" rel="stylesheet">
    <!--导航和底部样式-->
@@ -96,6 +96,12 @@
     #edit_dataType{
       display: none;
     }
+    #saListData{
+      /*width:100%;*/
+      /*background: red;*/
+      /*height:1000px;*/
+    }
+    #tableAS {width:100%; font-weight:lighter;table-layout:fixed;  font-size: 10px;margin-top: 10px;}
   </style>
 </head>
 <body>
@@ -180,17 +186,17 @@
                   <tbody class="showDevicesList"></tbody>
                   <script  type="text/jsrender" id="showDevicesList">
                     {{for equipments}}
-                        <tr class="t1">
-                          <td class="t30" id="mid">{{:equipmentId}}</td>
-                          <td class="t30" id="mid">{{:name}}</td>
-                          <td class="t20" id="mid">{{:createTime}}</td>
-                          <td class="t30" id="info">{{:info}}</td>
-                          <td class="t40">
-                               <button class="btn btn-default btn-sm edit-device"  onclick=editDevice('{{:equipmentId}}',this)>编辑</button>
-                               <button class="btn btn-default btn-sm show_dataTypes"  onclick=showDataTypes('{{:equipmentId}}',this)>查看传感器</button>
-                               <input class="btn btn-default btn-sm" type="button" value="删除" onclick=deleteDevice('{{:equipmentId}}','{{:name}}',this)>
-                          </td>
-                         </tr>
+                      <tr class="t1">
+                        <td class="t30" id="mid">{{:equipmentId}}</td>
+                        <td class="t30" id="mid">{{:name}}</td>
+                        <td class="t20" id="mid">{{:createTime}}</td>
+                        <td class="t30" id="info">{{:info}}</td>
+                        <td class="t40">
+                             <button class="btn btn-default btn-sm edit-device"  onclick=editDevice('{{:equipmentId}}',this)>编辑</button>
+                             <button class="btn btn-default btn-sm show_dataTypes"  onclick=showDataTypes('{{:equipmentId}}',this)>查看传感器</button>
+                             <input class="btn btn-default btn-sm" type="button" value="删除" onclick=deleteDevice('{{:equipmentId}}','{{:name}}',this)>
+                        </td>
+                       </tr>
                     {{/for}}
                   </script>
                 </table>
@@ -286,7 +292,7 @@
                                       <img src="../images/machineRoom-display1.png" alt="..." class="realtime_img" >
                                       <!--<img src={{:imgUrl}} alt="..." class="realtime_img" >-->
                                       <div class="realtime_title">
-                                          <a href="dataEquipment.html?id={{:equipmentId}}" target="view_window">{{:name}}</a>
+                                          <a href="dataEquipment.html?id={{:equipmentId}}" target="_blank">{{:name}}</a>
                                       </div>
                                   </div>
                               </td>
@@ -307,8 +313,35 @@
         </script>
         <!-- 统计分析-->
         <div role="tabpanel" class="tab-pane" id="statisticalanalysis">
-
+          <table id="tableAS" cellpadding="0" cellspacing="0" class="table">
+            <thead>
+            <tr class="thead">
+              <td class="t30">设备ID</td>
+              <td class="t30">名称</td>
+              <td class="t20">创建时间</td>
+              <td class="t20">简介</td>
+              <td class="t40">操作</td>
+            </tr>
+            </thead>
+          <tbody id="saListData"></tbody>
+            <script id="saList" type="text/x-jsrender">
+              {{for equipments}}
+                  <tr class="t1">
+                    <td class="t30" id="mid">{{:equipmentId}}</td>
+                    <td class="t30" id="mid">{{:name}}</td>
+                    <td class="t20" id="mid">{{:createTime}}</td>
+                    <td class="t30" id="info">{{:info}}</td>
+                    <td class="t40">
+                        <a href="dataForecast.html?id={{:equipmentId}}" target="_blank">
+                           <input class="btn btn-default btn-sm" type="button" value="查看预测数据">
+                        </a>
+                    </td>
+                   </tr>
+              {{/for}}
+          </script>
+          </table>
         </div>
+
         <!-- 弹出的内容-->
         <div id="edit_device" title="设备设置" style="display: none;">
         </div>
