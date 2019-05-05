@@ -7,7 +7,8 @@
         /*导航栏*/
         html,body{
             height:100%;
-            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
         body {
             overflow: auto;
@@ -261,19 +262,22 @@
         .hideup{
             width: 100%;
             height: 10%;
-            position: fixed;
+            position: absolute;
             border-bottom: 1px solid #cccccc;
+            overflow: hidden;
+            z-index: 100;
         }
         .hideup>a{
-            display: inline-block;
+            /*display: inline-block;*/
             font-size:20px ;
-            margin-left: 10px;
+            position: absolute;
+            left: 10px;
             margin-top: 20px;
         }
         .hideup>span{
-            /*position: absolute;*/
-            margin-left: 25%;
-            margin-top: 10px;
+            position: absolute;
+            left: 85%;
+            top: 30%;
             font-size: 20px;
             cursor: pointer;
         }
@@ -281,18 +285,20 @@
         .hidedown{
             width: 100%;
             height: 10%;
-            position: fixed;
+            position: absolute;
             bottom: 0;
+            z-index: 100;
             border-top: 1px solid #cccccc;
+
         }
         .hidedown>.down1btn{
             position: absolute;
             height: 40px;
-            width: 110px;
+            width: 30%;
             border: none;
             background-color: #1b6d85;
-            margin-top:20px;
-            margin-left: 100px;
+            margin-top:5%;
+            margin-left: 20%;
             border-radius: 4px;
             line-height: 40px;
             text-align: center;
@@ -304,10 +310,10 @@
         .hidedown>.down2btn{
             position: absolute;
             height: 40px;
-            width: 110px;
+            width:30%;
             border: 1px solid #cccccc;
-            margin-top:20px;
-            margin-left: 300px;
+            margin-top:5%;
+            margin-left: 60%;
             border-radius: 4px;
             line-height: 40px;
             text-align: center;
@@ -323,23 +329,31 @@
         }
         /*中间部分*/
         .hidecenter{
-            margin-top: 20%;
-            margin-left: 30px;
+            top: 20%;
+            left: 5%;
             height:80%;
+            width: 100%;
             overflow: auto;
             color: #cccccc;
             font-size:12px;
+            position: absolute;
         }
-        .hidecenter>form>label>input{
+        .hidecenter>div>label{
+            width: 100%;
+            /* margin:7% 8%; */
+        }
+        .hidecenter>form>div>label>input{
             height: 30px;
             width: 70%;
+            /*position: absolute;*/
             margin:7% 8%;
             border:1px solid #1b6d85;
             border-radius: 10px;
         }
-        .hidecenter>form>label>textarea{
+        .hidecenter>form>div>label>textarea{
             width: 70%;
             margin-left: 20%;
+            margin-top: 2%;
             border:1px solid #1b6d85;
         }
 
@@ -442,8 +456,8 @@
         <div class="hidecenter">
             <form>
             <p style="font-size: 18px; color: #000; ">产品信息</p>
-                <label for="name">产品名称：<input id="name" type="text" autocomplete="on"  required /></label>
-                <label for="job">产品行业：<input id="job" type="text"  list="cp"   />
+                <div><label for="name">产品名称：<input id="name" type="text" autocomplete="on"  required /></label></div>
+                <div><label for="job">产品行业：<input id="job" type="text"  list="cp"/></label></div>
                     <datalist id="cp">
                         <option >智能机器人</option>
                         <option >智能摄像头</option>
@@ -451,7 +465,7 @@
                         <option >其他</option>
                     </datalist>
                 </label>
-                <label for="introduction">产品简介：<br/><textarea id="introduction" placeholder="请输入1-200个字符" required></textarea></label>
+                <div><label for="introduction">产品简介：<br/><textarea id="introduction" placeholder="请输入1-200个字符" required></textarea></label></div>
             </form>
             <p style="font-size: 18px; color: #000; margin-top: 30px;">技术参数</p>
             <form>
@@ -565,7 +579,6 @@
                     $(this).parent("div").parent("div").parent("div").remove();
                     sum-=1;
                 })
-
         });
 
     })
