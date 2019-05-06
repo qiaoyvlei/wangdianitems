@@ -83,10 +83,6 @@ $().ready(function() {
         if($validator.form()) {
             /*将数据传递给后台*/
             var dataInfo = $("#registerForm").serializeArray();
-            var values={};
-            $.each(dataInfo,function(i,val){
-                values[val.name] = val.value;
-            });
             //删除confirmPassword
             delete values.confirmPassword;
             console.log(values);
