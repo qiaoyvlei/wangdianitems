@@ -131,13 +131,20 @@
       border-right: solid 1px gainsboro;
       text-align: center;
     }
+    .middle_shebeigailan .table_shebei .td_data{
+      padding-top: 20px;
+    }
+    .middle_shebeigailan .table_shebei .td_data .data{
+      padding-top: 40px;
 
+    }
     .middle_shebeigailan .table_shebei .td_data:last-child {
       border: none;
     }
 
-    .data {
-      padding-top: 60px;
+    .td_data,.data {
+      font-size: 14px;
+      /*padding-top: 60px;*/
     }
 
     .main_chart {
@@ -195,7 +202,7 @@
 
         <!--<div class="unlogin">-->
             <!--<a id="registerBtn" href="register.html">注册</a>-->
-            <!--<a id="loginBtn" href="login.html">登录</a>-->
+            <!--<a id="loginBtn" href="login1.html">登录</a>-->
         <!--</div>-->
 
         <div class="logined">
@@ -239,6 +246,8 @@
         <!-- 我的设备-->
         <div role="tabpanel" class="tab-pane active" id="mydevices">
           <div>
+
+
             <!-- 我的设备 添加设备-->
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="active" style="font-size: 14px;">
@@ -263,7 +272,7 @@
                     </tr>
                   </thead>
                   <tbody class="showDevicesList"></tbody>
-                  <script  type="text/jsrender" id="showDevicesList">
+                  <!--<script  type="text/jsrender" id="showDevicesList">
                     {{for equipments}}
                       <tr class="t1">
                         <td class="t30" id="mid">{{:equipmentId}}</td>
@@ -277,11 +286,14 @@
                         </td>
                        </tr>
                     {{/for}}
-                  </script>
+                  </script>-->
                 </table>
                 <!-- 分页-->
                 <div class="page">
-                  <div id="Pagination_mydevice" class="pagination"><!-- 这里显示分页 --></div>
+                  <div id="Pagination_mydevice" class="pagination">
+                    <!-- 这里显示分页 -->
+                  	<iframe src="产品开发.html" width="400" height="400"></iframe>
+                  </div>
                 </div>
               </div>
               <!-- 添加设备-->
@@ -455,7 +467,7 @@
                           var series = this.series[0];
                           //console.log(series);
                           setInterval(function() {
-                              $.ajax({
+                             /* $.ajax({
                                   //url: "http://47.100.6.42/electric/get_data.php",
                                   type: 'post',
                                   dataType: "json",
@@ -478,7 +490,7 @@
                                       var y = Number(datas[0]);
                                       series.addPoint([x, y], true, true);
                                   }
-                              });
+                              });*/
                           }, 1000);
                       }
                   }
@@ -950,6 +962,6 @@
   <!--jqPaginator jquery分页插件-->
   <script src="../js/jqPaginator.js"></script>
   <script src="../common.js"></script>
-<script src="../js/userManage.js"></script>
+<!--<script src="../js/userManage.js"></script>-->
 </body>
 </html>

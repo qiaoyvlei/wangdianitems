@@ -19,14 +19,20 @@
 </div>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+    var myData=$('#form1').serializeArray();
+    var jsonData=JSON.stringify(myData);
+    console.log(jsonData)
     function login() {
         $.ajax({
             //几个参数需要注意一下
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
             url: "http://222.24.20.127:8080/ssm/loginForm",//url
-            data: $('#form1').serialize(),///序列化格式
-//            contentType:"json",
+            data: myData,///序列化格式
+            headers:{
+                "Content-Type":
+                    "application/json; charset=utf-8"
+            },
             success: function (result) {
                 console.log(result);//打印服务端返回的数据(调试用)
                 if (result) {

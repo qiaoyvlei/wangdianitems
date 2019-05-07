@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -26,11 +26,10 @@
             <a class="items" href="hardwaresShow.html">硬件展示</a>
             <a class="items" href="userHelp.html">帮助文档</a>
     
-            <!--<div class="unlogin">-->
-                <!--<a id="registerBtn" href="register.html">注册</a>-->
-                <!--<a id="loginBtn" href="login.html">登录</a>-->
-            <!--</div>-->
-
+            <div class="unlogin">
+                <a id="registerBtn" href="register.html">注册</a>
+                <a id="loginBtn" href="login1.html">登录</a>
+            </div>
             <div class="logined">
                 <a class="developerBtn" href="equipmentList.html">我的设备</a>
                 <a class="developerBtn" href="userManage.html">开发者中心</a>
@@ -60,19 +59,22 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../common.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>
-<script>
-   $(function(){
-       var userId = getCookie("userId");
-       if(userId){
-           $('.logined').css('display','inline-block');
-           $('.unlogin').css('display','none');
-       }else{
-           $('.unlogin').css('display','inline-block');
-           $('.logined').css('display','none');
-       }
-       var params = {};
-       params.userId = userId;
-       function showNews(){
+<script src="../js/homePage2.js">
+    <script>
+   $(function () {
+       /*      //判断是否登录状态
+            var userId = true;
+            if(userId){
+                $('.logined').css('display','inline-block');
+                $('.unlogin').css('display','none');
+            }else{
+                $('.unlogin').css('display','inline-block');
+                $('.logined').css('display','none');
+            }*/
+     /*  var params = {};
+       params.userId = userId;*/
+//       出现故障
+       /*function showNews(){
            $.post(ip+'/equipment/findEData',params,function(json){
                if(json.type === "COMMON_SUC"){
                    var res = json.data;
@@ -123,14 +125,14 @@
                                    break;
                                case 'in_ele':
                                    if(obj2.data>=1){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:obj2.time});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:o  bj2.time});
                                    }
                                    break;
                            }
                        });
                        message.push(it);
                    });
-                   var messageData = [];
+                 var messageData = [];
                    for(var i=1;i<message.length;i++){
                        messageData = message[0].concat(message[i]);
                    }
@@ -146,6 +148,7 @@
        }
        showNews();
        setInterval(showNews,1000);
+   })*/
    })
 </script>
 </body>

@@ -90,7 +90,7 @@ $().ready(function() {
             $.post(ip+"/user/register", values,function(json){
                 console.log(json)
                 if(json.type === "COMMON_SUC"){
-                    window.location.href = "login.html";
+                    window.location.href = "login1.html";
                 }else if(json.type === "USER_REGISTER_REQ_ERROR"){
                     alert("注册参数请求错误");
                 }else if(json.type === "USER_NAME_EXIT"){

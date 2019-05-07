@@ -1,7 +1,7 @@
 $(function () {
     //判断是否登录状态
-    var userId = getCookie("userId");
-    if(1){
+    var userId = true;
+    if(userId){
         $('.logined').css('display','inline-block');
         $('.unlogin').css('display','none');
     }else{
