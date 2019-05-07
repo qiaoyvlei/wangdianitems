@@ -189,6 +189,17 @@
     }
 
     #tableAS {width:100%; font-weight:lighter;table-layout:fixed;  font-size: 10px;margin-top: 10px;}
+    iframe{
+        /*position: absolute;*/
+        margin-left: 0;
+        margin-top: 20px;
+        height: 750px;
+        width: 1200px;
+    }
+    .newpage{
+        height: 800px;
+        width: 800px;
+    }
   </style>
 </head>
 <body>
@@ -288,14 +299,15 @@
                     {{/for}}
                   </script>-->
                 </table>
-                <!-- 分页-->
-                <div class="page">
-                  <div id="Pagination_mydevice" class="pagination">
-                    <!-- 这里显示分页 -->
-                  	<iframe src="产品开发.html" width="400" height="400"></iframe>
+                  <!-- 分页-->
+                  <div class="newpage">
+                      <div id="Pagination_mydevice" class="pagination">
+                          <!-- 这里显示分页 -->
+                          <iframe src="产品开发.html"></iframe>
+                      </div>
                   </div>
-                </div>
               </div>
+
               <!-- 添加设备-->
               <div role="tabpanel" class="tab-pane" id="adddevices">
                 <div class="adddevice" style="font-size: 14px;padding:20px;font-weight: lighter;">
