@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4732caba-c40d-4ea4-86f6-47dea4ec469a" name="Default" comment="代码更新">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/html/login1.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/aaaa.html" afterPath="$PROJECT_DIR$/html/aaaa.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/addDelete.html" afterPath="$PROJECT_DIR$/html/addDelete.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/dataEquipment.html" afterPath="$PROJECT_DIR$/html/dataEquipment.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/dataForecast.html" afterPath="$PROJECT_DIR$/html/dataForecast.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/equipmentExplore.html" afterPath="$PROJECT_DIR$/html/equipmentExplore.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/equipmentList.html" afterPath="$PROJECT_DIR$/html/equipmentList.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/hardwaresShow.html" afterPath="$PROJECT_DIR$/html/hardwaresShow.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/homePage.html" afterPath="$PROJECT_DIR$/html/homePage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/homePageData.html" afterPath="$PROJECT_DIR$/html/homePageData.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/homePageMobile.html" afterPath="$PROJECT_DIR$/html/homePageMobile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/login.html" afterPath="$PROJECT_DIR$/html/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/newMessage.html" afterPath="$PROJECT_DIR$/html/newMessage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/userDocument.html" afterPath="$PROJECT_DIR$/html/userDocument.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/userHelp.html" afterPath="$PROJECT_DIR$/html/userHelp.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/userManage.html" afterPath="$PROJECT_DIR$/html/userManage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/产品开发.html" afterPath="$PROJECT_DIR$/html/产品开发.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/homePage2.js" afterPath="$PROJECT_DIR$/js/homePage2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/register.js" afterPath="$PROJECT_DIR$/js/register.js" />
     </list>
     <ignored path="ElectricSafetySteward.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,39 +26,23 @@
       <file leaf-file-name="userManage.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/html/userManage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="294" column="67" lean-forward="false" selection-start-line="294" selection-start-column="67" selection-end-line="294" selection-end-column="67" />
-              <folding />
+            <state relative-caret-position="161">
+              <caret line="951" column="27" lean-forward="false" selection-start-line="951" selection-start-column="21" selection-end-line="951" selection-end-column="27" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/default.css">
+      <file leaf-file-name="highcharts.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/highcharts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2442">
-              <caret line="74" column="1" lean-forward="false" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="init.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/init.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="25" column="69" lean-forward="false" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="aria.rnc" pinned="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/aria.rnc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2072">
-              <caret line="976" column="22" lean-forward="false" selection-start-line="976" selection-start-column="22" selection-end-line="976" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="198">
+              <caret line="6" column="2" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,7 +50,7 @@
       <file leaf-file-name="产品开发.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/html/产品开发.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
+            <state relative-caret-position="17952">
               <caret line="544" column="19" lean-forward="false" selection-start-line="544" selection-start-column="19" selection-end-line="544" selection-end-column="19" />
               <folding />
             </state>
@@ -113,23 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jquery.multiselect.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/jquery.multiselect.js">
+      <file leaf-file-name="addDelete.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/addDelete.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="default.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/default.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="204">
+              <caret line="7" column="50" lean-forward="false" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -167,7 +122,6 @@
       <find>ip</find>
       <find>loginF</find>
       <find>show</find>
-      <find>highcharts</find>
       <find>td_data</find>
       <find>data</find>
       <find>url</find>
@@ -177,9 +131,17 @@
       <find>设备ID</find>
       <find>nav</find>
       <find>我的</find>
-      <find>container-fluid</find>
-      <find>container-fluid all</find>
       <find>iframe</find>
+      <find>container-fluid all</find>
+      <find>container-fluid</find>
+      <find>highchart</find>
+      <find>highcharts</find>
+      <find>barChart</find>
+      <find>main_chart</find>
+      <find>$</find>
+      <find>high</find>
+      <find>highcharts.js</find>
+      <find>jquery</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -287,7 +249,6 @@
         <option value="$PROJECT_DIR$/html/userHelp.html" />
         <option value="$PROJECT_DIR$/产品开发.html" />
         <option value="$PROJECT_DIR$/html/产品开发.html" />
-        <option value="$PROJECT_DIR$/html/addDelete.html" />
         <option value="$PROJECT_DIR$/html/dataEquipment.html" />
         <option value="$PROJECT_DIR$/html/equipmentExplore.html" />
         <option value="$PROJECT_DIR$/html/equipmentList.html" />
@@ -306,6 +267,7 @@
         <option value="$PROJECT_DIR$/js/homePage2.js" />
         <option value="$PROJECT_DIR$/html/newMessage.html" />
         <option value="$PROJECT_DIR$/css/default.css" />
+        <option value="$PROJECT_DIR$/html/addDelete.html" />
         <option value="$PROJECT_DIR$/html/userManage.html" />
       </list>
     </option>
@@ -490,7 +452,8 @@
       <workItem from="1557137174879" duration="14477000" />
       <workItem from="1557195782755" duration="924000" />
       <workItem from="1557198852763" duration="2796000" />
-      <workItem from="1557227368726" duration="1151000" />
+      <workItem from="1557227368726" duration="2249000" />
+      <workItem from="1557230246769" duration="1004000" />
     </task>
     <task id="LOCAL-00001" summary="Default">
       <created>1556687038596</created>
@@ -639,16 +602,24 @@
       <option name="project" value="LOCAL" />
       <updated>1557141879054</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="代码更新">
+      <created>1557228542933</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1557228542933</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48799000" />
+    <option name="totallyTimeSpent" value="50901000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19597615" sideWeight="0.48511383" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19597615" sideWeight="0.48511383" order="2" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.07107438" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -676,21 +647,22 @@
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07107438" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.07107438" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24888226" sideWeight="0.48511383" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19597615" sideWeight="0.48511383" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924694" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19553666" sideWeight="0.50963223" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.195231" sideWeight="0.50963223" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16119403" sideWeight="0.51488614" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="找到" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289256" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -805,13 +777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="119" column="17" lean-forward="false" selection-start-line="119" selection-start-column="17" selection-end-line="119" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/highcharts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -970,19 +935,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/addDelete.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5478">
-          <caret line="166" column="33" lean-forward="false" selection-start-line="166" selection-start-column="33" selection-end-line="166" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/homePage2.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="9" column="5" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -990,7 +946,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2079">
           <caret line="63" column="18" lean-forward="false" selection-start-line="63" selection-start-column="18" selection-end-line="63" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1007,7 +962,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1041,16 +996,16 @@
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/aria.rnc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2072">
+        <state relative-caret-position="32208">
           <caret line="976" column="22" lean-forward="false" selection-start-line="976" selection-start-column="22" selection-end-line="976" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/init.css">
+    <entry file="file://$PROJECT_DIR$/html/产品开发.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="25" column="69" lean-forward="false" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
+        <state relative-caret-position="17952">
+          <caret line="544" column="19" lean-forward="false" selection-start-line="544" selection-start-column="19" selection-end-line="544" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -1063,19 +1018,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/产品开发.html">
+    <entry file="file://$PROJECT_DIR$/css/init.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="544" column="19" lean-forward="false" selection-start-line="544" selection-start-column="19" selection-end-line="544" selection-end-column="19" />
+        <state relative-caret-position="825">
+          <caret line="25" column="69" lean-forward="false" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/highcharts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="6" column="2" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/addDelete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="7" column="50" lean-forward="false" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/html/userManage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="294" column="67" lean-forward="false" selection-start-line="294" selection-start-column="67" selection-end-line="294" selection-end-column="67" />
-          <folding />
+        <state relative-caret-position="161">
+          <caret line="951" column="27" lean-forward="false" selection-start-line="951" selection-start-column="21" selection-end-line="951" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
