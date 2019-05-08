@@ -20,12 +20,12 @@
         <a class="toRegister" href="register.html">立即注册</a>
         <div class="formGroups">
             <span class="icon-user iconStyle"></span>
-            <input class="info" type="text" name="name" id="name" placeholder="请输入用户名"/>
+            <input class="info" type="text" name="name" id="name" placeholder="请输入用户名" value=""/>
         </div>
         <label></label>
         <div class="formGroups">
             <span class="icon-lock iconStyle"></span>
-            <input class="info" type="password" name="password" id="password" placeholder="请输入密码"/>
+            <input class="info" type="password" name="password" id="password" placeholder="请输入密码" value=""/>
         </div>
         <label></label>
         <input class="confirmButton buttonStyle" type="button" value="登录"/>
@@ -37,6 +37,7 @@
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script src="../js/jquery.validate.min.js"></script>
 <script src="../common.js"></script>
+<script src="../js/homePage2.js" type="text/javascript" charset="utf-8"></script>
 <script>
     $(function () {
         var $validator = $("#loginForm").validate({
@@ -86,9 +87,15 @@
                             "application/json; charset=utf-8"
                     },
                     success:function (data) {
-                        console.log(data);
-//                        userId=data
+                    	if(data.check){
+                        alert("登录成功!点击确定返回首页体验全部功能");
+                        userId=data.check;
+                        window.open("homePages.html");
                     }
+                    else{
+                        alert("账户名或密码错误，请检查后重新登录，或点击忘记密码");
+                            window.open("login.html");
+                    }}
                 });
             }
         })

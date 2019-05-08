@@ -1,6 +1,6 @@
 $(function () {
     //判断是否登录状态
-    var userId = true;
+    var userId = false;
     if(userId){
         $('.logined').css('display','inline-block');
         $('.unlogin').css('display','none');
