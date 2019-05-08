@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>物联网云平台</title>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/init.css">
+    <link href="../Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/homePage.css">
+    <link rel="stylesheet" href="../css/headerAndFooter.css">
+</head>
+<body>
+<header>
+    <nav class="header">
+        <img class="logo" src="../images/homePage-logo.png"/><!--logo-->
+        <a class="items" href="homePage.html">首页</a>
+        <a class="items" href="equipmentExplore.html">设备探索</a>
+        <a class="items" href="hardwaresShow.html">硬件展示</a>
+        <a class="items" href="userHelp.html">帮助文档</a>
+
+        <div class="unlogin">
+            <a id="registerBtn" href="register.html">注册</a>
+            <a id="loginBtn" href="login.html">登录</a>
+        </div>
+
+        <div class="logined">
+            <a class="developerBtn" href="equipmentList.html">我的设备</a>
+            <a class="developerBtn" href="userManage.html">开发者中心</a>
+            <a class="icon-bell bell" href="newMessage.html"></a>
+            <a class="icon-user user" href="userDocument.html"></a>
+        </div>
+    </nav>
+</header>
+
+<div class="content">
+    <!--轮播图-->
+    <!--盛放图片的容器，刚好能显示一张图片-->
+    <div class="container">
+        <!--图片列表-->
+        <ul>
+            <li><img src="../images/homePage-slideshow6.jpg" alt="图片6"></li>
+            <li><img src="../images/homePage-slideshow1.jpg" alt="图片1"></li>
+            <li><img src="../images/homePage-slideshow2.jpg" alt="图片2"></li>
+            <li><img src="../images/homePage-slideshow3.jpg" alt="图片3"></li>
+            <li><img src="../images/homePage-slideshow4.jpg" alt="图片4"></li>
+            <li><img src="../images/homePage-slideshow5.jpg" alt="图片5"></li>
+            <li><img src="../images/homePage-slideshow6.jpg" alt="图片6"></li>
+            <li><img src="../images/homePage-slideshow1.jpg" alt="图片1"></li>
+        </ul>
+        <!--左移和右移的按钮-->
+        <span class="prev">&lt;</span>
+        <span class="next">&gt;</span>
+        <!--一个用于盛放底部小圆点的盒子，点击小圆点可显示相应序号的图片-->
+        <div class="selectPoint">
+            <div class="item active"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+
+    <!--service-->
+    <div class="serviceBox">
+        <h2 class="serviceTitle">物联网云平台为您提供全面完备的服务</h2>
+        <div class="textContent">
+            <div id="data">
+                无缝对接海量实时数据，帮助您对所有数据源进行合并、探索和分析,
+                为您提供精美直观的图表，并支持动态交互
+            </div>
+            <div>
+                移动客户端功能齐全，让您可以随时随地查看数据，添加设备，更改信息等
+            </div>
+            <div>
+                所有用户的设备都会在高德地图上进行显示，通过地点探索，可以更快查询到
+                相应的设备，更加熟悉设备的布局
+            </div>
+        </div>
+        <div class="servicesContainer">
+            <div class="service" id="dataBox">
+                <img style= "width: 90%; height: 200px" src="../images/loading.gif"
+                     data-src="../images/homePage-service1.jpg" class="pic"/>
+                <div class="serviceName">数据可视化</div>
+            </div>
+            <div class="service" id="mobileBox">
+                <img style= "width: 90%; height: 200px" src="../images/loading.gif"
+                     data-src="../images/homePage-service2.jpg" class="pic"/>
+                <div class="serviceName">移动客户端</div>
+            </div>
+            <div class="service" id="locationBox">
+                <img style= "width: 90%; height: 200px" src="../images/loading.gif"
+                     data-src="../images/homePage-service3.jpg" class="pic"/>
+                <div class="serviceName">设备定位</div>
+            </div>
+        </div>
+    </div>
+
+    <!--function-->
+    <div class="functionBox">
+        <h2 class="functionTitle">物联网云平台为您提供的产品功能</h2>
+        <div class="functionsContainer" style="margin-top: 30px">
+            <div class="function" style="width: 256px">
+                <img style= "width: 90%; height: 220px" src="../images/loading.gif"
+                     data-src="../images/homePage-air.jpg" class="pic"/>
+                <div class="functionName">大气监测</div>
+            </div>
+            <div class="function" style="width: 256px">
+                <img style= "width: 90%; height: 220px" src="../images/loading.gif"
+                     data-src="../images/homePage-smog.jpg" class="pic"/>
+                <div class="functionName">烟雾监测</div>
+            </div>
+            <div class="function" style="width: 256px">
+                <img style= "width: 90%; height: 220px" src="../images/loading.gif"
+                     data-src="../images/homePage-temperature.jpg" class="pic"/>
+                <div class="functionName">温度监测</div>
+            </div>
+            <div class="function" style="width: 256px">
+                <img style= "width: 90%; height: 220px" src="../images/loading.gif"
+                     data-src="../images/homePage-wind.jpg" class="pic"/>
+                <div class="functionName">风力监测</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+<footer class="footer">
+    <div class="link">
+        <h2>友情链接</h2>
+        <a href="http://iot.10086.cn/cn/">中移物联网</a>
+        <a href="http://iot.10086.cn/cn/corp/priv-net">物联网专网</a>
+        <a href="https://www.oschina.net/">开源中国</a>
+        <a href="http://bbs.elecfans.com/">电子发烧友</a>
+    </div>
+    <div class="app">
+        <h2>APP下载</h2>
+        <img src="../images/homePage-2DCode.png" style="width: 150px; height: 150px"/>
+    </div>
+    <div class="contact">
+        <h2>联系方式</h2>
+        <a href="javascript: return false;">电话：029-88166000</a>
+        <a href="javascript: return false;">传真：029-88166000</a>
+        <a href="javascript: return false;">QQ：1234567890</a>
+        <a href="javascript: return false;">WeChat: xingongshiyanshi</a>
+        <a href="javascript: return false;">邮箱：1234567890@qq.com</a>
+        <a href="javascript: return false;">地址：陕西省西安市长安区西安邮电大学信工实验室</a>
+    </div>
+</footer>
+
+<script src="../common.js"></script>
+
+<script> 
+$(function () {
+    //判断是否登录状态
+    var userId = true;
+    if(userId){
+        $('.logined').css('display','inline-block');
+        $('.unlogin').css('display','none');
+    }else{
+        $('.unlogin').css('display','inline-block');
+        $('.logined').css('display','none');
+    }
+
+    function carousel() {
+        var $prev = $(".prev");
+        var $next = $(".next");
+        var count  = 1; //count记录当前是哪张图片
+        var $ul = $("ul");
+        var $lis = $("ul li");
+        var $items = $(".item");
+        var $containerBox = $(".container");
+        var containerWidth = $containerBox.width();
+        var changeImgTime = 1000; //切换图片所需时间为1000ms
+        var carouselInterval = 10000; //轮播图的时间间隔为3000ms
+        var liLen = $lis.length;
+
+        //初始化图片列表的尺寸
+        $ul.css({
+            "width" : (liLen * containerWidth) + "px",
+            "left" : (-1 * containerWidth) + "px"
+        });
+
+        $lis.each(function () {
+            $(this).width(containerWidth + "px");
+        });
+
+        //因为在收尾各加了一张假图，故li个数比图片个数多2
+        var imgCount = liLen -2;
+
+        //更换底部小圆点的高亮状态
+        function lightDot() {
+            $items.each(function () {
+                if($(this).index() == (count - 1) % liLen) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        }
+
+        function slide(direction) {
+            if(direction == "left") {
+                //让整个页面向左运动一个图片宽度，故应使left值减800
+                $ul.animate({left: "-="+containerWidth}, changeImgTime);
+                /*若原本是图片6，整个页面往左移动后count变为7，显示的是图片1（因为在html中在图片6后面
+                 还放了一个图片1），再往后就没有图片了，所以应该把整个页面重新拉回上一个图片1，这个变化
+                 不应该被用户察觉，故应把时间设置得尽可能短*/
+                if(count == imgCount + 1) {
+                    count = 1;
+                    lightDot();
+                    $ul.animate({left: -1 * containerWidth + ""}, 0.5);
+                }
+            } else if(direction == "right") {
+                //让整个页面向右运动一个图片宽度，故应使left值加800
+                $ul.animate({left: "+=" + containerWidth}, changeImgTime);
+                /*若原本是图片1，整个页面往左移动后count变为0，显示的是图片6（因为在html中在图片1前面
+                 还放了一个图片6），再往前就没有图片了，所以应该把整个页面重新拉回下一个图片6，这个变化
+                 不应该被用户察觉，故应把时间设置得尽可能短*/
+                if(count == 0) {
+                    count = imgCount;
+                    lightDot();
+                    $ul.animate({left: -1 * imgCount * containerWidth + ""}, 0.5);
+                }
+            }
+        }
+
+
+        //给向前的按钮增加点击事件
+        $prev.click(function() {
+            if(! $ul.is(":animated")) {
+                count++; //假设原本是图片1，按向前的按钮，就会变为图片2，故count值应该加一
+                //更换底部小圆点的高亮状态
+                lightDot();
+                //图片移动
+                slide("left");
+            }
+        });
+
+        //给向后的按钮增加点击事件，道理跟向前的按钮一样
+        $next.click(function () {
+            if(! $ul.is(":animated")) {
+                count--;
+                //更换底部小圆点的高亮状态
+                lightDot();
+                //图片移动
+                slide("right");
+            }
+        });
+
+        //给小圆点增加点击事件
+        $items.each(function () {
+            $(this).click(function () {
+                count = $(this).index() + 1;
+                //改变底部小圆点状态
+                lightDot();
+                var left = -containerWidth * count;
+                $ul.css("left", left);
+            });
+        });
+
+
+        //自动轮播
+        //自动轮播时整个页面往左移动
+        var timer = null;
+        autoPlay();
+
+        function autoPlay() {
+            count++;
+            lightDot();
+            slide("left");
+            timer = setTimeout(autoPlay, carouselInterval);
+        }
+
+        //鼠标移入container时，停止自动轮播
+        $containerBox.mouseover(function () {
+            clearTimeout(timer);
+            timer = null;
+        });
+
+        //鼠标移出container时，继续自动轮播
+        $containerBox.mouseout(function () {
+            timer = setTimeout(autoPlay, carouselInterval);
+        });
+
+        /*
+        //当轮播图不在视图内时停止轮播,在视图内时开始轮播
+
+        //获取屏幕可视窗口高度
+        var viewportHeight = document.documentElement.clientHeight;
+        //获取元素相对于文档顶部的距离
+        var offsetTop = $containerBox.offsetHeight;
+        //取浏览器窗口顶部与文档顶部之间的距离，也就是滚动条滚动的距离
+        var scrollTop = document.documentElement.scrollTop;
+
+        $(window).on("scroll", function () {
+           if(offsetTop - scrollTop > viewportHeight) {
+               clearTimeout(timer);
+               timer = null;
+           } else if(timer) {
+               timer = setTimeout(autoPlay, carouselInterval);
+           }
+        });
+        */
+    }
+
+    /*调用轮播图*/
+    carousel();
+
+
+    /*鼠标移动到具体的服务图片上时，上方显示说明文字*/
+    $("#data").css("display", "block");
+    $(".service").each(function () {
+        $(this).on("mouseover", function () {
+            var i = $(this).index();
+            $(".textContent div").each(function () {
+                $(this).css("display", "none");
+            });
+
+            $($(".textContent div")[i]).css("display", "block");
+        });
+    });
+
+    /*点击各个选项进入静态页面*/
+    $("#dataBox").on("click", function () {
+        window.open("homePageData.html");
+    });
+
+    $("#mobileBox").on("click", function () {
+        window.open("homePageMobile.html");
+    });
+
+    $("#locationBox").on("click", function () {
+        window.open("equipmentExplore.html");
+    });
+
+    //图片懒加载
+
+    //判断图片是否在视口内
+    function isInSight(el) {
+        const bound = el.getBoundingClientRect();
+        const clientHeight = window.innerHeight;
+        //如果只考虑向下滚动加载
+        //const clientWidth = window.innerWeight;
+        return bound.top <= clientHeight + 100;
+    }
+
+    function checkImgs() {
+        const imgs = document.getElementsByClassName('pic');
+        Array.from(imgs).forEach(function (el) {
+            if(isInSight(el)) {
+                el.src = el.dataset.src;
+            }
+        });
+    }
+
+
+    //节流函数
+    /*function throttle(fn, mustRun) {
+        const timer = null;
+        let previous = null;
+        return function () {
+            const now = new Date();
+            const context = this;
+            const args = arguments;
+            if (!previous) {
+                previous = now;
+            }
+
+            const remaining = now - previous;
+            if (mustRun && remaining >= mustRun) {
+                fn.apply(context, args);
+                previous = now;
+            }
+        }
+    }
+    */
+
+    var previous = null;
+    var now = null;
+
+    //监听滚轮事件
+    $(window).on('scroll', function () {
+        now = new Date();
+
+        if(!previous || now - previous >= 500) {
+            checkImgs();
+            previous = now;
+        }
+    });
+
+});
+function getCookie(cookieName) {
+    var strCookie = document.cookie;
+    var arrCookie = strCookie.split("; ");
+    for(var i = 0; i < arrCookie.length; i++){
+        var arr = arrCookie[i].split("=");
+        if(cookieName == arr[0]){
+            return arr[1];
+        }
+    }
+    return "";
+}	
+</script>
+</body>
+</html>
