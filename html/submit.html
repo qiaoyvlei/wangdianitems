@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html>
+
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <title>用AJAX以JSON方式提交数据</title>
+            <script src="../js/jquery.min.js"></script>
+        </head>
+
+<body>
+<form>
+    id：<input type="text" id="username" value="root" /><br/> 名称：
+    <input type="text" id="password" value="admin" /><br/>
+    <input type="button" value="提交" id="sender">
+</form>
+<div id="messageDiv"></div>
+
+<script>
+    $('#sender').click(function() {
+        var name = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var user = {
+            "name": name,
+            "password": password
+        };
+        var jsonData = JSON.stringify(user);
+        console.log(jsonData);
+        var page = "http://222.24.20.127:8080/ssm/loginForm";
+
+        $.ajax({
+            type: "POST",
+            url: page,
+            data: jsonData,
+//            processData: false,
+            dataType: "json",
+            success:function(){
+                alert("sss")
+            },
+            headers:{
+             "Content-Type":
+                "application/json; charset=utf-8"
+    }
+        });
+
+    });
+
+</script>
+</body>
+
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

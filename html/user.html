@@ -1,0 +1,978 @@
+<!doctype html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>管理设备</title>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="../js/highcharts.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+  <link href="../css/init.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+   <!--导航和底部样式-->
+  <link href="../css/headerAndFooter.css" rel="stylesheet">
+   <!--图标-->
+  <link href="../Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
+  <!-- jquery ui-->
+  <link href="../css/jquery-ui.css" rel="stylesheet">
+  <!-- multiselect-->
+  <link href="../css/jquery.multiselect.css" rel="stylesheet">
+  <!--主要写的css代码-->
+  <link href="../css/default.css" rel="stylesheet" type="text/css" />
+  <script src="http://webapi.amap.com/maps?v=1.3&key=b79caad469676224a0e32143ce5add02"></script>
+
+  <!-- 地理位置-->
+  <script type="text/javascript"
+          src="https://webapi.amap.com/maps?v=1.4.2&key=e58bae199679e49544969133bc20896e&plugin=AMap.DistrictSearch"></script>
+  <script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
+  <style>
+    #map #mapShow{
+      width:100%;
+      height:530px;
+      border:1px solid gray;
+      position:relative;
+      /*background: rgb(252,249,242);*/
+      cursor: url("https://webapi.amap.com/theme/v1.3/openhand.cur"),default;
+    }
+    #table {width:100%; font-weight:lighter;table-layout:fixed;  font-size: 10px;margin-top: 10px;}
+    td{
+      white-space:nowrap; text-overflow:ellipsis;overflow: hidden;
+    }
+    #mid{
+      vertical-align: middle;
+    }
+     #info{
+       background: #f5f5f5;
+       vertical-align: middle;
+     }
+    .t40{width:200px;text-align: center;}
+    .t30{width:150px;text-align: center;}
+    .t20{width:100px;text-align: center;}
+    .t10{width:70px;text-align: center;}
+    .tr1{background: #f2efef;color:#767676;height:40px;line-height: 30px;}
+    .tr2{background: white;color:#767676;height:40px;line-height: 30px;}
+    .map{
+      margin: 0px;
+      height:400px;
+      width: 100%;
+      border: 1px solid gray;
+      position: relative;
+      background: rgb(252, 249, 242);
+      cursor: url("https://webapi.amap.com/theme/v1.3/openhand.cur"), default;
+    }
+    .panel{
+      background-color: #fff;
+      border: solid 1px silver;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+    #deviceslist{
+      font-size: small;
+      /*overflow: auto;*/
+    }
+    .margin20_0{
+      margin: 20px 0;
+    }
+    .margin10_0{
+      margin: 10px 0 5px 0;
+    }
+    .realtime_table{
+      font-size: 14px;
+      font-weight:lighter;
+      border: 2px solid grey;
+    }
+    .realtime_img{
+      width:110px;
+      height:110px;
+      margin-left: 14px;
+      border-radius: 10px;
+    }
+    .realtime_title{
+      font-size: small;
+      width:140px;
+      text-align: center;
+      margin-top: 4px;
+    }
+    #realtimedata .intro{
+      text-align: center;
+    }
+    #edit_dataType{
+      display: none;
+    }
+    #saListData{
+      /*width:100%;*/
+      /*background: red;*/
+      /*height:1000px;*/
+    }
+    #nav_right {
+      position: relative;
+      float: left;
+      width: 85%;
+      height: 100%;
+      left: 4%;
+      background-color: rgb(245, 246, 247);
+      display: none;
+    }
+
+    #nav_right .middle_shebeigailan .table_shebei {
+      /*position: absolute;*/
+      top: 70px;
+      left: 8%;
+      height: 160px;
+      background-color: #fff;
+      overflow: hidden;
+    }
+
+    .middle_shebeigailan .table_shebei .td_data {
+      display: inline-block;
+      width: 24%;
+      height: 100%;
+      padding-top: 20px;
+      border-right: solid 1px gainsboro;
+      text-align: center;
+    }
+    .middle_shebeigailan .table_shebei .td_data{
+      padding-top: 20px;
+    }
+    .middle_shebeigailan .table_shebei .td_data .data{
+      padding-top: 40px;
+
+    }
+    .middle_shebeigailan .table_shebei .td_data:last-child {
+      border: none;
+    }
+
+    .td_data,.data {
+      font-size: 14px;
+      /*padding-top: 60px;*/
+    }
+
+    .main_chart {
+      position: relative;
+      top: 100px;
+      left: 8%;
+      width: 85%;
+      height: 360px;
+      background-color: rgb(245, 246, 247);
+    }
+
+    .barChart,
+    #sectorChart {
+      display: inline-block;
+      width: 45%;
+      background-color: white;
+      height: 80%;
+      margin: -0.8% 7.1% -0.2% -5.5%;
+    }
+
+    .new {
+      top: 900px;
+      height: 1000px;
+      background-color: rgb(245, 246, 247);
+    }
+
+    #apiChart {
+      position: relative;
+      top: 100px;
+      left: 8%;
+      width: 85%;
+      height: 300px;
+      background-color: #fff;
+    }
+    #orderChart{
+      position: relative;
+      top:180px;
+      left: 8%;
+      width: 85%;
+      height: 300px;
+      background-color: #fff;
+    }
+
+    #tableAS {width:100%; font-weight:lighter;table-layout:fixed;  font-size: 10px;margin-top: 10px;}
+    iframe{
+        /*position: absolute;*/
+        margin-left: 0;
+        margin-top: 20px;
+        height: 750px;
+        width: 1200px;
+    }
+    .newpage{
+        height: 800px;
+        width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="header navbar navbar-fixed-top">
+        <img class="logo" src="../images/homePage-logo.png"/><!--logo-->
+        <a class="items" href="homePages.html">首页</a>
+        <a class="items" href="equipmentExplore.html">设备探索</a>
+        <a class="items" href="hardwaresShow.html">硬件展示</a>
+        <a class="items" href="userHelp.html">帮助文档</a>
+s
+        <!--<div class="unlogin">-->
+            <!--<a id="registerBtn" href="register.html">注册</a>-->
+            <!--<a id="loginBtn" href="login1.html">登录</a>-->
+        <!--</div>-->
+
+        <div class="logined">
+            <a class="developerBtn" href="equipmentList.html">我的设备</a>
+            <a class="developerBtn" href="userManage.html">开发者中心</a>
+            <a class="icon-bell bell" href="newMessage.html"></a>
+            <a class="icon-user user" href="userDocument.html"></a>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid all">
+  <div class="sidebar">
+    <div class="manageDevices">
+      <h3 style="text-align: center;">菜单列表</h3>
+      <hr style="background:black;height:1px;"/>
+    </div>
+    <ul class="nav" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#mydevices" aria-controls="mydevices" role="tab" data-toggle="tab" id="wodeshebei">我的设备</a>
+      </li>
+      <li role="presentation">
+        <a href="#mapmode" aria-controls="mapmode" role="tab" data-toggle="tab" id="ditumoshi">地图模式</a>
+      </li>
+      <li role="presentation">
+        <a href="#nav_right" aria-controls="realtimedata" role="tab" data-toggle="tab" id="shishishuju">实时数据</a>
+      </li>
+      <li role="presentation">
+        <a href="#nav_right" aria-controls="statisticalanalysis" role="tab" data-toggle="tab" id="tongjifenxi">统计分析</a>
+      </li>
+    </ul>
+  </div>
+  <div id="sideslip">
+    <button type="button" class="navbar-toggle show pull-left" data-target="sidebar">
+      <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </button>
+  </div>
+  <div class="maincontent row">
+    <!--我是主要内容 start-->
+    <div class="breadcrumb">
+      <div class="tab-content">
+        <!-- 我的设备-->
+        <div role="tabpanel" class="tab-pane active" id="mydevices">
+          <div>
+
+
+            <!-- 我的设备 添加设备-->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active" style="font-size: 14px;">
+                <a href="#deviceslist" aria-controls="deviceslist" role="tab" data-toggle="tab">我的设备</a>
+              </li>
+              <li role="presentation" style="font-size: 14px;">
+                <a href="#adddevices" aria-controls="adddevices" role="tab" data-toggle="tab">添加设备</a>
+              </li>
+            </ul>
+            <!-- content-->
+            <div class="tab-content">
+              <!-- 设备列表-->
+              <div role="tabpanel" class="tab-pane active" id="deviceslist">
+                <table id="table" cellpadding="0" cellspacing="0" class="table">
+                  <thead>
+                    <tr class="thead">
+                      <td class="t30">设备ID</td>
+                      <td class="t30">名称</td>
+                      <td class="t20">创建时间</td>
+                      <td class="t20">简介</td>
+                      <td class="t40">操作</td>
+                    </tr>
+                  </thead>
+                  <tbody class="showDevicesList"></tbody>
+                  <!--<script  type="text/jsrender" id="showDevicesList">
+                    {{for equipments}}
+                      <tr class="t1">
+                        <td class="t30" id="mid">{{:equipmentId}}</td>
+                        <td class="t30" id="mid">{{:name}}</td>
+                        <td class="t20" id="mid">{{:createTime}}</td>
+                        <td class="t30" id="info">{{:info}}</td>
+                        <td class="t40">
+                             <button class="btn btn-default btn-sm edit-device"  onclick=editDevice('{{:equipmentId}}',this)>编辑</button>
+                             <button class="btn btn-default btn-sm show_dataTypes"  onclick=showDataTypes('{{:equipmentId}}',this)>查看传感器</button>
+                             <input class="btn btn-default btn-sm" type="button" value="删除" onclick=deleteDevice('{{:equipmentId}}','{{:name}}',this)>
+                        </td>
+                       </tr>
+                    {{/for}}
+                  </script>-->
+                </table>
+                  <!-- 分页-->
+                  <div class="newpage">
+                      <div id="Pagination_mydevice" class="pagination">
+                          <!-- 这里显示分页 -->
+                          <iframe src="产品开发.html"></iframe>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- 添加设备-->
+              <div role="tabpanel" class="tab-pane" id="adddevices">
+                <div class="adddevice" style="font-size: 14px;padding:20px;font-weight: lighter;">
+                  <form id="form1" method="post" >
+                    <table width="100%" cellspacing="1" class="data">
+                      <tbody>
+                      <tr class="tr1">
+                        <td>名称</td>
+                        <td>
+                          <input id="Name" name="name" size="50" type="text" value="" required>
+                        </td>
+                      </tr>
+                      <tr class="tr1">
+                        <td>上传图片</td>
+                        <td>
+                          <!--<input type="file" id="uploadImg" name="imgUrl" value="" onchange="selectImg(this)" required/>-->
+                          <!--<img id="showImg" src=""/>-->
+                          <!--<button class="frontBtn">上传图片</button>-->
+                          <form >
+                            <input type="file" class="front" name="image" multiple/>
+                          </form>
+                        </td>
+                      </tr>
+                      <tr class="tr2">
+                        <td>介绍</td>
+                        <td>
+                          <textarea name="info" style="resize: none; width: 600px;height:100px;max-width: 600px;max-height: 100px;" required></textarea>
+                        </td>
+                      </tr>
+                      <tr class="tr2">
+                        <td>是否公开</td>
+                        <td>
+                          <input type="radio" name="isPublic" checked value="true" ><label>是</label>
+                          <input type="radio" name="isPublic" value="false" ><label>否</label>
+                        </td>
+                      </tr>
+                      <tr class="tr2">
+                        <td>地理位置</td>
+                        <td>
+                          <input id="location_X" name="location_X" type="hidden" value="">
+                          <input id="location_Y" name="location_Y" type="hidden" value="">
+                          <div class = 'panel'>选择切换省市：<select open id = 'subDistricts'></select></div>
+                          <div id="mapDiv" class="map" tabindex="0"></div>
+                        </td>
+                      </tr>
+                      <tr class="tr1">
+                        <td colspan="2" align="center" style="padding-top: 30px;">
+                          <input type="button"  class="btn btn-default" value="保存" onclick="saveDevice()" >
+                          <input type="button"  class="btn btn-default" value="取消" onclick="cancelAddDevice()" >
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </form>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- 地图模式-->
+        <div role="tabpanel" class="tab-pane" id="mapmode">
+          <div id="map">
+            <div id="mapShow"></div>
+          </div>
+        </div>
+        <!-- 实时数据-->
+        <!--<div role="tabpanel" class="tab-pane" id="realtimedata">-->
+          <!--&lt;!&ndash; 各个设备实时数据&ndash;&gt;-->
+          <!--<div id="realtimeDataList">-->
+            <!--<p style="text-align: center;margin:0 auto;">加载中，请稍后</p>-->
+          <!--</div>-->
+        <!--</div>-->
+        <div id="nav_right">
+          <div class="middle_shebeigailan" id="shebei">
+            <p>设备概览</p>
+            <div class="table_shebei" style="width: 85%;">
+              <div class="td_data">
+                <p>设备总数（台)</p>
+                <p class="data">{{message1}}次</p>
+              </div>
+              <div class="td_data">
+                <p>今天API调用（次）</p>
+                <p class="data">{{message2}}次</p>
+
+              </div>
+              <div class="td_data">
+                <p>今天推送调用（次）</p>
+                <p class="data">{{message3}}次</p>
+              </div>
+              <div class="td_data">
+                <p>今天下发命令（次）</p>
+                <p class="data">{{message4}}次</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="main_chart">
+            <div id="sectorChart">
+
+            </div>
+            <div class="barChart container1 dfg">
+            </div>
+
+          </div>
+          <div class="mainChart new">
+            <div id="apiChart">
+
+            </div>
+            <div id="orderChart">
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <script type="text/javascript">
+          $(document).ready(function() {
+              $('.bMenuTitle').on('click', function() {
+                  $('.bMenuTitle').removeClass("selected");
+                  $(this).children('ul').slideDown();
+                  $(this).siblings().children('ul').slideUp();
+                  $(this).addClass("selected");
+              })
+              $('#tongjifenxi').on('click',function(){
+                  $('#nav_right').show();
+              })
+              $('#wodeshebei').on('click',function(){
+                  $('#nav_right').hide();
+              })
+              $('#ditumoshi').on('click',function(){
+                  $('#nav_right').hide();
+              })
+              $('#shishishuju').on('click',function(){
+                  $('#nav_right').hide();
+              })
+
+          });
+          var devies = new Vue({
+              el: "#shebei",
+              data: {
+                  message1: Math.floor(Math.random() * 1000),
+                  message2: Math.floor(Math.random() * 1000),
+                  message3: Math.floor(Math.random() * 1000),
+                  message4: Math.floor(Math.random() * 1000)
+              }
+          })
+          //数据展示——曲线统计图
+          var datas = [],
+              names = ["temperature", "活跃", "speed", "direction", "rainfall", "isRain", "mq135", "mq2", "humidity", "pressure", "altitude", "voltage", "pitch", "roll", "yaw"];
+          var cname = ['温度传感器(℃)', '设备数', '风速传感器(m/s)',
+              '风向传感器', '风向传感器', '是否下雨传感器', '有害气体传感器(Nm3/h)',
+              '烟雾传感器(Nm3/h)', '湿度传感器(%RH)', '大气压强传感器(Pa)', '海拔高度传感器(m)'
+          ]
+          $(".barChart").ready(function() {
+              var chart = {
+                  type: 'spline',
+                  subtitle: {
+                      text: '网电云管家提供数据'
+                  },
+                  animation: Highcharts.svg, // don't animate in IE < IE 10.
+                  marginRight: 10,
+                  marginTop: 60,
+                  events: {
+                      load: function() {
+                          // set up the updating of the chart each second
+                          var series = this.series[0];
+                          //console.log(series);
+                          setInterval(function() {
+                             /* $.ajax({
+                                  //url: "http://47.100.6.42/electric/get_data.php",
+                                  type: 'post',
+                                  dataType: "json",
+                                  async: false,
+                                  cache: false,
+                                  success: function(res) {
+                                      console.log(res);
+                                      for(var k = 0; k < res.length; i++) {
+                                          var nn = res[k].split("");
+                                          var len = res[k].split("").length;
+                                          for(var j = 0; j < len; j++) {
+                                              if(res[k].split("")[j] == ':') {
+                                                  var dd = nn.slice(j + 1, len).join('');
+                                                  datas.push(dd);
+                                                  break;
+                                              }
+                                          }
+                                      }
+                                      var x = (new Date()).getTime();
+                                      var y = Number(datas[0]);
+                                      series.addPoint([x, y], true, true);
+                                  }
+                              });*/
+                          }, 1000);
+                      }
+                  }
+              };
+              var xAxis = {
+                  title: {
+                      text: '时间'
+                  },
+                  type: 'datetime',
+                  tickPixelInterval: 150 //横轴的间距
+              };
+              var yAxis = {
+                  title: {
+                      text: '活跃设备数/台'
+                  },
+                  plotLines: [{
+                      value: 0,
+                      width: 3,
+                      color: '#808080' //横轴的线颜色
+                  }]
+              };
+              //标注
+              var tooltip = {
+                  formatter: function() {
+                      //console.log(this.x);
+                      return '<b>' + this.series.name + '</b><br/>' +
+                          Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                          Highcharts.numberFormat(this.y, 2);
+                  }
+              };
+              //以平滑的曲线展现
+              var plotOptions = {
+                  area: {
+                      pointStart: 1940,
+                      marker: {
+                          enabled: false,
+                          symbol: 'circle',
+                          radius: 2,
+                          states: {
+                              hover: {
+                                  enabled: true
+                              }
+                          }
+                      }
+                  }
+              };
+              var legend = {
+                  enabled: false
+              };
+              var credits = {
+                  enabled: false
+              };
+              var exporting = {
+                  enabled: false
+              };
+
+              for(var i = 0; i < 2; i++) {
+                  var title = {
+                      //text: 'Live random data'
+                      text: names[i] + cname[i]
+                  };
+                  var series1 = [{
+                      name: 'Random data',
+                      data: (function() {
+                          // generate an array of random data
+                          var data = [],
+                              time = (new Date()).getTime(),
+                              i;
+                          for(j = -6; j <= 0; j += 1) { //代表有多少个点
+                              data.push({
+                                  x: time + j * 1000,
+                                  y: (Math.random() * (1.1 - 1) + 1) * 20
+                              });
+                          }
+                          return data;
+                      }())
+                  }];
+                  var series2 = [{
+                      name: 'Random data',
+                      data: (function() {
+                          // generate an array of random data
+                          var data = [],
+                              time = (new Date()).getTime(),
+                              i;
+                          for(j = -6; j <= 0; j += 1) { //代表有多少个点
+                              data.push({
+                                  x: time + j * 1000,
+                                  y: (Math.random() * (1.09 - 1) + 1) * 400
+                              });
+                          }
+                          return data;
+                      }())
+                  }];
+                  var json = {};
+                  json.chart = chart;
+                  json.title = title;
+                  json.tooltip = tooltip;
+                  json.xAxis = xAxis;
+                  json.yAxis = yAxis;
+                  json.legend = legend;
+                  json.exporting = exporting;
+                  json.series = (i == 0) ? series1 : series2;
+                  json.plotOptions = plotOptions;
+                  json.credits = credits;
+                  Highcharts.setOptions({
+                      global: {
+                          useUTC: false
+                      }
+                  });
+                  $('.container' + i).highcharts(json);
+              }
+
+          });
+          var chart = Highcharts.chart('sectorChart', {
+              chart: {
+                  spacing: [40, 0, 40, 0]
+              },
+              title: {
+                  floating: true,
+                  text: '各种产品设备数'
+              },
+              subtitle: {
+                  text: '网电云管家提供数据'
+              },
+              tooltip: {
+                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+              },
+              plotOptions: {
+                  pie: {
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      dataLabels: {
+                          enabled: true,
+                          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                          style: {
+                              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                          }
+                      },
+                      point: {
+                          events: {
+                              mouseOver: function(e) { // 鼠标滑过时动态更新标题
+                                  // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+                                  chart.setTitle({
+                                      text: e.target.name + '\t' + e.target.y + ' %'
+                                  });
+                              }
+                              //,
+                              // click: function(e) { // 同样的可以在点击事件里处理
+                              //     chart.setTitle({
+                              //         text: e.point.name+ '\t'+ e.point.y + ' %'
+                              //     });
+                              // }
+                          }
+                      },
+                  }
+              },
+              series: [{
+                  type: 'pie',
+                  innerSize: '80%',
+                  name: '市场份额',
+                  data: [{
+                      name: '产品7',
+                      y: 45.0,
+                      url: 'http://bbs.hcharts.cn'
+                  },
+                      ['产品1', 26.8],
+                      {
+                          name: '产品6',
+                          y: 12.8,
+                          sliced: true,
+                          selected: true,
+                          url: 'http://www.hcharts.cn'
+                      },
+                      ['产品2', 8.5],
+                      ['产品3', 6.2],
+                      ['产品4', 0.7]
+                  ]
+              }]
+          }, function(c) { // 图表初始化完毕后的会掉函数
+              // 环形图圆心
+              var centerY = c.series[0].center[1],
+                  titleHeight = parseInt(c.title.styles.fontSize);
+              // 动态设置标题位置
+              c.setTitle({
+                  y: centerY + titleHeight / 2
+              });
+          });
+          var chart = Highcharts.chart('apiChart', {
+              title: {
+                  text: 'API调用情况'
+              },
+              subtitle: {
+                  text: '网电云管家提供数据'
+              },
+              yAxis: {
+                  title: {
+                      text: 'API调用\次'
+                  }
+              },
+              legend: {
+                  layout: 'vertical',
+                  align: 'right',
+                  verticalAlign: 'middle'
+              },
+              plotOptions: {
+                  series: {
+                      label: {
+                          connectorAllowed: false
+                      },
+                      pointStart: 15
+                  }
+              },
+              series: [{
+                  name: '产品1',
+                  data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+              }, {
+                  name: '产品2',
+                  data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+              }, {
+                  name: '产品3',
+                  data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+              }, {
+                  name: '产品4',
+                  data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+              }, {
+                  name: '产品5',
+                  data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+              }],
+              responsive: {
+                  rules: [{
+                      condition: {
+                          maxWidth: 500
+                      },
+                      chartOptions: {
+                          legend: {
+                              layout: 'horizontal',
+                              align: 'center',
+                              verticalAlign: 'bottom'
+                          }
+                      }
+                  }]
+              }
+          });
+          var chart = Highcharts.chart('orderChart', {
+              title: {
+                  text: '命令下发次数'
+              },
+              subtitle: {
+                  text: '网电云管家提供数据'
+              },
+              yAxis: {
+                  title: {
+                      text: '命令调用\次'
+                  }
+              },
+              legend: {
+                  layout: 'vertical',
+                  align: 'right',
+                  verticalAlign: 'middle'
+              },
+              plotOptions: {
+                  series: {
+                      label: {
+                          connectorAllowed: false
+                      },
+                      pointStart: 15
+                  }
+              },
+              series: [{
+                  name: '产品1',
+                  data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+              }, {
+                  name: '产品2',
+                  data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+              }, {
+                  name: '产品3',
+                  data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+              }, {
+                  name: '产品4',
+                  data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+              }, {
+                  name: '产品5',
+                  data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+              }],
+              responsive: {
+                  rules: [{
+                      condition: {
+                          maxWidth: 500
+                      },
+                      chartOptions: {
+                          legend: {
+                              layout: 'horizontal',
+                              align: 'center',
+                              verticalAlign: 'bottom'
+                          }
+                      }
+                  }]
+              }
+          });
+      </script>
+
+      <script id="theTmpl" type="text/x-jsrender">
+          <ul class="realtime_list">
+              {{for data}}
+              <li>
+                  <div class="margin20_0">
+                      <table border="1" class="realtime_table">
+                          <tr>
+                              <td rowspan="2">
+                                  <div class="margin10_0">
+                                      <img src="../images/machineRoom-display1.png" alt="..." class="realtime_img" >
+                                      <!--<img src={{:imgUrl}} alt="..." class="realtime_img" >-->
+                                      <div class="realtime_title">
+                                          <a href="dataEquipment.html?id={{:equipmentId}}" target="_blank">{{:name}}</a>
+                                      </div>
+                                  </div>
+                              </td>
+                              {{for list}}
+                                <td class="t10">{{:name}}</td>
+                              {{/for}}
+                          </tr>
+                          <tr>
+                              {{for list}}
+                                <td class="t10">{{:data}}<span style="font-size:8px;">  {{:unit}}</span></td>
+                              {{/for}}
+                          </tr>
+                      </table>
+                  </div>
+              </li>
+              {{/for}}
+          </ul>
+        </script>
+        <!-- 统计分析-->
+        <!--<div role="tabpanel" class="tab-pane" id="statisticalanalysis">-->
+          <!--<table id="tableAS" cellpadding="0" cellspacing="0" class="table">-->
+            <!--<thead>-->
+            <!--<tr class="thead">-->
+              <!--<td class="t30">设备ID</td>-->
+              <!--<td class="t30">名称</td>-->
+              <!--<td class="t20">创建时间</td>-->
+              <!--<td class="t20">简介</td>-->
+              <!--<td class="t40">操作</td>-->
+            <!--</tr>-->
+            <!--</thead>-->
+          <!--<tbody id="saListData"></tbody>-->
+            <!--<script id="saList" type="text/x-jsrender">-->
+              <!--{{for equipments}}-->
+                  <!--<tr class="t1">-->
+                    <!--<td class="t30" id="mid">{{:equipmentId}}</td>-->
+                    <!--<td class="t30" id="mid">{{:name}}</td>-->
+                    <!--<td class="t20" id="mid">{{:createTime}}</td>-->
+                    <!--<td class="t30" id="info">{{:info}}</td>-->
+                    <!--<td class="t40">-->
+                        <!--<a href="dataForecast.html?id={{:equipmentId}}" target="_blank">-->
+                           <!--<input class="btn btn-default btn-sm" type="button" value="查看预测数据">-->
+                        <!--</a>-->
+                    <!--</td>-->
+                   <!--</tr>-->
+              <!--{{/for}}-->
+          <!--</script>-->
+          <!--</table>-->
+        <!--</div>-->
+
+        <!-- 弹出的内容-->
+        <div id="edit_device" title="设备设置" style="display: none;">
+        </div>
+        <!--<script id="edit_device_data" type="text/x-jsrender">-->
+            <!--<div class="editdevice" style="font-size: 14px;padding:20px;font-weight: lighter;">-->
+                  <!--<form id="form_edit" method="post" >-->
+                    <!--<table width="100%" cellspacing="1" class="data">-->
+                      <!--<tbody>-->
+                      <!--<tr class="tr1">-->
+                        <!--<td>名称</td>-->
+                        <!--<td>-->
+                          <!--<input id="Name" name="name" size="50" type="text" value="{{:name}}" required>-->
+                        <!--</td>-->
+                      <!--</tr>-->
+                      <!--<tr class="tr2">-->
+                        <!--<td>介绍</td>-->
+                        <!--<td>-->
+                          <!--<textarea name="info" style="resize: none; width: 600px;height:100px;max-width: 600px;max-height: 100px;" required>{{:info}}</textarea>-->
+                        <!--</td>-->
+                      <!--</tr>-->
+                      <!--<tr class="tr2">-->
+                        <!--<td>是否公开</td>-->
+                        <!--<td>-->
+                            <!--<input type="radio" name="isPublic" {{if isPublic == "true"}} checked="checked" {{/if}} value="true"/><label>是</label>-->
+                            <!--<input type="radio" name="isPublic" {{if isPublic == "false"}} checked="checked" {{/if}} value="false"/><label>否</label>-->
+                        <!--</td>-->
+                      <!--</tr>-->
+                      <!--<tr class="tr2">-->
+                        <!--<td>地理位置</td>-->
+                        <!--<td>-->
+                          <!--<input id="location_X_edit" name="location_X" type="hidden" value="{{:location_X}}">-->
+                          <!--<input id="location_Y_edit" name="location_Y" type="hidden" value="{{:location_Y}}">-->
+                          <!--<div class = 'panel'>选择切换省市：<select open id = 'subDistricts_edit'></select></div>-->
+                          <!--<div id="mapDiv_edit" class="map" tabindex="0"></div>-->
+                        <!--</td>-->
+                      <!--</tr>-->
+                      <!--<tr class="tr1">-->
+                        <!--<td colspan="2" align="center" style="padding-top: 30px;">-->
+                          <!--<input type="button"  class="btn btn-default" value="保存" onclick="updateDevice('{{:equipmentId}}')" >-->
+                        <!--</td>-->
+                      <!--</tr>-->
+                      <!--</tbody>-->
+                    <!--</table>-->
+                  <!--</form>-->
+
+                <!--</div>-->
+        <!--</script>-->
+        <div id="showDataTypes" title="传感器类型" style="display: none;">
+          <div class="showDataTypes" style="font-size: 14px;padding:20px;font-weight: lighter;">
+            <div id="getEquipmentId"></div>
+            <script type="text/jsrender" id="getEquipmentId_js">
+              <button type="button" class="btn btn-info" onclick=addDataTypes('{{:equipmentId}}')>添加</button>
+            </script>
+            <table width="100%" cellspacing="0" class="data" class="table table-striped">
+              <thead>
+              <tr class="thead">
+                <td class="t30">传感器名称</td>
+                <td class="t30">传感器类型</td>
+                <td class="t30">传感器单位</td>
+                <td class="t40">操作</td>
+              </tr>
+              </thead>
+              <tbody id="showDataTypes_body"></tbody>
+            </table>
+          </div>
+        </div>
+        <script id="showDataTypes_Data" type="text/x-jsrender">
+                {{for data}}
+                  <tr class="t1">
+                      <td class="t30" id="mid">
+                        <span id="edit_name">{{:name}}</span>
+                        <span id="e_name" style="display:none;">
+                          <input type="text" name="name" style="width:80px"/>
+                          <button class="eNameOk">确定</button>
+                          <button class="eNameCancel">取消</button>
+                        </span>
+                      </td>
+                      <td class="t30" id="mid">{{:dataType}}</td>
+                      <td class="t30" id="mid">{{:unit}}</td>
+                      <td class="t40">
+                           <button class="btn btn-default btn-sm edit-device"  onclick=editDataType('{{:equipmentId}}','{{:id}}',this)>编辑</button>
+                           <input class="btn btn-default btn-sm" type="button" value="删除" onclick=deleteDataType('{{:equipmentId}}','{{:id}}','{{:name}}',this)>
+                      </td>
+                   </tr>
+                {{/for}}
+        </script>
+      </div>
+
+    </div>
+    <!--我是主要内容 end-->
+  </div>
+</div>
+<a href="#top" id="goTop"><span class="glyphicon glyphicon-chevron-up"></span></a>
+  <script src="../js/bootstrap.min.js"></script>
+  <!--平滑滚动到顶部库-->
+  <script src="../js/jquery.scrolltopcontrol/scrolltopcontrol.js" type="text/javascript"></script>
+  <!--主要写的jquery拓展方法-->
+  <script src="../js/jquery.extend.js" type="text/javascript"></script>
+  <script src="../js/jquery-ui.min.js"></script>
+  <script src="../js/jquery.multiselect.js"></script>
+  <!--主要写的js代码-->
+  <script src="../js/default.js" type="text/javascript"></script>
+  <!--使用json数据动态生成结构 ，，html模板引擎-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>
+  <!--jqPaginator jquery分页插件-->
+  <script src="../js/jqPaginator.js"></script>
+  <script src="../common.js"></script>
+<!--<script src="../js/userManage.js"></script>-->
+</body>
+</html>
