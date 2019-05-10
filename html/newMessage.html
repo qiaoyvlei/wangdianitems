@@ -31,7 +31,7 @@
                 <a id="loginBtn" href="login1.html">登录</a>
             </div>
             <div class="logined">
-                <a class="developerBtn" href="equipmentList.html">我的设备</a>
+                <!--<a class="developerBtn" href="equipmentList.html">我的设备</a>-->
                 <a class="developerBtn" href="userManage.html">开发者中心</a>
                 <a class="icon-bell bell" href="newMessage.html"></a>
                 <a class="icon-user user" href="userDocument.html"></a>
@@ -59,10 +59,10 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../common.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>
-<script src="../js/homePage2.js">
+    <script src="../js/homePage2.js"></script>
     <script>
    $(function () {
-       /*      //判断是否登录状态
+            //判断是否登录状态
             var userId = true;
             if(userId){
                 $('.logined').css('display','inline-block');
@@ -70,11 +70,11 @@
             }else{
                 $('.unlogin').css('display','inline-block');
                 $('.logined').css('display','none');
-            }*/
-     /*  var params = {};
-       params.userId = userId;*/
+            }
+       var params = {};
+       params.userId = userId;
 //       出现故障
-       /*function showNews(){
+       function showNews(){
            $.post(ip+'/equipment/findEData',params,function(json){
                if(json.type === "COMMON_SUC"){
                    var res = json.data;
@@ -125,7 +125,7 @@
                                    break;
                                case 'in_ele':
                                    if(obj2.data>=1){
-                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time:o  bj2.time});
+                                       it.push({name:obj2.name,data:obj2.data,unit:obj2.unit,equipmentName:obj.name,equipmentId:obj.equipmentId,time: obj2.time});
                                    }
                                    break;
                            }
@@ -148,7 +148,6 @@
        }
        showNews();
        setInterval(showNews,1000);
-   })*/
    })
 </script>
 </body>

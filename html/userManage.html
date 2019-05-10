@@ -2,6 +2,7 @@
 <!doctype html>
 <html>
 <head lang="en">
+<<<<<<< Updated upstream
     <meta charset="UTF-8">
     <title>管理设备</title>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
@@ -208,6 +209,212 @@
             width:100%;
         }
     </style>
+=======
+  <meta charset="UTF-8">
+  <title>管理设备</title>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="../js/highcharts.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+  <link href="../css/init.css" rel="stylesheet">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+   <!--导航和底部样式-->
+  <link href="../css/headerAndFooter.css" rel="stylesheet">
+   <!--图标-->
+  <link href="../Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
+  <!-- jquery ui-->
+  <link href="../css/jquery-ui.css" rel="stylesheet">
+  <!-- multiselect-->
+  <link href="../css/jquery.multiselect.css" rel="stylesheet">
+  <!--主要写的css代码-->
+  <link href="../css/default.css" rel="stylesheet" type="text/css" />
+  <script src="http://webapi.amap.com/maps?v=1.3&key=b79caad469676224a0e32143ce5add02"></script>
+
+  <!-- 地理位置-->
+  <script type="text/javascript"
+          src="https://webapi.amap.com/maps?v=1.4.2&key=e58bae199679e49544969133bc20896e&plugin=AMap.DistrictSearch"></script>
+  <script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
+  <style>
+    #map #mapShow{
+      width:100%;
+      height:530px;
+      border:1px solid gray;
+      position:relative;
+      /*background: rgb(252,249,242);*/
+      cursor: url("https://webapi.amap.com/theme/v1.3/openhand.cur"),default;
+    }
+    #table {width:100%; font-weight:lighter;table-layout:fixed;  font-size: 10px;margin-top: 10px;}
+    td{
+      white-space:nowrap; text-overflow:ellipsis;overflow: hidden;
+    }
+    #mid{
+      vertical-align: middle;
+    }
+     #info{
+       background: #f5f5f5;
+       vertical-align: middle;
+     }
+    .t40{width:200px;text-align: center;}
+    .t30{width:150px;text-align: center;}
+    .t20{width:100px;text-align: center;}
+    .t10{width:70px;text-align: center;}
+    .tr1{background: #f2efef;color:#767676;height:40px;line-height: 30px;}
+    .tr2{background: white;color:#767676;height:40px;line-height: 30px;}
+    .map{
+      margin: 0;
+      height:400px;
+      width: 100%;
+      border: 1px solid gray;
+      position: relative;
+      background: rgb(252, 249, 242);
+      cursor: url("https://webapi.amap.com/theme/v1.3/openhand.cur"), default;
+    }
+    .panel{
+      background-color: #fff;
+      border: solid 1px silver;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+    #deviceslist{
+      font-size: small;
+      /*overflow: auto;*/
+    }
+    .margin20_0{
+      margin: 20px 0;
+    }
+    .margin10_0{
+      margin: 10px 0 5px 0;
+    }
+    .realtime_table{
+      font-size: 14px;
+      font-weight:lighter;
+      border: 2px solid grey;
+    }
+    .realtime_img{
+      width:110px;
+      height:110px;
+      margin-left: 14px;
+      border-radius: 10px;
+    }
+    .realtime_title{
+      font-size: small;
+      width:140px;
+      text-align: center;
+      margin-top: 4px;
+    }
+    #realtimedata .intro{
+      text-align: center;
+    }
+    #edit_dataType{
+      display: none;
+    }
+    #saListData{
+      /*width:100%;*/
+      /*background: red;*/
+      /*height:1000px;*/
+    }
+    #nav_right {
+      position: relative;
+      float: left;
+      width: 85%;
+      height: 100%;
+      left: 4%;
+      background-color: rgb(245, 246, 247);
+      display: none;
+    }
+
+    #nav_right .middle_shebeigailan .table_shebei {
+      /*position: absolute;*/
+      top: 70px;
+      left: 8%;
+      height: 160px;
+      background-color: #fff;
+      overflow: hidden;
+    }
+
+    .middle_shebeigailan .table_shebei .td_data {
+      display: inline-block;
+      width: 24%;
+      height: 100%;
+      padding-top: 20px;
+      border-right: solid 1px gainsboro;
+      text-align: center;
+    }
+    .middle_shebeigailan .table_shebei .td_data{
+      padding-top: 20px;
+    }
+    .middle_shebeigailan .table_shebei .td_data .data{
+      padding-top: 40px;
+
+    }
+    .middle_shebeigailan .table_shebei .td_data:last-child {
+      border: none;
+    }
+
+    .td_data,.data {
+      font-size: 14px;
+      /*padding-top: 60px;*/
+    }
+    .middle_shebeigailan{
+      margin-left: 8%;
+    }
+
+    .main_chart {
+      position: relative;
+      top: 100px;
+      left: 13%;
+      width: 85%;
+      height: 360px;
+      background-color: rgb(245, 246, 247);
+    }
+
+    .barChart,
+    #sectorChart {
+      display: inline-block;
+      width: 45%;
+      background-color: white;
+      height: 80%;
+      margin: -0.8% 7.1% -0.2% -5.5%;
+    }
+
+    .new {
+      top: 900px;
+      height: 1000px;
+      background-color: rgb(245, 246, 247);
+    }
+
+    #apiChart {
+      position: relative;
+      top: 100px;
+      left: 8%;
+      width: 85%;
+      height: 300px;
+      background-color: #fff;
+    }
+    #orderChart{
+      position: relative;
+      top:180px;
+      left: 8%;
+      width: 85%;
+      height: 300px;
+      background-color: #fff;
+    }
+
+    #tableAS {width:100%; font-weight:lighter;table-layout:fixed;  font-size: 10px;margin-top: 10px;}
+    iframe{
+        /*position: absolute;*/
+        margin-left: 0;
+        margin-top: 20px;
+        height: 750px;
+        width: 100%;
+    }
+
+    .pagination{
+      width:100%;
+    }
+
+  </style>
+>>>>>>> Stashed changes
 </head>
 <body>
 <header>
@@ -224,7 +431,7 @@
         <!--</div>-->
 
         <div class="logined">
-            <a class="developerBtn" href="equipmentList.html">我的设备</a>
+            <!--<a class="developerBtn" href="equipmentList.html">我的设备</a>-->
             <a class="developerBtn" href="userManage.html">开发者中心</a>
             <a class="icon-bell bell" href="newMessage.html"></a>
             <a class="icon-user user" href="userDocument.html"></a>
