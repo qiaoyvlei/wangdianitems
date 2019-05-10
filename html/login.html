@@ -68,7 +68,7 @@
         $(".confirmButton").click(function () {
             if ($validator.form()) {
                 var dataInfo = $("#loginForm").serializeArray();
-                var page = "http://222.24.20.127:8080/ssm/loginForm";
+                var page = "http://192.168.0.109:8080/ssm/loginForm";
                 var userId;
                 var values = {};
                 $.each(dataInfo, function (i, val) {

@@ -59,7 +59,7 @@ $(document).ready(function(){
     params.userId = userId;
     params.pageNo = 1 || pageIndex;
     //显示devices列表
-    $.post(ip+'/equipment/find',params,function(json){
+   /* $.post(ip+'/equipment/find',params,function(json){
         if(json.type === "COMMON_SUC"){
             var template1 = $.templates("#showDevicesList");
             var htmlOutput1 = template1.render(json.data);
@@ -89,10 +89,10 @@ $(document).ready(function(){
     },'json').fail(function(json){
         alert("请求失败，请稍后再试")
     });
-
+*/
     //显示实时设备信息table
     //使用funcion
-    findNewData();
+   /* findNewData();
     setInterval(function(){findNewData();},20000);
     function findNewData(){
         $.post(ip+'/equipment/findEData',{userId:userId},function(json){
@@ -108,7 +108,7 @@ $(document).ready(function(){
         }).fail(function(json){
             alert("请求失败，请稍后再试")
         });
-    }
+    }*/
 
 
     //编辑设备弹出框
@@ -192,7 +192,7 @@ $(document).ready(function(){
     //请求所有数据，展示每个设备
     var params1 = {};
     params1.userId = userId;
-    $.post(ip+"/equipment/findLocationUserId",params1,function(json){
+    /*$.post(ip+"/equipment/findLocationUserId",params1,function(json){
         $.each(json.data, function (i, item) {
             var ss = '<span style="font-size: 16px;">设备名称：</span>'
                 +'<span style="font-size:14px;text-decoration:underline;" >'
@@ -208,7 +208,7 @@ $(document).ready(function(){
             cluster = new AMap.MarkerClusterer(mapObj, markers);
             cluster.setGridSize(60);
         });
-    });
+    });*/
 });
 
 //删除设备
@@ -221,7 +221,7 @@ function deleteDevice(id,name,obj){
         tbody.removeChild(tr);
 
         var params = {"equipmentId":id};
-        $.post(ip+"/equipment/del",params,function(json){
+        /*$.post(ip+"/equipment/del",params,function(json){
             if(json.typpe === "COMMPN_SUC"){
                 var url=window.location.href;
                 window.location.href = url;
@@ -231,7 +231,7 @@ function deleteDevice(id,name,obj){
         }).fail(function(){
             alert("请求错误，请稍后再试");
         });
-    }
+    }*/
 }
 //编辑设备
 function editDevice(id,obj){
@@ -468,7 +468,9 @@ function updateDevice(id){
 }
 //保存新添加的设备信息
 function saveDevice(){
-    if($("#Name").val()){
+    alert("保存成功");
+    window.open("userManage.html")
+   /* if($("#Name").val()){
         var params = $("#form1").serializeArray();
         console.log(params);
         var values={};
@@ -492,7 +494,7 @@ function saveDevice(){
         alert("请填写必要信息")
     }
 
-
+*/
 
 }
 //取消正在添加的设备信息
