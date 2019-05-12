@@ -72,7 +72,7 @@
                 $.each(dataInfo,function(i,val){
                     values[val.name] = val.value;
                 });
-//                removeCookie('userName');m
+                removeCookie('userName');
                 console.log(values);
                 $.post(ip+"/user/login", values, function (json) {
                     if(json.type === "COMMON_SUC") {

@@ -100,10 +100,7 @@
             }
         })
     })
-    //现在还无法掌握cookie相关操作，封存
-    /*$.post(ip+"/user/login", values, function (json) {
-
-
+    $.post(ip+"/user/login", values, function (json) {
         if(json.type === "COMMON_SUC") {
             //cookie存储用户名，密码，用户ID
             setCookie('userName',json.data.name,30);
@@ -122,8 +119,8 @@
     alert("信息填写不完整，再补充一下吧！");
 }
 });
-});/*/
-    /* //封装成函数
+});
+     //封装成函数
      //设置cookie
      function setCookie(name, value, iday) {
          var oDate = new Date();
@@ -146,7 +143,7 @@
      //删除cookie
      function removeCookie(name) {
          setCookie(name, "1", -1);
-     }})*/
+     }
 </script>
 </body>
 

@@ -144,13 +144,13 @@ $(function () {
             $.each(json.data.sensorTypeResps, function (index, data) {
                 drawChart(equipmentId, data.dataType, 0);
             });
-            //setInterval(
-            //    function(){
-            //        $.each(json.data.sensorTypeResps, function (index, data){
-            //            drawChart(equipmentId, data.dataType, 0);
-            //        })
-            //    },
-            //10000);
+            setInterval(
+               function(){
+                   $.each(json.data.sensorTypeResps, function (index, data){
+                       drawChart(equipmentId, data.dataType, 0);
+                   })
+               },
+            10000);
             var template1 = $.templates("#showEveryEquipmentData");
             var htmlOutput1 = template1.render(json.data);
             $(".showEveryEquipmentData").html(htmlOutput1);

@@ -2,7 +2,6 @@
 <!doctype html>
 <html>
 <head lang="en">
-<<<<<<< Updated upstream
     <meta charset="UTF-8">
     <title>管理设备</title>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
@@ -164,7 +163,7 @@
         .barChart,
         #sectorChart {
             display: inline-block;
-            width: 45%;
+            width: 685px;
             background-color: white;
             height: 80%;
             margin: -0.8% 7.1% -0.2% -5.5%;
@@ -180,7 +179,7 @@
             position: relative;
             top: 100px;
             left: 8%;
-            width: 85%;
+            width: 685px;
             height: 300px;
             background-color: #fff;
         }
@@ -188,7 +187,7 @@
             position: relative;
             top:180px;
             left: 8%;
-            width: 85%;
+            width: 685px;
             height: 300px;
             background-color: #fff;
         }
@@ -209,218 +208,12 @@
             width:100%;
         }
     </style>
-=======
-  <meta charset="UTF-8">
-  <title>管理设备</title>
-  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="../js/highcharts.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
-  <link href="../css/init.css" rel="stylesheet">
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-   <!--导航和底部样式-->
-  <link href="../css/headerAndFooter.css" rel="stylesheet">
-   <!--图标-->
-  <link href="../Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
-  <!-- jquery ui-->
-  <link href="../css/jquery-ui.css" rel="stylesheet">
-  <!-- multiselect-->
-  <link href="../css/jquery.multiselect.css" rel="stylesheet">
-  <!--主要写的css代码-->
-  <link href="../css/default.css" rel="stylesheet" type="text/css" />
-  <script src="http://webapi.amap.com/maps?v=1.3&key=b79caad469676224a0e32143ce5add02"></script>
-
-  <!-- 地理位置-->
-  <script type="text/javascript"
-          src="https://webapi.amap.com/maps?v=1.4.2&key=e58bae199679e49544969133bc20896e&plugin=AMap.DistrictSearch"></script>
-  <script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
-  <style>
-    #map #mapShow{
-      width:100%;
-      height:530px;
-      border:1px solid gray;
-      position:relative;
-      /*background: rgb(252,249,242);*/
-      cursor: url("https://webapi.amap.com/theme/v1.3/openhand.cur"),default;
-    }
-    #table {width:100%; font-weight:lighter;table-layout:fixed;  font-size: 10px;margin-top: 10px;}
-    td{
-      white-space:nowrap; text-overflow:ellipsis;overflow: hidden;
-    }
-    #mid{
-      vertical-align: middle;
-    }
-     #info{
-       background: #f5f5f5;
-       vertical-align: middle;
-     }
-    .t40{width:200px;text-align: center;}
-    .t30{width:150px;text-align: center;}
-    .t20{width:100px;text-align: center;}
-    .t10{width:70px;text-align: center;}
-    .tr1{background: #f2efef;color:#767676;height:40px;line-height: 30px;}
-    .tr2{background: white;color:#767676;height:40px;line-height: 30px;}
-    .map{
-      margin: 0;
-      height:400px;
-      width: 100%;
-      border: 1px solid gray;
-      position: relative;
-      background: rgb(252, 249, 242);
-      cursor: url("https://webapi.amap.com/theme/v1.3/openhand.cur"), default;
-    }
-    .panel{
-      background-color: #fff;
-      border: solid 1px silver;
-      padding: 5px 10px;
-      font-size: 14px;
-      border-radius: 4px;
-    }
-    #deviceslist{
-      font-size: small;
-      /*overflow: auto;*/
-    }
-    .margin20_0{
-      margin: 20px 0;
-    }
-    .margin10_0{
-      margin: 10px 0 5px 0;
-    }
-    .realtime_table{
-      font-size: 14px;
-      font-weight:lighter;
-      border: 2px solid grey;
-    }
-    .realtime_img{
-      width:110px;
-      height:110px;
-      margin-left: 14px;
-      border-radius: 10px;
-    }
-    .realtime_title{
-      font-size: small;
-      width:140px;
-      text-align: center;
-      margin-top: 4px;
-    }
-    #realtimedata .intro{
-      text-align: center;
-    }
-    #edit_dataType{
-      display: none;
-    }
-    #saListData{
-      /*width:100%;*/
-      /*background: red;*/
-      /*height:1000px;*/
-    }
-    #nav_right {
-      position: relative;
-      float: left;
-      width: 85%;
-      height: 100%;
-      left: 4%;
-      background-color: rgb(245, 246, 247);
-      display: none;
-    }
-
-    #nav_right .middle_shebeigailan .table_shebei {
-      /*position: absolute;*/
-      top: 70px;
-      left: 8%;
-      height: 160px;
-      background-color: #fff;
-      overflow: hidden;
-    }
-
-    .middle_shebeigailan .table_shebei .td_data {
-      display: inline-block;
-      width: 24%;
-      height: 100%;
-      padding-top: 20px;
-      border-right: solid 1px gainsboro;
-      text-align: center;
-    }
-    .middle_shebeigailan .table_shebei .td_data{
-      padding-top: 20px;
-    }
-    .middle_shebeigailan .table_shebei .td_data .data{
-      padding-top: 40px;
-
-    }
-    .middle_shebeigailan .table_shebei .td_data:last-child {
-      border: none;
-    }
-
-    .td_data,.data {
-      font-size: 14px;
-      /*padding-top: 60px;*/
-    }
-    .middle_shebeigailan{
-      margin-left: 8%;
-    }
-
-    .main_chart {
-      position: relative;
-      top: 100px;
-      left: 13%;
-      width: 85%;
-      height: 360px;
-      background-color: rgb(245, 246, 247);
-    }
-
-    .barChart,
-    #sectorChart {
-      display: inline-block;
-      width: 45%;
-      background-color: white;
-      height: 80%;
-      margin: -0.8% 7.1% -0.2% -5.5%;
-    }
-
-    .new {
-      top: 900px;
-      height: 1000px;
-      background-color: rgb(245, 246, 247);
-    }
-
-    #apiChart {
-      position: relative;
-      top: 100px;
-      left: 8%;
-      width: 85%;
-      height: 300px;
-      background-color: #fff;
-    }
-    #orderChart{
-      position: relative;
-      top:180px;
-      left: 8%;
-      width: 85%;
-      height: 300px;
-      background-color: #fff;
-    }
-
-    #tableAS {width:100%; font-weight:lighter;table-layout:fixed;  font-size: 10px;margin-top: 10px;}
-    iframe{
-        /*position: absolute;*/
-        margin-left: 0;
-        margin-top: 20px;
-        height: 750px;
-        width: 100%;
-    }
-
-    .pagination{
-      width:100%;
-    }
-
-  </style>
->>>>>>> Stashed changes
 </head>
 <body>
 <header>
     <nav class="header navbar navbar-fixed-top">
         <img class="logo" src="../images/homePage-logo.png"/><!--logo-->
-        <a class="items" href="homePage.html">首页</a>
+        <a class="items" href="homePages.html">首页</a>
         <a class="items" href="equipmentExplore.html">设备探索</a>
         <a class="items" href="hardwaresShow.html">硬件展示</a>
         <a class="items" href="userHelp.html">帮助文档</a>
@@ -431,7 +224,6 @@
         <!--</div>-->
 
         <div class="logined">
-            <!--<a class="developerBtn" href="equipmentList.html">我的设备</a>-->
             <a class="developerBtn" href="userManage.html">开发者中心</a>
             <a class="icon-bell bell" href="newMessage.html"></a>
             <a class="icon-user user" href="userDocument.html"></a>
@@ -451,6 +243,9 @@
             <li role="presentation">
                 <a href="#mapmode" aria-controls="mapmode" role="tab" data-toggle="tab" id="ditumoshi">地图模式</a>
             </li>
+            <!--<li role="presentation">
+                <a href="#nav_right" aria-controls="realtimedata" role="tab" data-toggle="tab" id="shishishuju">实时数据</a>
+            </li>-->
             <li role="presentation">
                 <a href="#nav_right" aria-controls="statisticalanalysis" role="tab" data-toggle="tab" id="tongjifenxi">统计分析</a>
             </li>
@@ -604,25 +399,25 @@
                                 <p class="data">{{message1}}次</p>
                             </div>
                             <div class="td_data">
-                                <p>今天API调用（次）</p>
+                                <p>24小时API调用（次）</p>
                                 <p class="data">{{message2}}次</p>
 
                             </div>
                             <div class="td_data">
-                                <p>今天推送调用（次）</p>
+                                <p>24小时推送调用（次）</p>
                                 <p class="data">{{message3}}次</p>
                             </div>
                             <div class="td_data">
-                                <p>今天下发命令（次）</p>
+                                <p>24小时下发命令（次）</p>
                                 <p class="data">{{message4}}次</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="main_chart">
-                        <div id="sectorChart">
+                       <!-- <div id="sectorChart">
 
-                        </div>
+                        </div>-->
                         <div class="barChart container1 dfg">
                         </div>
 
@@ -631,6 +426,9 @@
                         <div id="apiChart">
 
                         </div>
+                       <!-- <div id="orderChart">
+
+                        </div>-->
                     </div>
 
                 </div>
@@ -721,11 +519,11 @@
                             text: '时间'
                         },
                         type: 'datetime',
-                        tickPixelInterval: 150 //横轴的间距
+                        tickPixelInterval: 15 //横轴的间距
                     };
                     var yAxis = {
                         title: {
-                            text: '活跃设备数/台'
+                            text: '当前活跃设备数/台'
                         },
                         plotLines: [{
                             value: 0,
@@ -774,11 +572,11 @@
                             text: names[i] + cname[i]
                         };
                         var series1 = [{
-                            name: 'Random data',
+                            name: '活跃设备',
                             data: (function() {
                                 // generate an array of random data
                                 var data = [],
-                                    time = (new Date()).getTime(),
+                                    time = (new Date()).getDay(),
                                     i;
                                 for(j = -6; j <= 0; j += 1) { //代表有多少个点
                                     data.push({
@@ -790,16 +588,16 @@
                             }())
                         }];
                         var series2 = [{
-                            name: 'Random data',
+                            name: '周六',
                             data: (function() {
                                 // generate an array of random data
                                 var data = [],
-                                    time = (new Date()).getTime(),
+                                    time = (new Date()).getDay(),
                                     i;
                                 for(j = -6; j <= 0; j += 1) { //代表有多少个点
                                     data.push({
                                         x: time + j * 1000,
-                                        y: (Math.random() * (1.09 - 1) + 1) * 400
+                                        y: (Math.random() * (1.09 - 1) + 1) * 500
                                     });
                                 }
                                 return data;
@@ -825,15 +623,16 @@
                     }
 
                 });
-                Highcharts.chart('sectorChart', {
+                /*var chart = Highcharts.chart('sectorChart', {
                     chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
+                        spacing: [40, 0, 40, 0]
                     },
                     title: {
-                        text: '各产品设备数'
+                        floating: true,
+                        text: '各种产品设备数'
+                    },
+                    subtitle: {
+                        text: '网电云管家提供数据'
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -848,44 +647,56 @@
                                 style: {
                                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                                 }
-                            }
+                            },
+                            point: {
+                                events: {
+                                    mouseOver: function(e) { // 鼠标滑过时动态更新标题
+                                        // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+                                        chart.setTitle({
+                                            text: e.target.name + '\t' + e.target.y + ' %'
+                                        });
+                                    }
+                                    //,
+                                    // click: function(e) { // 同样的可以在点击事件里处理
+                                    //     chart.setTitle({
+                                    //         text: e.point.name+ '\t'+ e.point.y + ' %'
+                                    //     });
+                                    // }
+                                }
+                            },
                         }
                     },
                     series: [{
-                        name: 'Brands',
-                        colorByPoint: true,
+                        type: 'pie',
+                        innerSize: '80%',
+                        name: '市场份额',
                         data: [{
-                            name: 'Chrome',
-                            y: 61.41,
-                            sliced: true,
-                            selected: true
-                        }, {
-                            name: 'Internet Explorer',
-                            y: 11.84
-                        }, {
-                            name: 'Firefox',
-                            y: 10.85
-                        }, {
-                            name: 'Edge',
-                            y: 4.67
-                        }, {
-                            name: 'Safari',
-                            y: 4.18
-                        }, {
-                            name: 'Sogou Explorer',
-                            y: 1.64
-                        }, {
-                            name: 'Opera',
-                            y: 1.6
-                        }, {
-                            name: 'QQ',
-                            y: 1.2
-                        }, {
-                            name: 'Other',
-                            y: 2.61
-                        }]
+                            name: '产品7',
+                            y: 45.0,
+                            url: 'http://bbs.hcharts.cn'
+                        },
+                            ['产品1', 26.8],
+                            {
+                                name: '产品6',
+                                y: 12.8,
+                                sliced: true,
+                                selected: true,
+                                url: 'http://www.hcharts.cn'
+                            },
+                            ['产品2', 8.5],
+                            ['产品3', 6.2],
+                            ['产品4', 0.7]
+                        ]
                     }]
-                });
+                }, function(c) { // 图表初始化完毕后的会掉函数
+                    // 环形图圆心
+                    var centerY = c.series[0].center[1],
+                        titleHeight = parseInt(c.title.styles.fontSize);
+                    // 动态设置标题位置
+                    c.setTitle({
+                        y: centerY + titleHeight / 2
+                    });
+                });*/
                 var chart = Highcharts.chart('apiChart', {
                     title: {
                         text: '实时数据'
@@ -895,13 +706,8 @@
                     },
                     yAxis: {
                         title: {
-                            text: '统计值'
-                        },
-                        lable:{
-                            step:0.5
-                        },
-                        max:100
-
+                            text: '时间'
+                        }
                     },
                     legend: {
                         layout: 'vertical',
@@ -917,25 +723,19 @@
                         }
                     },
                     series: [{
-                        name: '风速cm/s',
-                        data: [13, 14, 26, 32, 12, 23, 11, 23]
+                        name: '风速m/s',
+                        data: [3.34, 2.53, 5.71, 6.58, 2.01, 1.31, 1.33, 1.345]
                     }, {
                         name: '光强lux',
-                        data: [249, 240, 297, 291, 490, 282, 121, 404]
+                        data: [149.16, 140.64, 197.42, 198.51, 124.90, 102.82, 121.45, 104.34]
                     }, {
-                        name: '气压KPa',
-                        data: [95.983, 75.983, 95.933, 95.981, 95.983, 95.923, 92.147, 99.387]
-                    }, {
-                        name: '降雨量ml',
-                        data: [0, 0, 0, 0, 0, 0, 0, 0]
-                    }, {
-                        name: '有害气体mg/m^3',
-                        data: [12.908, 5.948, 8.105, 11.248, 8.989, 11.816, 18.274, 18.111]
+                        name: '气压kPa',
+                        data: [117.44, 117.22, 99.005, 137.71, 101.85, 143.77, 121.47, 93.87]
                     }],
                     responsive: {
                         rules: [{
                             condition: {
-                                maxWidth: 50
+                                maxWidth: 500
                             },
                             chartOptions: {
                                 legend: {
@@ -947,7 +747,7 @@
                         }]
                     }
                 });
-                var chart = Highcharts.chart('orderChart', {
+                /*var chart = Highcharts.chart('orderChart', {
                     title: {
                         text: '命令下发次数'
                     },
@@ -957,8 +757,8 @@
                     yAxis: {
                         title: {
                             text: '命令调用\次'
-                        }
-                    },
+                        },
+
                     legend: {
                         layout: 'vertical',
                         align: 'right',
@@ -1002,7 +802,7 @@
                             }
                         }]
                     }
-                });
+                });*/
             </script>
 
             <script id="theTmpl" type="text/x-jsrender">
@@ -1177,4 +977,3 @@
 <script src="../js/userManage.js"></script>
 </body>
 </html>
-软件1607
