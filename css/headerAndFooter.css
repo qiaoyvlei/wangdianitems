@@ -4,21 +4,22 @@
     height: 70px;
     line-height: 70px;
     background:  #2A9F96;
+
     opacity: 1;
     padding: 0;
-    z-index: 999;
+    z-index: 1;
     min-width: 1200px;
 }
 
 /*logo*/
 .header .logo {
     display: inline-block;
+    margin-left:40px;
     margin-right: 30px;
     padding: 0;
     width: 81px;
     height: 100%;
     vertical-align: top;
-    margin-left: 20px;
 }
 
 .header .items {
@@ -28,20 +29,21 @@
     box-sizing: border-box;
     margin: 0 20px;
     cursor: pointer;
-    color: white;
+   color: white;
+
     text-decoration: none;
     vertical-align: top;
 }
 
 .header .items:hover {
-    color: yellow;
+    color:yellow ;
 }
 
 
 /*未登录*/
 .header .unlogin {
-    margin-left: 45%;
-    display: inline-block;
+    margin-left: 50%;
+    display: none;
 }
 /*登录和注册按钮*/
 .header .unlogin a{
@@ -68,7 +70,7 @@
 /*已登录*/
 .header .logined {
     display: inline-block;
-    margin-left: 34%;
+    margin-left: 47%;
 }
 
 .logined a {
@@ -102,7 +104,7 @@
 }
 
 .logined .bell:hover {
-    color: yellow;
+    color:yellow;
 }
 
 /*个人中心*/
@@ -111,13 +113,13 @@
 }
 
 .logined .user:hover {
-    color: yellow;
+    color:yellow;
 }
 
 /*底部*/
 .footer {
     min-width: 1200px;
-    margin-top: 100px;
+    margin-top: 50px;
     background-color: #2A9F90;
     color: #FCFCFD;
     width: 100%;
@@ -153,7 +155,7 @@
 }
 
 .contact:hover, .link:hover, .app:hover {
-    background: -moz-linear-gradient(top, #169E8C 50%, #63C3B6);
+    background: -moz-linear-gradient(top, #ddd 50%, #63C3B6);
     background: -webkit-linear-gradient(top, #169E8C 20%, #63C3B6);
     background: -o-linear-gradient(top, #169E8C 50%, #63C3B6);
 }
