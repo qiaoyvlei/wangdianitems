@@ -95,7 +95,8 @@
             margin-top: 4px;
         }
         #realtimedata .intro{
-            text-align: center;
+            /*text-align: center;*/
+            height: 100%;
         }
         #edit_dataType{
             display: none;
@@ -207,6 +208,7 @@
         .pagination{
             width:100%;
         }
+
     </style>
 </head>
 <body>
@@ -243,9 +245,9 @@
             <li role="presentation">
                 <a href="#mapmode" aria-controls="mapmode" role="tab" data-toggle="tab" id="ditumoshi">地图模式</a>
             </li>
-            <!--<li role="presentation">
-                <a href="#nav_right" aria-controls="realtimedata" role="tab" data-toggle="tab" id="shishishuju">实时数据</a>
-            </li>-->
+            <li role="presentation">
+                <a href="#realtimedata" aria-controls="realtimedata" role="tab" data-toggle="tab" id="shishishuju">实时数据</a>
+            </li>
             <li role="presentation">
                 <a href="#nav_right" aria-controls="statisticalanalysis" role="tab" data-toggle="tab" id="tongjifenxi">统计分析</a>
             </li>
@@ -378,18 +380,15 @@
                 </div>
                 <!-- 地图模式-->
                 <div role="tabpanel" class="tab-pane" id="mapmode">
-                    <!--<div id="map">-->
-                    <!--<div id="mapShow"></div>-->
-                    <!--</div>-->
                     <iframe src="map.html"></iframe>
                 </div>
-                <!-- 实时数据-->
-                <!--<div role="tabpanel" class="tab-pane" id="realtimedata">-->
-                <!--&lt;!&ndash; 各个设备实时数据&ndash;&gt;-->
-                <!--<div id="realtimeDataList">-->
-                <!--<p style="text-align: center;margin:0 auto;">加载中，请稍后</p>-->
-                <!--</div>-->
-                <!--</div>-->
+                <div role="tabpanel" class="tab-pane" id="realtimedata">
+                <!-- 各个设备实时数据-->
+                <div id="realtimeDataList">
+                    <iframe src="devicemanage.html"></iframe>
+                </div>
+                </div>
+                <!--统计分析-->
                 <div id="nav_right">
                     <div class="middle_shebeigailan" id="shebei">
                         <p>设备概览</p>
