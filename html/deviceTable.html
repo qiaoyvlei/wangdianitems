@@ -88,9 +88,9 @@
             align: 'center',
             valign: 'middle',
             formatter:function(result){
-                var oUrl=result+".html";
+                var oUrl=result;
                 console.log(oUrl)
-                return "<a class='a' href="+oUrl+".html">查看更多</a>"
+                return "<a href="+oUrl+".html"+"?id="+oUrl+">查看更多</a>"
             }
         }
 
