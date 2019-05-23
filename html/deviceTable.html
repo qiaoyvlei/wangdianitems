@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap-table/bootstrap-table.css">
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../bootstrap-table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-table-zh-CN.min.js"></script>
+    <style type="text/css">
+        .page_tile {
+            margin-left: 20px;
+            height: 50px;
+            font: bold 16px/50px "微软雅黑";
+        }
+    </style>
+
+<body>
+<table id="table"></table>
+<script type="text/javascript">
+    $btn_add = $("#btn_add");
+    $btn_add_modal = $("#btn_add_modal");
+    $btn_delete = $("#btn_delete");
+    $table = $("#table");
+    domain = "http://39.96.23.138:8080";
+
+    $btn_add.click(function() {
+        $("#add_modal").modal();
+    });
+    $btn_add_modal.click(function() {
+        $('#add_modal').modal('hide');
+        var data = $('#add_form').serialize();
+        data = decodeURIComponent(data, true);
+        submitdata = JSON.parse(submitdata);
+
+    });
+
+    // data =
+    $table.bootstrapTable({ // 对应table标签的id
+        data: "",
+        sidePagination: 'server', // 设置为服务器端分页
+        url: " http://222.24.20.127:8080/ssm/sensor", // 获取表格数据的url
+        method: 'post',
+        contentType: "application/json", //一种编码。好像在post请求的时候需要用到。这里用的get请求，注释掉这句话也能拿到数据
+
+        cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+        striped: true, //表格显示条纹，默认为false
+        pagination: true, // 在表格底部显示分页组件，默认false
+        toolbar: '#toolbar', //工具按钮用哪个容器
+        pageNumber: 1, // 首页页码
+        // search: true,
+        strictSearch: true,
+        pageSize: 10, //单页记录数
+        pageList: [10, 5], //分页步进值
+        responseHandler: responseHandler, //请求数据成功后，渲染表格前的方法
+        queryParams: function(params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+            return {
+                pageSize: params.limit, // 每页要显示的数据条数
+                pageNum: (params.offset / params.limit) + 1 // 每页显示数据的开始行号
+            }
+        },
+        // sortName: 'id', // 要排序的字段
+        // sortOrder: 'desc', // 排序规则
+        columns: [{
+            field: 'name', // 返回json数据中的name
+            title: '传感器', // 表格表头显示文字
+            align: 'center', // 左右居中
+            valign: 'middle' ,// 上下居中
+        }, {
+            field: 'dataLimit',
+            title: "正常范围",
+            align: 'center',
+            valign: 'middle'
+        }, {
+            field: 'data',
+            title: '当日数据平均值',
+            align: 'center',
+            valign: 'middle'
+        }, {
+            field: 'id',
+            title: '更多操作',
+            value:"查看更多",
+            align: 'center',
+            valign: 'middle',
+            formatter:function(result){
+                var oUrl=result+".html";
+                console.log(oUrl)
+                return "<a class='a' href="+oUrl+".html">查看更多</a>"
+            }
+        }
+
+        ],
+        onLoadSuccess: function(data) { //加载成功时执行
+            console.info("加载成功");
+        },
+        onLoadError: function(data) { //加载失败时执行
+            console.log(data)
+            console.info("加载数据失败");
+        }
+    });
+
+    //请求成功方法
+    function responseHandler(result) {
+        return {
+            // total : result.dataLength, //总页数,前面的key必须为"total"
+            total: result.total, //总页数,前面的key必须为"total"
+            rows: result.rowDatas //行数据，前面的key要与之前设置的dataField的值一致.
+        }
+    };
+
+    // setTimeout(function(){
+    // 	alert("kkk");
+    // 	refresh("www.baidu.com");
+    // },2000);
+    //刷新表格数据,点击你的按钮调用这个方法就可以刷新
+    function refresh(url) {
+        $('#table').bootstrapTable('refresh');
+    }
+</script>
+</body>
+
+</html>
