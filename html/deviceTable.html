@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
@@ -44,7 +43,7 @@
     $table.bootstrapTable({ // 对应table标签的id
         data: "",
         sidePagination: 'server', // 设置为服务器端分页
-        url: " http://222.24.20.127:8080/ssm/sensor", // 获取表格数据的url
+        url: "http://222.24.20.127:1233/ssm/sensor", // 获取表格数据的url
         method: 'post',
         contentType: "application/json", //一种编码。好像在post请求的时候需要用到。这里用的get请求，注释掉这句话也能拿到数据
 
@@ -89,8 +88,8 @@
             valign: 'middle',
             formatter:function(result){
                 var oUrl=result;
-                console.log(oUrl)
-                return "<a href="+oUrl+".html"+"?id="+oUrl+">查看更多</a>"
+                console.log(oUrl);
+                return "<" + "a href=ViewMore.html?id="+oUrl+" id ="+oUrl+">查看更多</a>"
             }
         }
 
@@ -99,7 +98,7 @@
             console.info("加载成功");
         },
         onLoadError: function(data) { //加载失败时执行
-            console.log(data)
+            console.log(data);
             console.info("加载数据失败");
         }
     });
@@ -111,17 +110,13 @@
             total: result.total, //总页数,前面的key必须为"total"
             rows: result.rowDatas //行数据，前面的key要与之前设置的dataField的值一致.
         }
-    };
-
-    // setTimeout(function(){
-    // 	alert("kkk");
-    // 	refresh("www.baidu.com");
-    // },2000);
-    //刷新表格数据,点击你的按钮调用这个方法就可以刷新
+    }
     function refresh(url) {
         $('#table').bootstrapTable('refresh');
     }
+
+
+
 </script>
 </body>
 
-</html>

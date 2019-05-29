@@ -7,7 +7,7 @@
     <script src="../js/highcharts.js"></script>
 </head>
 <body>
-<div class="container0 dfg"  style="width: 600px; height: 380px; margin: 0 auto"></div>
+<div class="container0 dfg"  style="width: 800px; height: 380px; margin: 0 auto"></div>
 <script>
 
     var datas=[],names=["temperature","illumination","speed","direction","rainfall","isRain","mq135","mq2", "humidity","pressure","altitude","voltage","pitch","roll","yaw"];
@@ -26,7 +26,7 @@
                     var series = this.series[0];
                     setInterval(function () {
                         $.ajax({
-                            url:"http://222.24.20.127:8080/ssm/sensorData",
+                            url:"http://222.24.20.127:8080/smartCarefree/sensorData_test",
                             type: 'post',
                             dataType: "json",
                             async: false,
@@ -51,7 +51,7 @@
         };
         var yAxis = {
             title: {
-                text: 'Value'
+                text:'Value'
             },
             plotLines: [{
                 value: 0,

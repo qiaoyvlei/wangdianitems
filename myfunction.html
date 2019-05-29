@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myfunction</title>
+</head>
+<body>
+<script>
+    function myfunction(n){
+        var num=0;
+        for(var i=1;i<=n;i++){
+            if(i%2===0 && i%3===0 && i%5===0){
+                num++;
+                document.write(i+'&nbsp;');
+                if(num%6===0){
+                    document.write("<br>");
+                }
+            }
+        }
+    }
+
+    myfunction(1000);
+</script>
+</body>
+</html>

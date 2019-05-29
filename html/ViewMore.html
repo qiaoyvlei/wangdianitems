@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ViewMore</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        body{
+            display: flex;
+            flex-direction: row;
+            /*background-color: #bec5cc;*/
+        }
+        .introduce{
+            flex: 3;
+            display: flex;
+            flex-direction:column;
+            overflow: hidden;
+        }
+        .image{
+            margin: 20px 100px;
+            flex: 2;
+            display: flex;
+            flex-direction: row;
+            border: 1px solid #cccccc;
+            border-radius: 10px;
+            float: left;
+            text-indent: 2em;
+            background-color: #FFFFFF;
+
+        }
+        iframe{
+            border: none;
+             flex: 3;
+        }
+        .son1{
+            flex: 1;
+            background:url(../images/DHT11.png) no-repeat;
+            background-size: contain;
+        }
+        .son2{
+            flex: 1;
+            padding: 50px;
+        }
+        h2{
+            text-align: center;
+        }
+        .introduce:hover{
+            border-color:#2A9F96;
+        }
+        button{
+            height: 50px;
+            width: 80px;
+            border: none;
+            border-radius: 10px;
+            background-color: #2A9F96;
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 200;
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #1b6d85;
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+<!--<div style="flex: 1;"></div>-->
+<div class="introduce">
+    <div class="image">
+        <div class="son1"></div>
+        <div class="son2">
+            <h2>STM32</h2>
+            <p>微处理器选用STM32F103，STM32F103使用高性能的ARMCortex-M3 32位内核，内部有高速存储器，有很多引脚，包括多个I/O引脚和12位ADC转换引脚，有三个通用的定时器和一个PWM定时器，还包括多种标准的通信接口</p>
+            <br>
+        </div>
+
+    </div>
+    <iframe src="hightchart%20%20temperature.html" scrolling="no"></iframe>
+</div>
+<div style="flex: 0.7;"></div>
+<button type="button" onclick="window.location.href='deviceTable.html'">返回</button>
+<script>
+    function getQueryStringArgs() {
+        //取得查询字符串并去掉开头的问号
+        var qs = location.search.length > 0 ? location.search.substring(1):"";
+        //保存数据的对象
+        var args = {};
+        //取得每一项
+        items = qs.length > 0 ? qs.split('&'):[];
+        var item = null,name = null,value = null;
+        for(var i = 0;i < items.length;i++) {
+            item = items[i].split('=');
+            name = decodeURIComponent(item[0]);
+            value = decodeURIComponent(item[1]);
+            if(name.length) {
+                args[name] = value;
+            }
+
+        }
+        return args;
+    }
+    var number1=getQueryStringArgs();
+    var number=number1["id"];
+    alert(number);
+    // $.ajax({
+    //     url:"http://222.24.20.127:8080/smartCarefree/sensor_list",
+    //     type: 'post',
+    //     dataType: "json",
+    //     data:{id:number},
+    //     async: false,
+    //     cache: false,
+    //     success:function (res) {
+    //         console.log(res);
+    //     }
+    // })
+</script>
+</body>
+</html>
