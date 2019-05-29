@@ -350,21 +350,7 @@
                                     </tr>
                                     </thead>
                                     <tbody class="showDevicesList"></tbody>
-                                    <!--<script  type="text/jsrender" id="showDevicesList">
-                                      {{for equipments}}
-                                        <tr class="t1">
-                                          <td class="t30" id="mid">{{:equipmentId}}</td>
-                                          <td class="t30" id="mid">{{:name}}</td>
-                                          <td class="t20" id="mid">{{:createTime}}</td>
-                                          <td class="t30" id="info">{{:info}}</td>
-                                          <td class="t40">
-                                               <button class="btn btn-default btn-sm edit-device"  onclick=editDevice('{{:equipmentId}}',this)>编辑</button>
-                                               <button class="btn btn-default btn-sm show_dataTypes"  onclick=showDataTypes('{{:equipmentId}}',this)>查看传感器</button>
-                                               <input class="btn btn-default btn-sm" type="button" value="删除" onclick=deleteDevice('{{:equipmentId}}','{{:name}}',this)>
-                                          </td>
-                                         </tr>
-                                      {{/for}}
-                                    </script>-->
+
                                 </table>
                                 <!-- 分页-->
                                         <iframe src="产品开发.html" scrolling="no"></iframe>
@@ -446,7 +432,7 @@
                 <div role="tabpanel" class="tab-pane" id="realtimedata">
                     <!-- 各个设备实时数据-->
                     <div id="realtimeDataList">
-                        <iframe src="devicemanage.html" scrolling="no"></iframe>
+                        <iframe src="deviceTable.html" scrolling="no"></iframe>
                     </div>
                 </div>
                 <!--统计分析-->
@@ -486,9 +472,6 @@
                         <div id="apiChart">
 
                         </div>
-                        <!-- <div id="orderChart">
-
-                         </div>-->
                     </div>
 
                 </div>
@@ -545,32 +528,7 @@
                                 // set up the updating of the chart each second
                                 var series = this.series[0];
                                 //console.log(series);
-                                setInterval(function () {
-                                    /* $.ajax({
-                                         //url: "http://47.100.6.42/electric/get_data.php",
-                                         type: 'post',
-                                         dataType: "json",
-                                         async: false,
-                                         cache: false,
-                                         success: function(res) {
-                                             console.log(res);
-                                             for(var k = 0; k < res.length; i++) {
-                                                 var nn = res[k].split("");
-                                                 var len = res[k].split("").length;
-                                                 for(var j = 0; j < len; j++) {
-                                                     if(res[k].split("")[j] == ':') {
-                                                         var dd = nn.slice(j + 1, len).join('');
-                                                         datas.push(dd);
-                                                         break;
-                                                     }
-                                                 }
-                                             }
-                                             var x = (new Date()).getTime();
-                                             var y = Number(datas[0]);
-                                             series.addPoint([x, y], true, true);
-                                         }
-                                     });*/
-                                }, 1000);
+
                             }
                         }
                     };
@@ -671,7 +629,7 @@
                         json.yAxis = yAxis;
                         json.legend = legend;
                         json.exporting = exporting;
-                        json.series = (i == 0) ? series1 : series2;
+                        json.series = (i === 0) ? series1 : series2;
                         json.plotOptions = plotOptions;
                         json.credits = credits;
                         Highcharts.setOptions({
@@ -683,80 +641,6 @@
                     }
 
                 });
-                /*var chart = Highcharts.chart('sectorChart', {
-                    chart: {
-                        spacing: [40, 0, 40, 0]
-                    },
-                    title: {
-                        floating: true,
-                        text: '各种产品设备数'
-                    },
-                    subtitle: {
-                        text: '网电云管家提供数据'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                style: {
-                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                }
-                            },
-                            point: {
-                                events: {
-                                    mouseOver: function(e) { // 鼠标滑过时动态更新标题
-                                        // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
-                                        chart.setTitle({
-                                            text: e.target.name + '\t' + e.target.y + ' %'
-                                        });
-                                    }
-                                    //,
-                                    // click: function(e) { // 同样的可以在点击事件里处理
-                                    //     chart.setTitle({
-                                    //         text: e.point.name+ '\t'+ e.point.y + ' %'
-                                    //     });
-                                    // }
-                                }
-                            },
-                        }
-                    },
-                    series: [{
-                        type: 'pie',
-                        innerSize: '80%',
-                        name: '市场份额',
-                        data: [{
-                            name: '产品7',
-                            y: 45.0,
-                            url: 'http://bbs.hcharts.cn'
-                        },
-                            ['产品1', 26.8],
-                            {
-                                name: '产品6',
-                                y: 12.8,
-                                sliced: true,
-                                selected: true,
-                                url: 'http://www.hcharts.cn'
-                            },
-                            ['产品2', 8.5],
-                            ['产品3', 6.2],
-                            ['产品4', 0.7]
-                        ]
-                    }]
-                }, function(c) { // 图表初始化完毕后的会掉函数
-                    // 环形图圆心
-                    var centerY = c.series[0].center[1],
-                        titleHeight = parseInt(c.title.styles.fontSize);
-                    // 动态设置标题位置
-                    c.setTitle({
-                        y: centerY + titleHeight / 2
-                    });
-                });*/
                 var chart = Highcharts.chart('apiChart', {
                     title: {
                         text: '实时数据'
@@ -807,62 +691,7 @@
                         }]
                     }
                 });
-                /*var chart = Highcharts.chart('orderChart', {
-                    title: {
-                        text: '命令下发次数'
-                    },
-                    subtitle: {
-                        text: '网电云管家提供数据'
-                    },
-                    yAxis: {
-                        title: {
-                            text: '命令调用\次'
-                        },
 
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
-                    },
-                    plotOptions: {
-                        series: {
-                            label: {
-                                connectorAllowed: false
-                            },
-                            pointStart: 15
-                        }
-                    },
-                    series: [{
-                        name: '产品1',
-                        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-                    }, {
-                        name: '产品2',
-                        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-                    }, {
-                        name: '产品3',
-                        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-                    }, {
-                        name: '产品4',
-                        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-                    }, {
-                        name: '产品5',
-                        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-                    }],
-                    responsive: {
-                        rules: [{
-                            condition: {
-                                maxWidth: 500
-                            },
-                            chartOptions: {
-                                legend: {
-                                    layout: 'horizontal',
-                                    align: 'center',
-                                    verticalAlign: 'bottom'
-                                }
-                            }
-                        }]
-                    }
-                });*/
             </script>
 
             <script id="theTmpl" type="text/x-jsrender">
@@ -897,84 +726,10 @@
           </ul>
 
             </script>
-            <!-- 统计分析-->
-            <!--<div role="tabpanel" class="tab-pane" id="statisticalanalysis">-->
-            <!--<table id="tableAS" cellpadding="0" cellspacing="0" class="table">-->
-            <!--<thead>-->
-            <!--<tr class="thead">-->
-            <!--<td class="t30">设备ID</td>-->
-            <!--<td class="t30">名称</td>-->
-            <!--<td class="t20">创建时间</td>-->
-            <!--<td class="t20">简介</td>-->
-            <!--<td class="t40">操作</td>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody id="saListData"></tbody>-->
-            <!--<script id="saList" type="text/x-jsrender">-->
-            <!--{{for equipments}}-->
-            <!--<tr class="t1">-->
-            <!--<td class="t30" id="mid">{{:equipmentId}}</td>-->
-            <!--<td class="t30" id="mid">{{:name}}</td>-->
-            <!--<td class="t20" id="mid">{{:createTime}}</td>-->
-            <!--<td class="t30" id="info">{{:info}}</td>-->
-            <!--<td class="t40">-->
-            <!--<a href="dataForecast.html?id={{:equipmentId}}" target="_blank">-->
-            <!--<input class="btn btn-default btn-sm" type="button" value="查看预测数据">-->
-            <!--</a>-->
-            <!--</td>-->
-            <!--</tr>-->
-            <!--{{/for}}-->
-            <!--</script>-->
-            <!--</table>-->
-            <!--</div>-->
 
             <!-- 弹出的内容-->
             <div id="edit_device" title="设备设置" style="display: none;">
             </div>
-            <!--<script id="edit_device_data" type="text/x-jsrender">-->
-            <!--<div class="editdevice" style="font-size: 14px;padding:20px;font-weight: lighter;">-->
-            <!--<form id="form_edit" method="post" >-->
-            <!--<table width="100%" cellspacing="1" class="data">-->
-            <!--<tbody>-->
-            <!--<tr class="tr1">-->
-            <!--<td>名称</td>-->
-            <!--<td>-->
-            <!--<input id="Name" name="name" size="50" type="text" value="{{:name}}" required>-->
-            <!--</td>-->
-            <!--</tr>-->
-            <!--<tr class="tr2">-->
-            <!--<td>介绍</td>-->
-            <!--<td>-->
-            <!--<textarea name="info" style="resize: none; width: 600px;height:100px;max-width: 600px;max-height: 100px;" required>{{:info}}</textarea>-->
-            <!--</td>-->
-            <!--</tr>-->
-            <!--<tr class="tr2">-->
-            <!--<td>是否公开</td>-->
-            <!--<td>-->
-            <!--<input type="radio" name="isPublic" {{if isPublic == "true"}} checked="checked" {{/if}} value="true"/><label>是</label>-->
-            <!--<input type="radio" name="isPublic" {{if isPublic == "false"}} checked="checked" {{/if}} value="false"/><label>否</label>-->
-            <!--</td>-->
-            <!--</tr>-->
-            <!--<tr class="tr2">-->
-            <!--<td>地理位置</td>-->
-            <!--<td>-->
-            <!--<input id="location_X_edit" name="location_X" type="hidden" value="{{:location_X}}">-->
-            <!--<input id="location_Y_edit" name="location_Y" type="hidden" value="{{:location_Y}}">-->
-            <!--<div class = 'panel'>选择切换省市：<select open id = 'subDistricts_edit'></select></div>-->
-            <!--<div id="mapDiv_edit" class="map" tabindex="0"></div>-->
-            <!--</td>-->
-            <!--</tr>-->
-            <!--<tr class="tr1">-->
-            <!--<td colspan="2" align="center" style="padding-top: 30px;">-->
-            <!--<input type="button"  class="btn btn-default" value="保存" onclick="updateDevice('{{:equipmentId}}')" >-->
-            <!--</td>-->
-            <!--</tr>-->
-            <!--</tbody>-->
-            <!--</table>-->
-            <!--</form>-->
-
-            <!--</div>-->
-            <!--</script>-->
             <div id="showDataTypes" title="传感器类型" style="display: none;">
                 <div class="showDataTypes" style="font-size: 14px;padding:20px;font-weight: lighter;">
                     <div id="getEquipmentId"></div>

@@ -26,14 +26,14 @@
                     var series = this.series[0];
                     setInterval(function () {
                         $.ajax({
-                            url:"http://222.24.20.127:8080/ssm/sensorData",
+                            url:"http://222.24.20.127:8080/smartCarefree/sensorData_test",
                             type: 'post',
                             dataType: "json",
                             async: false,
                             cache: false,
                             success: function (res){
                                 for(var key in res) {
-                                    datas.push(res[key]);                                alert(datas)
+                                    datas.push(res[key]);
                                 }
                                 var x=(new Date()).getTime();
                                 var y = Number(res[key]);
