@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" lang="zh-cn" />
+    <title>从设备/NRU上检索下载设备</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/logindemo.css">
+    <style>
+        #fromputresultid td{
+            cursor: pointer
+        }
+    </style>
+</head>
+
+<body>
+<div class="container" style="display: none; padding: 20px;" id="mainid">
+    <div style="margin-bottom: 20px;">
+        <h2 style="text-align: center">从设备/NRU上检索下载设备(仅OCX插件)</h2>
+    </div>
+    <div>
+        <loginmodule id="loginmask"></loginmodule>
+
+        <div id="mask">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#frompu" data-toggle="tab">
+                        从设备上
+                    </a>
+                </li>
+                <li>
+                    <a href="#fromnru" data-toggle="tab">
+                        从NRU上
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content row" style="box-shadow: 0px 0px 5px #888888; ">
+
+                <div class="tab-pane fade in active" id="frompu">
+                    <ul class="list-unstyled  col-sm-6">
+                        <li>
+                            <form class="form-horizontal">
+                                <h3>1、检索</h3>
+                                <hr />
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="input01">设备ID</label>
+                                        <div class="col-sm-7">
+                                            <input id="frompupuidid" type="text" value="PU_27423133" class="input-xlarge form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="input01">iBeginTime</label>
+                                        <div class="col-sm-7">
+                                            <input id="frompuibegintimeid" type="datetime-local" class="form-control"
+                                                   value="">(UTC时间微秒)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="input01">iEndTime</label>
+                                        <div class="col-sm-7">
+                                            <input id="frompuiendtimeid" type="datetime-local" class="form-control"
+                                                   value="" />(UTC时间微秒)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-4 col-sm-7">
+                                            <input class="btn btn-success" onclick="testSearchRecordOnPu()" type="button"
+                                                   value="检索设备上文件">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </li>
+                        <li>
+                            <div>
+                                <h3>2、检索结果</h3>
+                                <hr />
+                                <div style="height: 216px; overflow-y: auto;" id="fromputresultid">
+                                    <table class='table table-striped table-bordered' style="width: 100%; table-layout: fixed; position:sticky">
+                                        <thead>
+                                        <tr>
+                                            <th class="col-sm-9">SzRemotePath</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="frompumsgshowid"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="list-unstyled col-sm-6">
+                        <li>
+                            <form class="form-horizontal">
+                                <h3>3、下载</h3>
+                                <hr />
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="input01">设备ID</label>
+                                        <div class="col-sm-7">
+                                            <input id="downloadfrompupuidid" type="text" value="" class="input-xlarge form-control"
+                                                   disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="input01">szRemotePath</label>
+                                        <div class="col-sm-7">
+                                            <input id="downloadfrompuremotepath" type="text" class="form-control"
+                                                   value="" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="input01">localFileDir</label>
+                                        <div class="col-sm-7">
+                                            <input id="frompuiendlocaldirid" type="text" class="form-control" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-4 col-sm-7">
+                                            <input class="btn btn-success" onclick="testDownFileFromPu()" type="button"
+                                                   value="下载文件">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </li>
+                        <li>
+                            <div>
+                                <h3>4、进度</h3>
+                                <hr />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-pane fade" id="fromnru">
+                    <form class="form-horizontal col-sm-6">
+                        <h3>1、检索</h3>
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="input01">设备ID</label>
+                                <div class="col-sm-7">
+                                    <input id="fromnrupuidid" type="text" class="input-xlarge form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">时间条件对应的时间字段类型</label>
+                                <div class="col-sm-7">
+                                    <input id="fromnruitimeconditionId" type="text" class="input-xlarge form-control">
+                                    0，1：录像开始时间。2：录像结束时间。3：录像开始or结束时间。4：文件索引入库时间。
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="input01">iBeginTime</label>
+                                <div class="col-sm-7">
+                                    <input id="fromnruibegintimeid" type="datetime-local" value="" class="form-control">(UTC时间微秒)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="input01">iEndTime</label>
+                                <div class="col-sm-7">
+                                    <input id="fromnruiendtimeid" type="datetime-local" value="" class="form-control" />(UTC时间微秒)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="input01">szDesc1</label>
+                                <div class="col-sm-7">
+                                    <input id="fromnruszdesc1id" type="text" value="" class="form-control" />(描述信息1)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="input01">szDesc2</label>
+                                <div class="col-sm-7">
+                                    <input id="fromnruszdesc2id" type="text" value="" class="form-control" />(描述信息2)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-4">
+                                    <input class="btn btn-success" onclick="testSearchRecordOnNru()" type="button"
+                                           value="检索NRU上录像文件">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <div class="col-sm-6" id="msg">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
+<script src="../WebClient/js/lib/angular/angular.min.js"></script>
+<script src="Logintemplate/js/logindemo.js"></script>
+<script type="text/javascript" src="../js/jsw.js"></script>
+<script type="text/javascript">
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+
+    var myDate = new Date();
+    var begintime = myDate.Format("yyyy-MM-ddThh:mm:ss");
+    myDate.setDate(myDate.getDate() - 1);
+    var endtime = myDate.Format("yyyy-MM-ddThh:mm:ss");
+    document.getElementById('frompuibegintimeid').value = endtime;
+    document.getElementById('frompuiendtimeid').value = begintime;
+    document.getElementById('fromnruibegintimeid').value = endtime;
+    document.getElementById('fromnruiendtimeid').value = begintime;
+
+
+    if (false) {
+        $("#loginmask").fadeToggle(function () {
+            $("#mainid").slideToggle();
+        });
+    } else {
+        $("#mask").fadeToggle(100, function () {
+            $("#mainid").fadeToggle();
+        });
+    }
+
+    var session = null;
+
+    //这就是为了获取登录过的session的接口
+    Demo.AsyncGetSession(function (sess) {
+        session = sess;
+        session.swAddCallBack('notify', notifycallback);
+        $("#loginmask").slideUp('fast', function () {
+            $("#mask").slideToggle();
+        });
+    });
+
+    function notifycallback(sender, event, data) {
+        if (data.msg == jSW.MessageType.notify_down_from_pu.cmd) {
+            var transinfo = data.content;
+            if (transinfo.sEvent.iEvent == jSW.FileTransEvent.FILE_TRANS_PROCESS) {
+                var pinfo = "文件" + transinfo.sEvent.szRemoteFilePath + "传输中," +
+                    transinfo.sProgressInfo.iTransferBytes + "/" + transinfo.sProgressInfo.iTotalBytes +
+                    "Bytes, Speed:" + transinfo.sProgressInfo.iSpeedKBpsLongTerm + "KBps";
+                console.log(pinfo);
+            } else if (transinfo.sEvent.iEvent == jSW.FileTransEvent.FILE_TRANS_CLOSE) {
+                var info = "文件" + transinfo.sEvent.szRemoteFilePath + "传输关闭，文件传输是否已完成:" + (transinfo.sEvent.iResult ==
+                jSW.RcCode.RC_CODE_S_OK ? "是" : "否")
+                console.log(info);
+            }
+
+
+        }
+    }
+
+    function testSearchRecordOnPu() {
+        var beginTimer = document.getElementById('frompuibegintimeid');
+        var endTimer = document.getElementById('frompuiendtimeid');
+        var itimeBegin = new Date(beginTimer.value).getTime() / 1000;
+        var itimeEnd = new Date(endTimer.value).getTime() / 1000;
+        var puid = document.getElementById('frompupuidid').value;
+
+        if (session) {
+            var rc = session.swSearchFileOnPu({
+                stSearchInfo: {
+                    iType: 0,
+                    iPostition: 0,
+                    iCount: 50
+                },
+                stFilter: {
+                    szPUID: puid,
+                    iChannelIndex: -1,
+                    iFileType: 0,
+                    iTimeBegin: itimeBegin,
+                    iTimeEnd: itimeEnd,
+                    iFileSizeMin: 0,
+                    iFileSizeMax: 0,
+                    iRecordType: 0,
+                },
+                callback: function (options, response, data) {
+                    if (response.getCode() == jSW.RcCode.RC_CODE_S_OK) {
+                        var aadata = new Date();
+                        var strTime;
+                        var trtag = "";
+                        trtag = "";
+                        var icount = data.content.length < 20 ? data.content.length : 20;
+                        for (var i = 0; i < icount; i++) {
+                            aadata.setTime(data.content[i].iTimeRecord * 1000);
+                            strTime = aadata.Format("yyyy-MM-ddThh:mm:ss")
+                            trtag += "<tr>";
+                            trtag +=
+                                "<td style='width: 25%; word-break : break-all; overflow-x: hidden' data-frompu='" +
+                                JSON.stringify(data.content[i]) + "'>" + data.content[i].szFilePath +
+                                "</td>";
+                            trtag += "</tr>";
+                        }
+                        $("#frompumsgshowid").html(trtag);
+                        $('#fromputresultid td').dblclick(function (event) {
+                            var $target = $(this);
+                            var data = $target.data("frompu");
+                            fromPuFillData(data);
+                        });
+                    }
+                },
+                tag: null
+            });
+            if (rc == jSW.RcCode.RC_CODE_S_OK) {
+                console.log("查询接口调用成功");
+            } else {
+                console.log("查询接口调用失败");
+            }
+        }
+    }
+
+    function testSearchRecordOnNru() {
+        var beginTimer = document.getElementById('fromnruibegintimeid');
+        var endTimer = document.getElementById('fromnruiendtimeid');
+        var itimeBegin = new Date(beginTimer.value).getTime() / 1000;
+        var itimeEnd = new Date(endTimer.value).getTime() / 1000;
+        var puid = document.getElementById('fromnrupuidid').value;
+        var szDesc1 = document.getElementById('fromnruszdesc1id').value;
+        var szDesc2 = document.getElementById('fromnruszdesc2id').value;
+        var iTimeCondition = document.getElementById('fromnruitimeconditionId').value;
+
+        if (session) {
+            session.swSearch({
+                stSearchInfo: {
+                    iCount: 20,
+                },
+                stFilter: {
+                    szPUID: puid,
+                    iTimeCondition: iTimeCondition,
+                    iTimeBegin: itimeBegin,
+                    iTimeEnd: itimeEnd,
+                    iFileType: 0,
+                    szDesc1: szDesc1,
+                    szDesc2: szDesc2
+                },
+                callback: function (options, response, data) {
+                    if (response.getCode() == jSW.RcCode.RC_CODE_S_OK) {
+                        var msgtag = document.getElementById('msg');
+                        var aadata = new Date();
+                        var strTime;
+                        var trtag = "";
+                        trtag =
+                            "<table class='table table-striped'><thead><tr><th>SzRemotePath</th><th>Begin Time</th><th>End Time</th><th>fill</th></tr></thead><tbody>";
+                        for (var i = 0; i < data.content.length; i++) {
+                            aadata.setTime(data.content[i].iTimeRecord * 1000);
+                            strTime = aadata.Format("yyyy-MM-ddThh:mm:ss")
+                            trtag += "<tr>";
+                            trtag += "<td>" + data.content[i].iRecordID + "</td>";
+                            aadata.setTime(data.content[i].iTimeBegin * 1000);
+                            strTime = aadata.Format("yyyy-MM-ddThh:mm:ss")
+                            trtag += "<td>" + "<input type=\"datetime-local\" value=\"" + strTime +
+                                "\" readonly=\"readonly\"><br/>" + data.content[i].iTimeBegin + "</td>";
+                            aadata.setTime(data.content[i].iTimeEnd * 1000);
+                            strTime = aadata.Format("yyyy-MM-ddThh:mm:ss")
+                            trtag += "<td>" + "<input type=\"datetime-local\" value=\"" + strTime +
+                                "\" readonly=\"readonly\"><br/>" + data.content[i].iTimeEnd + "</td>";
+                            trtag += "<td>" + data.content[i].szPuid + "</td>";
+                            trtag += "<td>" + data.content[i].iChannelIndex + "</td>";
+                            trtag += '<td>' + data.content[i].szSourceID + '</td>';
+                            trtag += '<td><a data-filepath="' + data.content[i].szFilePath + '\"data-nruid="' +
+                                data.content[i].szSourceID +
+                                '"onclick="onClickDownloadFromNru()">插件下载</a></td>';
+                            trtag += "</tr>";
+                        }
+                        trtag += "</tbody></table>";
+                        msgtag.innerHTML = trtag;
+                    }
+                },
+            });
+        }
+    }
+
+    function fromPuFillData(data) {
+        $('#downloadfrompupuidid').val("");
+        $('#downloadfrompuremotepath').val("");
+        setTimeout(function (data) {
+            $('#downloadfrompupuidid').val(data.szPuid);
+            $('#downloadfrompuremotepath').val(data.szFilePath);
+        }, 200, data);
+    }
+
+    function testDownFileFromPu() {
+        var puid = $('#downloadfrompupuidid').val();
+        var remotePath = $('#downloadfrompuremotepath').val();
+        var localPath = $('#frompuiendlocaldirid').val();
+
+        if (session) {
+            var rc = session.swDownFileFromPu({
+                szPUID: puid,
+                remoteFilePath: remotePath,
+                localFileDir: localPath,
+                callback: function (options, response, data) {
+                    if (response.emms.code == jSW.RcCode.RC_CODE_S_OK) {
+                        console.log("下载接口回调通知成功");
+                    } else {
+                        console.log("下载接口回调通知失败");
+                    }
+                },
+                pcallback: function (options, response, data) {
+                    console.log(JSON.stringify(data));
+                },
+                tag: null
+            });
+        }
+        if (rc == jSW.RcCode.RC_CODE_S_OK) {
+            console.log("下载接口调用成功");
+        } else {
+            console.log("下载接口调用失败");
+        }
+    }
+
+
+    function onClickDownloadFromNru() {
+        var filePath = $(event.target).data("filepath");
+        var nruId = $(event.target).data("nruid");
+        testDownFileFromNru(nruId, filePath, "c:\\测试\\");
+    }
+
+    function testDownFileFromNru(nruid, remotepath, localpath) {
+        console.log(nruid);
+        console.log(remotepath);
+        console.log(localpath);
+        if (session) {
+            var rc = session.swDownFileFromNru({
+                szNRUID: nruid,
+                remoteFilePath: remotepath,
+                localFileDir: localpath,
+                callback: function (options, response, data) {
+                    if (response.emms.code == jSW.RcCode.RC_CODE_S_OK) {
+                        console.log("下载接口回调通知成功");
+                    } else {
+                        console.log("下载接口回调通知失败");
+                    }
+                },
+                tag: null
+            });
+        }
+        if (rc == jSW.RcCode.RC_CODE_S_OK) {
+            console.log("下载接口调用成功");
+        } else {
+            console.log("下载接口调用失败");
+        }
+    }
+
+
+    $('#inputloginid').on('click', function () {
+        var $btn = $(this).button('loading');
+    })
+</script>

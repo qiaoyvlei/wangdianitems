@@ -631,4 +631,4 @@ function addPoint1(lng, lat, content, typeIcon,gid) {
     });
     marker1.setMap(mapObj);
     markers.push(marker1);
-}
+}}

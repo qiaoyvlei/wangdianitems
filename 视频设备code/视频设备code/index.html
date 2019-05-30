@@ -1,0 +1,121 @@
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>login</title>
+    <!--<script src="Jquery/jquery-3.1.1.min.js"></script>-->
+    <script type="text/javascript" src="../js/jsw.js"></script>
+    <script src="../WebClient/js/lib/angular/angular.min.js"></script>
+    <link rel="stylesheet" href="css/logindemo.css">
+</head>
+<body>
+    <div class="contentlogin">
+        <div>
+            <span>服务器地址</span>
+            <input type="text" id="ipserver" value="127.0.0.1">
+        </div>
+        <div>
+            <span>端口</span>
+            <input type="text" id="port" value="9701">
+        </div>
+        <div>
+            <span>用户名</span>
+            <input type="text" id="username" value="admin">
+        </div>
+        <div>
+            <span>密码</span>
+            <input type="password" id="password" value="123456">
+        </div>
+        <hr>
+        <div style="text-align: right; display: block;">
+            <input type="checkbox" id="OCXcontrol"><span style="font-size:13px;">OCX方式登录</span>
+            <button type="submit" class="showlogin" onclick="testLogin()">登录</button>
+            <button type="submit" class="outlogin" onclick="testLogout()">退出</button>
+            
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        jSW.swDeInit();
+    }
+
+    var session = null;
+    var swInitkeywords = null;
+    function testLogin() {
+        if(swInitkeywords){
+            if (session) { delete session; }
+            session = new jSW.SWSession({
+                server: document.getElementById("ipserver").value, // 如果是jSW.CallProtoType.OCX方式，这里需要填写具体的IP
+                port: document.getElementById('port').value,
+                onopen: function (sess) {
+                    sess.swLogin({
+                        user: document.getElementById('username').value,
+                        password: document.getElementById('password').value
+                    });
+                }
+            });
+
+            // 注册事件的回调函数
+            session.swAddCallBack('login', sessionCallback);
+            session.swAddCallBack('logout', sessionCallback);
+        }else{
+            swInit();
+        }
+    }
+
+    function swInit() {
+        var OCXcontrol = document.getElementById("OCXcontrol")
+        if(OCXcontrol.checked){
+            var initCfgParams = {bocxws : true};
+            var initParams = {
+                url: window.location.origin,
+                calltype: jSW.CallProtoType.OCX,
+                config: initCfgParams,
+                oninit: oninitcall
+            }
+            return rc = jSW.swInit(initParams);
+        }else{
+            return rc = jSW.swInit({
+                url: window.location.origin, // bv_nginx.exe服务器地址
+                calltype: jSW.CallProtoType.AUTO, // AUTO: IE优先使用OCX, 如果希望IE仍然使用HTTP通信, 请使用jSW.CallProtoType.HTTP
+                oninit: oninitcall
+            });
+        }
+    }
+
+    function oninitcall(rc) {
+        if(rc == 0){ // 在这之后才能调用其他接口，否则会报错，proto找不到等
+            console.log("on init ok");
+            swInitkeywords = true
+            testLogin()
+        }else{
+            return console.log("ocx on init fald：" + rc)
+        }
+    }
+
+    function testLogout() {
+        if (session) {
+            session.swLogout();
+        }
+    }
+
+    function sessionCallback(sender, event, json) {
+        var info = '';
+        if ('login' == event) {
+            info += '登录';
+        } else if ('logout' == event) {
+            info += '退出';
+        }
+
+        if (json.code == jSW.RcCode.RC_CODE_S_OK) {
+            info += '成功';
+        } else {
+            info += '失败, error code: ' + json.code;
+        }
+        alert(info);
+    }
+</script>

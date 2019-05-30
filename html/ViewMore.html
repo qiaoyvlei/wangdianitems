@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ViewMore</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <style>
         *{
             margin: 0;
@@ -43,6 +44,7 @@
             flex: 1;
             background:url(../images/DHT11.png) no-repeat;
             background-size: contain;
+            overflow: hidden;
         }
         .son2{
             flex: 1;
@@ -112,18 +114,25 @@
     }
     var number1=getQueryStringArgs();
     var number=number1["id"];
-    alert(number);
-    // $.ajax({
-    //     url:"http://222.24.20.127:8080/smartCarefree/sensor_list",
-    //     type: 'post',
-    //     dataType: "json",
-    //     data:{id:number},
-    //     async: false,
-    //     cache: false,
-    //     success:function (res) {
-    //         console.log(res);
-    //     }
-    // })
+   $(function () {
+       $.ajax({
+           url:"http://222.24.20.127:1233/ssm/sensorData_one?id="+number,
+           type: 'post',
+           dataType: "json",
+           data:{id:number},
+           async: false,
+           cache: false,
+           success:function (res) {
+               console.log(res);
+               $("h2").html(res['name']);
+               $("p").html(res['detail']);
+               $(".son1").css('background','url(../images/'+res['id']+'.png)');
+               $(".son1").css('background-size','contain');
+               $(".son1").css('background-repeat','no-repeat');
+               console.log($("iframe").$("div"));
+           }
+       })
+   })
 </script>
 </body>
 </html>
