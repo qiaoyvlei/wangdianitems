@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MultiVideoPresentation</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="css/logindemo.css">
+    <style>
+        .box {
+            margin: 10px 0;
+            width: 383px;
+            height: 286px;
+            background: #ccc;
+            overflow: hidden;
+            border: 1px darkgrey solid;
+        }
+
+        .right_box {
+            font-size: 14px;
+            position: absolute;
+            width: 110px;
+            right: 20px;
+            top: 80px;
+            display: flex;
+            flex-flow: column;
+            justify-items: center;
+        }
+
+        .right_box input {
+            margin-bottom: 20px;
+        }
+
+        .right_box button {
+            margin-bottom: 20px;
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+        }
+
+        .choose {
+            width: 60px;
+        }
+
+        .video, .intercom {
+            width: 600px;
+            height: 480px;
+            box-sizing: border-box;
+            margin: 10px;
+            border: 1px #ccc solid;
+            padding: 5px;
+            float: left;
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            top: 5px;
+            left: 20px;
+            box-shadow: 0px 0px 2px;
+        }
+
+        .success {
+            background-color: green;
+        }
+
+        .faild {
+            background-color: red;
+        }
+
+        .displaydiv {
+            background: black;
+            height: calc(100% - 160px);
+            margin-top: 5px;
+        }
+
+        .divinfo {
+            width: 100%;
+            height: 20px;
+            background-color: grey;
+            text-align: center;
+            font-size: large;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0px;
+            height: 20px;
+        }
+
+        ul li {
+            float: left;
+            margin-left: 4px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<loginmodule></loginmodule>
+<!-- <h1 id="logininfoshowid" style="text-align: center;">未登录</h1> -->
+
+<div style="width:100%; box-sizing: border-box;padding: 30px;">
+    <div class="video">
+        PU ID<input type="text" class="puidinput" placeholder="请输入PUID" value="PU_55AA00" demo-puid>
+        <input type="checkbox" id="bovertcpid"/>
+        <ul>
+            <li><button>打开</button></li>
+            <li><button>关闭</button></li>
+            <li><button>旋转</button></li>
+            <li><button>全屏</button></li>
+            <li><button>隐藏</button></li>
+            <li><button>显示</button></li>
+            <li><button>音频接收</button></li>
+            <li><button>图像拉伸</button></li>
+            <li><button>本地抓拍</button></li>
+            <li><input value="4"/>(1-7)<button>设置OCX视频预览平滑度参数</button></li>
+        </ul>
+        <br />
+        <br />
+        <div class="circle faild"></div>
+        <div class="displaydiv"></div>
+        <div class="divinfo"></div>
+    </div>
+
+    <div class="intercom" style="width: 1000px">
+        <div class="divinfo"></div>
+        <h3>对讲</h3>
+        PU ID<input type="text" class="puidinput" placeholder="请输入PUID">
+        <ul>
+            <li><button>打开</button></li>
+            <li><button>关闭</button></li>
+            <li><button>音频发送</button></li>
+            <li><button>音频接收</button></li>
+            <li><button>获取音量</button></li>
+            <li><button>设置音量</button></li>
+            <li><button>获取会话录像配置</button></li>
+            <li><button>设置会话录像配置</button></li>
+        </ul>
+        <div>
+            icapture <input id="icaptureid" />
+            iplay <input id="iplayid" />
+        </div>
+        <div style="margin-top: 5px">
+            录像配置 <input id="irecordid" />
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script src="../WebClient/js/lib/angular/angular.min.js"></script>
+<script src="Logintemplate/js/logindemo.js"></script>
+<script type="text/javascript" src="../js/jsw.js"></script>
+<script type="text/javascript">
+    var session = null;
+
+    //这就是为了获取登录过的session的接口
+    Demo.AsyncGetSession(function (sess) {
+        session = sess;
+
+        var params = {
+            Idelayvssmooth: 4, //默认值3
+            callback: function (options, response) {
+                console.log("set global delayvssmooth has result:" + response.emms.code);
+            },
+            tag: null
+        };
+
+        session.swSetGlobalControlParam(params); //设置全局控制参数
+    });
+
+
+    function nessInfoInject(domele, fhandle) {
+        var hdlg = -1;
+        let puid = $(domele).parent().parent().find("input").val();//PUID的值
+        let position = $(domele).parent().parent().find(".displaydiv")[0];//视频播放位置
+        let elecapture = $(domele).parent().parent().find("#icaptureid");
+        let eleplay = $(domele).parent().parent().find("#iplayid");
+        var chanel = session.swGetPuChanel(puid, 0);
+        if (position) {
+            hdlg = getDivDialog(position);
+        }
+        return fhandle.bind(domele)(chanel, position, hdlg, elecapture, eleplay);
+    }
+
+    /*
+    * play
+    */
+    var deschanel = null;
+    $(".video ul").find("li:eq(0)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            if (chanel) {
+                deschanel = chanel;
+                var result = chanel.swOpenEx({
+                    div: position,
+                    prototype: 'ocx', //rtmp > hls
+                    callback: onOpenChanelHasResult,
+                    tag: position,
+                    ismuti: true,
+                    media: jSW.MEDIADIR.VIDEORECV,
+                    bovertcp: bovertcpid.checked,
+                    bwindowless: true
+                });
+                if (result != jSW.RcCode.RC_CODE_S_OK) {
+                    alert('打开视频失败: ' + result);
+                }
+            } else {
+                alert('没有该设备通道');
+            }
+        });
+    });
+
+    function onOpenChanelHasResult(options, response, handleObj) {
+        if (response.emms.code == jSW.RcCode.RC_CODE_S_OK) {
+            var desPlayDiv = options.tag;
+            setDivDialog(desPlayDiv, handleObj.hdlg);
+            $(desPlayDiv).parent().find(".circle").removeClass('faild').addClass('success');
+            $(desPlayDiv).parent().find(".divinfo").text(handleObj.hdlg);
+        }
+    }
+
+    function setDivDialog(div, hdlg) {
+        div.dataDlgHandle = hdlg;
+    }
+
+    function getDivDialog(div) {
+        return div.dataDlgHandle;
+    }
+
+    /*
+    * close
+    */
+    $(".video ul").find("li:eq(1)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            if (chanel) {
+                var rc = chanel.swClose(hdlg);
+                if (rc == jSW.RcCode.RC_CODE_S_OK) {
+                    $(position).parent().find(".circle").removeClass('success').addClass('faild');
+                    $(position).parent().find(".divinfo").text("");
+                }
+            } else {
+            }
+        });
+    });
+
+    /*
+    * rotate
+    */
+    $(".video ul").find("li:eq(2)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            if (chanel) {
+                var params = {
+                    hdlg: hdlg,
+                    irotate: 90,
+                    callback: function (opts, response, data) {
+
+                    }
+                };
+                var rc = chanel.swVideoRotate(params);
+            } else {
+            }
+        });
+    });
+
+    /*
+    * full screen
+    */
+    $(".video ul").find("li:eq(3)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            if (chanel) {
+                var params = {
+                    hdlg: hdlg
+                };
+                var rc = chanel.swFullScreen(params);
+            } else {
+            }
+        });
+    });
+
+    /*
+    * hide
+    */
+    $(".video ul").find("li:eq(4)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            if (chanel) {
+                var params = {
+                    hdlg: hdlg
+                };
+                var rc = chanel.swHide(params);
+            } else {
+            }
+        });
+    });
+
+    /*
+    * show
+    */
+    $(".video ul").find("li:eq(5)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            if (chanel) {
+                var params = {
+                    hdlg: hdlg
+                };
+                var rc = chanel.swShow(params);
+            } else {
+            }
+        });
+    });
+
+    /*
+    * 修改视频通道方向
+    */
+    $(".video ul").find("li:eq(6)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            var bAudio = $(this).find("button").text() == "音频接收";
+            var bVideo = true;
+            if (chanel) {
+                var params = {
+                    hdlg: hdlg,
+                    isRecvAudio: bAudio,
+                    isRecvVideo: bVideo,
+                    callback: function (options, response) {
+                        var tag = options.tag;
+                        tag.onGetResult(response.emms.code == jSW.RcCode.RC_CODE_S_OK);
+                    },
+                    tag: {
+                        ele: this,
+                        bAudio: bAudio,
+                        onGetResult: function (bresult) {
+                            if (bresult) {
+                                if (bAudio) {
+                                    $(this.ele).find("button").text("取消接收音频");
+                                    $(this.ele).find("button").css("background", "green")
+                                } else {
+                                    $(this.ele).find("button").text("音频接收");
+                                    $(this.ele).find("button").css("background", "white")
+                                }
+                            }
+                        }
+                    }
+                };
+                var rc = chanel.swAlterVideoDir(params);
+
+            }
+        });
+    });
+
+
+    /*
+    * 视频拉伸
+    */
+    $(".video ul").find("li:eq(7)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            var bStretch = $(this).find("button").text() == "图像拉伸";
+            if (chanel) {
+                var params = {
+                    hdlg: hdlg,
+                    bStretch: bStretch,
+                    callback: function (options, response) {
+                        var tag = options.tag;
+                        tag.onGetResult(response.emms.code == jSW.RcCode.RC_CODE_S_OK);
+                    },
+                    tag: {
+                        ele: this,
+                        bStretch: bStretch,
+                        onGetResult: function (bresult) {
+                            if (bresult) {
+                                if (this.bStretch) {
+                                    $(this.ele).find("button").text("取消图像拉伸");
+                                    $(this.ele).find("button").css("background", "green")
+                                } else {
+                                    $(this.ele).find("button").text("图像拉伸");
+                                    $(this.ele).find("button").css("background", "white")
+                                }
+                            }
+                        }
+                    }
+                };
+                var rc = chanel.swVideoStretch(params);
+            }
+        });
+    });
+
+
+    /*
+    * 本地抓拍
+    */
+    $(".video ul").find("li:eq(8)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            var szFilePath = "c:\\a.jpg";
+            if (chanel) {
+                var params = {
+                    szFilePath: szFilePath,
+                    callback: function (options, response) {
+                        console.log("local snapshot has result:" + response.emms.code);
+                    },
+                    tag: null
+                };
+                var rc = chanel.swLocalSnapshot(params);
+            }
+        });
+    });
+
+    /*
+ * 本地播放参数设置
+ */
+    $(".video ul").find("li:eq(9)").click(function () {
+        var inputVal = Number($(this).parent().find("input").val());
+
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            if (chanel) {
+                var params = {
+                    Idelayvssmooth: inputVal,
+                    callback: function (options, response) {
+                        console.log("set delayvssmooth has result:" + response.emms.code);
+                    },
+                    tag: null,
+                    hdlg: hdlg
+                };
+                var rc = chanel.swSetControlParam(params);
+            }
+        });
+    });
+
+    /*
+    * 打开对讲
+    */
+    $(".intercom ul").find("li:eq(0)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            chanel.swOpenIntercom({
+                isSendAudio: true,
+                isRecvAudio: true,
+                callback: function (opts, response) {
+
+                },
+                tag: null
+            });
+        });
+    });
+
+    /*
+    * 关闭对讲
+    */
+    $(".intercom ul").find("li:eq(1)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            chanel.swCloseIntercom();
+        });
+    });
+
+    /*
+    * 音频发送
+    */
+    $(".intercom ul").find("li:eq(2)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            var params = {
+                isSendAudio: true,
+                isRecvAudio: false,
+                callback: function (opts, response) {
+                },
+                tag: null
+            };
+            chanel.swAlterAudioDir(params);
+        });
+    });
+
+    /*
+    * 音频接收
+    */
+    $(".intercom ul").find("li:eq(3)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg) {
+            var params = {
+                isSendAudio: false,
+                isRecvAudio: true,
+                callback: function (opts, response) {
+                },
+                tag: null
+            };
+            chanel.swAlterAudioDir(params);
+        });
+    });
+
+    /*
+    * 获取对讲音量
+    */
+    $(".intercom ul").find("li:eq(4)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg, elecapture, eleplay) {
+            var params = {
+                callback: function (opts, response, data) {
+                    if (jSW.RcCode.RC_CODE_S_OK == response.emms.code) {
+                        var tag = opts.tag;
+                        tag.setVolume(data);
+                    }
+                },
+                tag: {
+                    capture: elecapture,
+                    play: eleplay,
+                    setVolume: function (valume) {
+                        this.capture.val(valume.icapture);
+                        this.play.val(valume.iplay);
+                    }
+                }
+            };
+            chanel.swGetVolume(params);
+        });
+    });
+
+    /*
+    * 设置对讲音量
+    */
+    $(".intercom ul").find("li:eq(5)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg, elecapture, eleplay) {
+            var params = {
+                volume: {
+                    icapture: (Number)(elecapture.val()),
+                    iplay: (Number)(eleplay.val())
+                },
+                callback: function (opts, response) {
+                },
+                tag: null
+            };
+            chanel.swAlterVolume(params);
+        });
+    });
+
+
+    /*
+    * 获取会话录像配置
+    */
+    $(".intercom ul").find("li:eq(6)").click(function () {
+        var rc = nessInfoInject(this, function (chanel, position, hdlg, elecapture, eleplay) {
+            var params = {
+                callback: function (opts, response, data) {
+                    if (jSW.RcCode.RC_CODE_S_OK == response.emms.code) {
+                        $("#irecordid").val(data.szpath);
+                    }
+                },
+                tag: null
+            };
+            chanel.swGetLocalRecord(params);
+        });
+    });
+
+
+    /*
+    * 设置会话录像配置
+    */
+    $(".intercom ul").find("li:eq(7)").click(function () {
+        var filepath = $("#irecordid").val();
+        var iseconde = 300;
+        var rc = nessInfoInject(this, function (chanel, position, hdlg, elecapture, eleplay) {
+            var params = {
+                szpath: filepath,
+                ifileleninseconds: iseconde,
+                callback: function (opts, response) {
+                },
+                recordCallback: function (data) {
+                    console.log(data);
+                },
+                hdlg: hdlg,
+                tag: null
+            };
+            chanel.swSetLocalRecord(params);
+        });
+    });
+</script>

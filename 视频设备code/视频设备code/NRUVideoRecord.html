@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>NRUVideoRecord</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="css/logindemo.css">
+    <style>
+        .setimg {
+            display: none;
+            position: absolute; /*使图片脱离流*/
+            left: 520px;
+            top: 85px;
+            width: 1056px;
+            height: 683px;
+        }
+        .worngtips{
+            width: 300px;
+            color: red;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body class="container">
+<div style="margin-top: 10px;">
+    <loginmodule></loginmodule>
+    <div style="margin: 10px 0px">
+        <input type="text" id="puid" placeholder="请输入PUID">
+        <input type="button" value="打开视频" onclick="testOpenVideo()" />
+        <input type="button" value="关闭视频" onclick="testCloseVideo()" />
+    </div>
+    <div>
+        录像时长：<input type="number" value="300" id="ilengthnum">
+        <input type="button" value="开始录像" onclick="saveNRURecord()" id="recordbutton" />
+        <div class="worngtips" id="worngtips"></div> <br>
+
+    </div>
+    <div id="id_video" style="width:500px; height:400px; float:left; border: 1px solid #ccc"></div>
+</div>
+</body>
+
+</html>
+
+<script src="../WebClient/js/lib/angular/angular.min.js"></script>
+<script src="Logintemplate/js/logindemo.js"></script>
+<script type="text/javascript" src="../js/jsw.js"></script>
+<script type="text/javascript">
+    var session = null;
+
+    //这就是为了获取登录过的session的接口
+    Demo.AsyncGetSession(function (sess) {
+        session = sess;
+    });
+
+    var worngtips = document.getElementById("worngtips")
+    function testOpenVideo() {
+        var szPuid = $("#puid").val();
+        var chanel = session.swGetPuChanel(szPuid, 0);
+        var strVideoDivId = document.getElementById('id_video')
+        if (chanel) {
+            var result = chanel.swOpenEx({
+                div: strVideoDivId,
+                prototype: 'auto', //rtmp > hls
+                callback: function (options, response) {
+                    // alert(response.emms.code + "视频打开成功，可以获取URl了");
+                }
+            });
+
+            if (result != jSW.RcCode.RC_CODE_S_OK) {
+                // alert('打开视频失败: ' + result);
+                worngtips.innerHTML = "打开视频失败！"+result
+            }
+        } else {
+            // alert('没有该设备通道');
+            worngtips.innerHTML = "没有该设备通道！"
+        }
+    }
+
+    function testCloseVideo() {
+        var szPuid = $("#puid").val();
+        var chanel = session.swGetPuChanel(szPuid, 0);
+        chanel.swClose();
+    }
+
+    var nn = 1;
+    function saveNRURecord (){
+        var ilength = Number($("#ilengthnum").val());
+        var channel = session.swGetPuChanel($("#puid").val(), 0);
+        if(nn==1){
+            if (channel) {
+                try{
+                    var rc = channel.swSetNruRecord({
+                        istart: nn,
+                        ilength: ilength,
+                        imediadir:10,
+                        callback: setNruRecordAVcb,
+                        tag: ''
+                    });
+                    this.bSuccess(rc);
+                    document.getElementById('recordbutton').value = "完成录像";
+                    worngtips.innerHTML = "录像已开始";
+                    nn = 0;
+                }
+                catch (e) {
+                    worngtips.innerHTML = e;
+                    // alert("录像失败！请检查录像路径是否设置完整。")
+                    return false;
+                }
+            }
+        }else{
+            if (channel) {
+                try{
+                    var rc = channel.swSetNruRecord({
+                        istart: nn,
+                        ilength: ilength,
+                        imediadir:10,
+                        callback: setNruRecordAVcb,
+                        tag: ''
+                    });
+                    this.bSuccess(rc);
+                    document.getElementById('recordbutton').value = "开始录像";
+                    worngtips.innerHTML = "录像已结束";
+                    nn = 1;
+                }
+                catch (e) {
+                    worngtips.innerHTML = e
+                    // alert("录像失败！请检查录像路径是否设置完整。")
+                    return false;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    function setNruRecordAVcb (opt, response, data) {
+        var tag = opt.tag;
+        var cb = tag.cb;
+        tag = tag.tag;
+        var bresult = bSuccess(response.emms.code);
+    }
+
+    function setLocalRecordAVrecordcb (data){
+        // var channel = swSetLocalRecord()
+        if(data.storage.iresult == 0){
+            var resulet = "成功"
+            console.log("录像结果："+resulet+","+"录像路径："+data.storage.szfilename)
+        }else{
+            var resulet = "失败";
+            console.log("录像结果："+resulet)
+        }
+    }
+
+    function bSuccess (iresult){
+        return (iresult == jSW.RcCode.RC_CODE_S_OK);
+    }
+
+</script>

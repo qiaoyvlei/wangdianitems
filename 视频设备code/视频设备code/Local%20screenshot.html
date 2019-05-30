@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Localscreenshot</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="css/logindemo.css">
+    <style>
+        .setimg {
+            display: none;
+            position: absolute; /*使图片脱离流*/
+            left: 520px;
+            top: 85px;
+            width: 1056px;
+            height: 683px;
+        }
+        .worngtips{
+            width: 500px;
+            color: red;
+            display: inline-block;
+            margin-left: 20px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body class="container">
+<div style="margin-top: 10px;">
+    <loginmodule></loginmodule>
+    <div style="margin: 10px 0px">
+        <input type="text" id="puid" placeholder="请输入PUID">
+        <input type="button" value="打开视频" onclick="testOpenVideo()" />
+        <input type="button" value="关闭视频" onclick="testCloseVideo()" />
+    </div><br>
+    <div>
+        请选择本地存储截图路径及图片命名：<br>
+        eg：C:\Users\Administrator\Desktop\1.jpg (必须以.jpg结尾！)<br>
+        <input id="path" type="text" name="path" style="width:390px;">
+        <button onclick="browseFolder('path')">选择</button><br>
+        <a href="https://jingyan.baidu.com/article/4b07be3c862d9d48b380f3ba.html" target="_blank">1 Automation不能创建对象？</a>
+        <a href="../WebClient/images/content/internet set.png"  target="_blank"> 2 仍没有权限？</a>
+        <img src="../WebClient/images/content/internet set.png" class="setimg" alt=""><br><br>
+
+        图片质量(0-100,数字越大图片质量越高)：<input type="number" value="100" id="picturequality" max="100" min="0">
+        <input type="button" value="截图" onclick="savelocalScreen()" id="recordbutton" /><br>
+    </div>
+    <div id="id_video" style="width:500px; height:400px; float:left; border: 1px solid #ccc"></div><br>
+    <div class="worngtips" id="worngtips">请打开视频、设置截图路径及图片命名再截图！</div> <br>
+</div>
+</body>
+
+</html>
+
+<script src="../WebClient/js/lib/angular/angular.min.js"></script>
+<script src="Logintemplate/js/logindemo.js"></script>
+<script type="text/javascript" src="../js/jsw.js"></script>
+<script type="text/javascript">
+    var session = null;
+
+    //这就是为了获取登录过的session的接口
+    Demo.AsyncGetSession(function (sess) {
+        session = sess;
+    });
+
+    var worngtips = document.getElementById("worngtips")
+    function testOpenVideo() {
+        var szPuid = $("#puid").val();
+        var chanel = session.swGetPuChanel(szPuid, 0);
+        var strVideoDivId = document.getElementById('id_video')
+        if (chanel) {
+            var result = chanel.swOpenEx({
+                div: strVideoDivId,
+                prototype: 'auto', //rtmp > hls
+                callback: function (options, response) {
+                    // alert(response.emms.code + "视频打开成功，可以获取URl了");
+                }
+            });
+
+            if (result != jSW.RcCode.RC_CODE_S_OK) {
+                // alert('打开视频失败: ' + result);
+                worngtips.innerHTML = "打开视频失败！"+result
+            }
+        } else {
+            // alert('没有该设备通道');
+            worngtips.innerHTML = "没有该设备通道！"
+        }
+    }
+
+    function testCloseVideo() {
+        var szPuid = $("#puid").val();
+        var chanel = session.swGetPuChanel(szPuid, 0);
+        chanel.swClose();
+    }
+
+    function setrecordpath (){
+        var path = document.getElementById('path');
+        if(path.value == ""||path.value == null){
+            return false;
+        }else{
+            return recordpath = path.value
+        }
+    }
+
+    function savelocalScreen(){
+        var puid = $("#puid").val();
+        var channel = session.swGetPuChanel(puid, 0);
+        var path = document.getElementById('path');
+        if (channel) {
+            try{
+                var szpath = setrecordpath();
+                if(szpath == false){
+                    worngtips.innerHTML = "请设置截图路径"
+                    return false
+                }
+                var rc = channel.swLocalSnapshot({
+                    hdlg: 1,
+                    iQuality: $("#picturequality").val(),
+                    szFileName:szpath,
+                    callback: setLocalcb,
+                    tag: ''
+                });
+                this.bSuccess(rc);
+                worngtips.innerHTML = "截图成功"
+            }
+            catch (e) {
+                worngtips.innerHTML = e;
+                // alert("录像失败！请检查录像路径是否设置完整。")
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    function setLocalcb (opt, response, data) {
+        var bresult = bSuccess(response.emms.code);
+    }
+
+    function bSuccess (iresult){
+        return (iresult == jSW.RcCode.RC_CODE_S_OK);
+    }
+
+    function browseFolder (path) {
+        try {
+            var Message = "\u8bf7\u9009\u62e9\u6587\u4ef6\u5939"; //选择框提示信息
+            var Shell = new ActiveXObject("Shell.Application");
+            var Folder = Shell.BrowseForFolder(0, Message, 64, 17); //起始目录为：我的电脑
+            //var Folder = Shell.BrowseForFolder(0, Message, 0); //起始目录为：桌面
+            if (Folder != null) {
+                Folder = Folder.items(); // 返回 FolderItems 对象
+                Folder = Folder.item(); // 返回 Folderitem 对象
+                Folder = Folder.Path; // 返回路径
+                if (Folder.charAt(Folder.length - 1) != "\\") {
+                    Folder = Folder + "\\";
+                };
+
+                var localaddress = document.getElementById(path)
+                if(localaddress.value != Folder){
+                    localaddress.value = Folder;
+                    worngtips.innerHTML = "设置路径成功！请在路径末尾命名图片。"
+                    // alert("设置路径成功")
+                }
+            }
+        }
+        catch (e) {
+            alert(e.message);
+        }
+    }
+</script>

@@ -26,18 +26,15 @@
                     var series = this.series[0];
                     setInterval(function () {
                         $.ajax({
-                            url:"http://222.24.20.127:8080/smartCarefree/sensorData_test",
+                            url:"http://222.24.20.127:1233/ssm/sensorData",
                             type: 'post',
                             dataType: "json",
                             async: false,
                             cache: false,
                             success: function (res){
-                               for(var key in res) {
-                                   datas.push(res[key]);
-                                   break;
-                               }
+                                datas.push(res["temperature"]);
                                 var x=(new Date()).getTime();
-                                var y = Number(res[key]);
+                                var y = Number(res['temperature']);
                                 series.addPoint([x, y], true, true);
                             }
                         });
@@ -93,11 +90,14 @@
         var exporting = {
             enabled: false
         };
-        for(var i=0;i<2;i++){
+        for(var i=0;i<1;i++){
+
             var title = {
                 //text: 'Live random data'
                 text: names[i]+cname[i]
             };
+
+
         var series1= [{
             name: 'Real-time data',
             data: (function () {

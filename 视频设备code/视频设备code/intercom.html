@@ -1,0 +1,302 @@
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>对讲视频通道</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/logindemo.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<div>
+    <loginmodule></loginmodule>
+</div>
+<div class="container" style="box-sizing: border-box">
+
+    <div id="legend" class="">
+        <legend class="">对讲，实时视频，媒体通道的修改(仅支持OCX方式)</legend>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">PUID</label>
+                    <div class="col-sm-2">
+                        <input type="text" id="puid" placeholder="请输入PUID" class="form-control" demo-Puid>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">通道号</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" id="id_cindex" type="text" value=0 />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                </div>
+
+                <div class="col-sm-10">
+                    <div id="id_video" class="" style="width:320px; height:200px; background-color: black;" onclick="onPlayDivClick()" ondblclick="onPlaydbDivClick()"></div>
+                    <legend>实时视频</legend>
+                    <div class="col-sm-12">
+                        <div>
+                            <input id="id_close_audiorec" type="checkbox" />音频接收
+                            <div>
+                                <input class="btn btn-info" type="button" value="打开Video" onclick="testOpenVideo()" />
+                                <input class="btn btn-info" type="button" value="关闭Video" style="margin-left: 20px;" onclick="testCloseVideo()" />
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <input id="id_alter_video_audiorec" type="checkbox" />音频接收
+                            <div>
+                                <input class="btn btn-info" type="button" value="修改Video方向" onclick="testAlterVideoDir()" />
+                                <input class="btn btn-info" type="button" value="旋转视频" onclick="textVideoRotate()" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <legend>对讲</legend>
+                    <div class="col-sm-12">
+                        <div>
+                            <input id="id_open_audiorec" type="checkbox" checked="checked" />音频接收
+                            <input id="id_open_audiosend" type="checkbox" style="margin-left: 20px" checked="checked" />音频发送
+                        </div>
+                        <div class="" style="margin-top: 10px;">
+                            <input class="btn btn-info" type="button" value="打开对讲" onclick="testOpenAudio()" />
+                            <input class="btn btn-info" style="margin-left: 20px;" type="button" value="关闭对讲" onclick="testCloseAudio()" />
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <input id="id_alert_audio_audio_rec" type="checkbox" checked="checked" />音频接收
+                            <input id="id_alert_audio_audio_send" type="checkbox" style="margin-left: 20px" checked="checked" />音频发送
+                            <div>
+                                <input class="btn btn-info" type="button" value="修改Audio方向" onclick="testAlterAudioDir()" />
+                            </div>
+                        </div>
+                    </div>
+                    <legend>调节音量</legend>
+                    <div class="col-sm-12">
+                        <div>
+                            采集音量<input id="id_alert_capture_volume" />
+                            <input class="btn btn-info" type="button" value="获取Volume" onclick="getVolumeAndSet()" />
+                        </div>
+                        <div>
+                            播放音量<input id="id_alert_play_volume" />
+                            <input class="btn btn-info" type="button" value="修改Volume" onclick="testSetVolume()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+
+<script src="../WebClient/js/lib/angular/angular.min.js"></script>
+<script src="Logintemplate/js/logindemo.js"></script>
+<script type="text/javascript" src="../js/jsw.js"></script>
+<script type="text/javascript">
+
+    var session = null;
+
+    /*
+    *
+    */
+    Demo.AsyncGetSession(function (sess) {
+        session = sess;
+    });
+
+    function onPlayDivClick() {
+        event.currentTarget.style.border = "5px solid red";
+    }
+
+    function onPlaydbDivClick() {
+        event.currentTarget.style.border = "0px solid white";
+    }
+
+    function testOpenVideo() {
+        var szpuid = document.getElementById('puid').value;
+        var channelindex = document.getElementById('id_cindex').value;
+
+        var chanel = session.swGetPuChanel(szpuid, channelindex);
+        var result = chanel.swOpenEx({
+            bwindowless:false,
+            ismuti:true,
+            bstretch:true,
+            bovertcp:document.getElementById("id_close_audiorec").checked,
+            callback: function (options, response) {
+                if (response.emms.code == jSW.RcCode.RC_CODE_S_OK) {
+                    alert('打开视频成功: ' + result);
+                }
+            },
+            div: 'id_video',
+            media: jSW.MEDIADIR.VIDEORECV | jSW.MEDIADIR.AUDIORECV
+        });
+    }
+
+    function testCloseVideo() {
+        var szpuid = document.getElementById('puid').value;
+        var channelindex = document.getElementById('id_cindex').value;
+        var chanel = session.swGetPuChanel(szpuid, channelindex);
+        var result = chanel.swClose();
+        if (result != jSW.RcCode.RC_CODE_S_OK) {
+            alert('打开对讲失败: ' + result);
+        }
+    }
+
+    function testOpenAudio() {
+        var chanel = getSwChanel();
+        var rec = document.getElementById('id_open_audiorec').checked;
+        var send = document.getElementById('id_open_audiosend').checked;
+        if (chanel) {
+            var result = chanel.swOpenIntercom({
+                isSendAudio: send,
+                isRecvAudio: rec,
+                callback: function (options, response) {
+                    if (response.emms.code == jSW.RcCode.RC_CODE_S_OK) {
+                        alert('打开对讲成功: ' + result);
+                    }
+                },
+                tag: chanel
+            });
+
+            if (result != jSW.RcCode.RC_CODE_S_OK) {
+                alert('打开对讲: ' + result);
+            }
+        } else {
+            alert('没有该设备通道');
+        }
+    }
+
+    function testCloseAudio() {
+        var chanel = getSwChanel();
+        if (chanel) {
+            var rc = chanel.swCloseIntercom({
+                callback: function (options, response) {
+                    alert('关闭对讲: ' + response.emms.code);
+                }
+            });
+            if (rc != jSW.RcCode.RC_CODE_S_OK) {
+                alert('关闭对讲失败: ' + rc);
+            }
+        }
+    }
+
+
+    function testAlterVideoDir() {
+        var videoaudiorec = document.getElementById("id_alter_video_audiorec").checked;
+        var chanel = getSwChanel();
+        if (chanel) {
+            chanel.swAlterVideoDir({
+                isRecvAudio: videoaudiorec,
+                callback: function (options, response) {
+                    if (response.emms.code == jSW.RcCode.RC_CODE_S_OK) {
+                        console.log("alter video success");
+                    }
+                },
+                tag: null
+            });
+        }
+    }
+
+    function textVideoRotate() {
+        // var videoaudiorec = document.getElementById("id_alter_video_audiorec").checked;
+        var chanel = getSwChanel();
+        if (chanel) {
+            chanel.swVideoRotate({
+                irotate: 90,
+                callback: function (options, response) {
+                    if (response.emms.code == jSW.RcCode.RC_CODE_S_OK) {
+                        console.log("rotate video success");
+                    }
+                },
+                tag: null
+            });
+        }
+    }
+
+    function testAlterAudioDir() {
+        var audioaudiorec = document.getElementById("id_alert_audio_audio_rec").checked;
+        var audioaudiosend = document.getElementById("id_alert_audio_audio_send").checked;
+        var chanel = getSwChanel();
+        if (chanel) {
+            chanel.swAlterAudioDir({
+                isSendAudio: audioaudiosend,
+                isRecvAudio: audioaudiorec,
+                callback: function (options, response) {
+                    if (response.emms.code == jSW.RcCode.RC_CODE_S_OK) {
+                        console.log("alter audio success");
+                    }
+                },
+                tag: null
+            });
+        }
+    }
+
+    function getSwChanel() {
+        var szpuid = document.getElementById('puid').value;
+        var channelindex = document.getElementById('id_cindex').value;
+        var chanel = null;
+        if (session) {
+            chanel = session.swGetPuChanel(szpuid, channelindex);
+        }
+        return chanel;
+    }
+
+    function getVolumeAndSet() {
+        var chanel = getSwChanel();
+        if (chanel) {
+            var rc = chanel.swGetVolume({
+                callback: function (options, response, data) {
+                    if (response.emms.code == jSW.RcCode.RC_CODE_S_OK) {
+                        document.getElementById('id_alert_capture_volume').value = data.icapture;
+                        document.getElementById('id_alert_play_volume').value = data.iplay;
+                    }
+                },
+                tag: null
+            });
+            if (jSW.RcCode.RC_CODE_S_OK != rc) {
+                console.log("get volume faild!");
+            }
+        }
+    }
+
+    function testSetVolume() {
+        var icapture = document.getElementById('id_alert_capture_volume').value;
+        var iplay = document.getElementById('id_alert_play_volume').value;
+
+        var chanel = getSwChanel();
+        if (chanel) {
+            var rc = chanel.swAlterVolume({
+                volume: {
+                    icapture: icapture,
+                    iplay: iplay
+                },
+                callback: function (options, response) {
+                    if (jSW.RcCode.RC_CODE_S_OK == response.emms.code) {
+                        // var tag = options.tag;
+                        console.log('change volume ok!');
+                    }
+                },
+                tag: {
+                    icapture: icapture,
+                    iplay: iplay
+                }
+            });
+
+            if (jSW.RcCode.RC_CODE_S_OK != rc) {
+                console.log('change volume faild!');
+            }
+        }
+    }
+</script>
