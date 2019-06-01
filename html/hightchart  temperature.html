@@ -5,6 +5,77 @@
     <title></title>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/highcharts.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        body{
+            display: flex;
+            flex-direction: row;
+            /*background-color: #bec5cc;*/
+        }
+        .introduce{
+            flex: 3;
+            display: flex;
+            flex-direction:column;
+            overflow: hidden;
+        }
+        .image{
+            margin: 20px 100px;
+            flex: 2;
+            display: flex;
+            flex-direction: row;
+            border: 1px solid #cccccc;
+            border-radius: 10px;
+            float: left;
+            text-indent: 2em;
+            background-color: #FFFFFF;
+
+        }
+        .new{
+            border: none;
+            flex: 3;
+        }
+        .son1{
+            flex: 1;
+            background:url(../images/DHT11.png) no-repeat;
+            background-size: contain;
+            overflow: hidden;
+        }
+        .son2{
+            flex: 1;
+            padding: 50px;
+        }
+        h2{
+            text-align: center;
+        }
+        .introduce:hover{
+            border-color:#2A9F96;
+        }
+        button{
+            height: 50px;
+            width: 80px;
+            border: none;
+            border-radius: 10px;
+            background-color: #2A9F96;
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 200;
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #1b6d85;
+            color: yellow;
+        }
+    </style>
 </head>
 <body>
 <div class="container0 dfg"  style="width: 800px; height: 380px; margin: 0 auto"></div>
@@ -90,12 +161,9 @@
         var exporting = {
             enabled: false
         };
-        for(var i=0;i<1;i++){
-
-            var title = {
-                //text: 'Live random data'
-                text: names[i]+cname[i]
-            };
+        for(var i=0;i<11;i++){
+            var title = {//text: 'Live random data'
+                text: names[i]+cname[i]};
 
 
         var series1= [{

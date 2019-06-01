@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head lang="en">
     <meta charset="UTF-8">
     <title>ViewMore</title>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/highcharts.js"></script>
     <style>
         *{
             margin: 0;
@@ -36,9 +38,9 @@
             background-color: #FFFFFF;
 
         }
-        iframe{
+        .new{
             border: none;
-             flex: 3;
+            flex: 3;
         }
         .son1{
             flex: 1;
@@ -77,7 +79,6 @@
     </style>
 </head>
 <body>
-<!--<div style="flex: 1;"></div>-->
 <div class="introduce">
     <div class="image">
         <div class="son1"></div>
@@ -88,7 +89,9 @@
         </div>
 
     </div>
-    <iframe src="hightchart%20%20temperature.html" scrolling="no"></iframe>
+    <div class="new">
+        <div class="container0 dfg"  style="width: 800px; height: 380px; margin: 0 auto"></div>
+    </div>
 </div>
 <div style="flex: 0.7;"></div>
 <button type="button" onclick="window.location.href='deviceTable.html'">返回</button>
@@ -114,25 +117,158 @@
     }
     var number1=getQueryStringArgs();
     var number=number1["id"];
-   $(function () {
-       $.ajax({
-           url:"http://222.24.20.127:1233/ssm/sensorData_one?id="+number,
-           type: 'post',
-           dataType: "json",
-           data:{id:number},
-           async: false,
-           cache: false,
-           success:function (res) {
-               console.log(res);
-               $("h2").html(res['name']);
-               $("p").html(res['detail']);
-               $(".son1").css('background','url(../images/'+res['id']+'.png)');
-               $(".son1").css('background-size','contain');
-               $(".son1").css('background-repeat','no-repeat');
-               console.log($("iframe").$("div"));
-           }
-       })
-   })
+    $(function () {
+        $.ajax({
+            url:"http://222.24.20.127:1233/ssm/sensorData_one?id="+number,
+            type: 'post',
+            dataType: "json",
+            data:{id:number},
+            async: false,
+            cache: false,
+            success:function (res) {
+                console.log(res);
+                $("h2").html(res['name']);
+                $("p").html(res['detail']);
+                $(".son1").css('background','url(../images/'+res['id']+'.png)');
+                $(".son1").css('background-size','contain');
+                $(".son1").css('background-repeat','no-repeat');
+            }
+        })
+    });
+    var datas=[],names=["temperature","illumination","speed","rainfall","direction","isRain","mq135","digitalHumidity","current", "voltage","liquidLevel","WIFI"];
+    var cname=['温度传感器(℃)','光照传感器(lux)','风速传感器(m/s)',
+        '降雨量传感器','风向传感器','是否下雨传感器','数字湿度传感器(%RH)',
+        '电流传感器(A)','电压传感器(V)','液位传感器(L)','WIFI模块'];
+    $(".dfg").ready(function() {
+        var chart = {
+            type: 'spline',
+            animation: Highcharts.svg,// don't animate in IE < IE 10.
+            marginRight: 10,
+            marginTop:60,
+            events: {
+                load: function () {
+                    // set up the updating of the chart each second
+                    var series = this.series[0];
+                    setInterval(function () {
+                        $.ajax({
+                            url:"http://222.24.20.127:1233/ssm/sensorData_one?id="+number,
+                            type: 'post',
+                            dataType: "json",
+                            async: false,
+                            cache: false,
+                            success: function (res){
+                                console.log(res);
+                                datas.push(res["data"]);
+                                var x=(new Date()).getTime();
+                                var y = Number(res['data']);
+                                series.addPoint([x, y], true, true);
+                            }
+                        });
+                    }, 1000);
+                }
+            }
+        };
+        var xAxis = {
+            type: 'datetime',
+            tickPixelInterval: 150//横轴的间距
+        };
+        var yAxis = {
+            title: {
+                text:'Value'
+            },
+            plotLines: [{
+                value: 0,
+                width: 3,
+                color: '#808080'//横轴的线颜色
+            }]
+        };
+        //标注
+        var tooltip = {
+            formatter: function () {
+                //console.log(this.x);
+                return '<b>' + this.series.name + '</b><br/>' +
+                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                    Highcharts.numberFormat(this.y, 2);
+            }
+        };
+        //以平滑的曲线展现
+        var plotOptions = {
+            area: {
+                pointStart: 1940,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        };
+        var legend = {
+            enabled: false
+        };
+        var credits={
+            enabled:false
+        };
+        var exporting = {
+            enabled: false
+        };
+        var m,n;
+        for(var i=0;i<1;i++){
+            $.ajax({
+                    url:"http://222.24.20.127:1233/ssm/sensorData_one?id="+number,
+                    type: 'post',
+                    dataType: "json",
+                    async: false,
+                    cache: false,
+                    success: function (res){
+                     var h=res['id'];
+                     m=cname[h-1]+ names[h-1];
+                     n=res['data'];
+                      // console.log(m);
+                    }
+                });
+
+
+            var title = {//text: 'Live random data'
+                text:m
+            };
+            var series1= [{
+                name: 'Real-time data',
+                data: (function () {
+                    // generate an array of random data
+                    var data = [],time = (new Date()).getTime(),j;
+                    for (j = -6; j <= 0; j += 1) {//代表有多少个点
+                        data.push({
+                            x: time + j * 1000,
+                            y:(Math.random() * (1.1 - 1) + 1)*Math.floor(n)
+                        });
+                    }
+                    return data;
+                }())
+            }];
+            var json = {};
+            json.chart = chart;
+            json.title =title;
+            json.tooltip = tooltip;
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;
+            json.legend = legend;
+            json.exporting = exporting;
+            json.series = series1;
+            json.plotOptions = plotOptions;
+            json.credits=credits;
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false
+                }
+            });
+            $('.container'+i).highcharts(json);
+        }
+    });
 </script>
 </body>
 </html>
