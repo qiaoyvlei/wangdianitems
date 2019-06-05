@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>管理设备</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="../js/highcharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link href="../css/init.css" rel="stylesheet">
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<!--导航和底部样式-->
+		<link href="../css/headerAndFooter.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<!--图标-->
+		<link href="../Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+		<!-- jquery ui-->
+		<link href="../css/jquery-ui.css" rel="stylesheet">
+		<!-- multiselect-->
+		<link href="../css/jquery.multiselect.css" rel="stylesheet">
+		<!--主要写的css代码-->
+		<link href="../css/default.css" rel="stylesheet" type="text/css" />
+		<script src="http://webapi.amap.com/maps?v=1.3&key=b79caad469676224a0e32143ce5add02"></script>
+
+		<!-- 地理位置-->
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.2&key=e58bae199679e49544969133bc20896e&plugin=AMap.DistrictSearch"></script>
+		<script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
+		<style>
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+			
+			._all_wrap {
+				position: absolute;
+				display: block;
+				top: 65px;
+				bottom: 0;
+				background-color: #fff;
+				width: 100%;
+				left: 0;
+			}
+			
+			._all_wrap .row {
+				width: 100%;
+				height: 100%;
+			}
+			/*侧菜单栏*/
+			
+			._sidebar {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				overflow: auto;
+			}
+			
+			._sidebar .panel {
+
+				border: none;
+				color: #fff;
+				list-style: none;
+				background-color: rgb(245, 246, 247)
+			}
+			
+			.sidebar .panel-group {
+				border: dashed 1px black;				
+				background-color: rgb(245, 246, 247)
+			}
+			
+			._sidebar .panel-group .panel-default {
+
+				background-color: rgb(245, 246, 247)
+			}
+			
+			._sidebar .panel-body {
+				border-top: 10px solid #00BFFF;
+				background-color: rgb(245, 246, 247);
+				font: 14px "黑体";
+				cursor: pointer;
+				color: #000000;
+			}
+			
+			._sidebar .panel-heading {
+				width: 200px;
+				height: 50px;
+				box-sizing: border-box;
+				background-color: rgb(245, 246, 247);
+				border-bottom: 1px solid #222;
+				padding: 0;
+				margin: 0;
+			}
+			
+			._sidebar .panel-heading .panel-title {
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+			}
+			
+			._sidebar .panel-heading .panel-title a {
+				box-sizing: border-box;
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+				font: 20px/50px "宋体";
+				text-align: left;
+				padding-left: 15px;
+				text-decoration: none;
+			}
+			
+			._sidebar .panel-heading:hover {
+				background-color: lightgoldenrodyellow;
+				color: #000000;
+			}
+			
+			._sidebar .panel-body:hover {
+				background-color: yellow;
+				color: #000000;
+			}
+			
+			._sidebar .panel-body {
+				transition: 0.2s;
+			}
+			
+			._sidebar .panel-heading {
+				transition: 0.4s;
+			}
+			/*滚动条*/
+			
+			::-webkit-scrollbar {
+				width: 0px;
+			}
+			
+			.sub_page {
+				/*background-color: red;*/
+				display: inline-block;
+				height: 100%;
+			}
+			
+			.sub_page iframe {
+				box-sizing: border-box;
+				border: none;
+				width: 100%;
+				height: 99%;
+				margin-left: -20px;
+			}
+			.header .logined {
+				margin-left: 45%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<nav class="header navbar navbar-fixed-top">
+				<img class="logo" src="../images/homePage-logo.png" />
+				<!--logo-->
+				<a class="items" href="homePages.html">视频监视平台</a>
+				<a class="items" href="homePages.html">如何使用</a>
+				<div class="logined">
+					<a class="developerBtn" href="userManage.html">开发者中心</a>
+					<a class="icon-bell bell" href="newMessage.html"></a>
+					<a class="icon-user user" href="userDocument.html"></a>
+				</div>
+			</nav>
+		</header>
+		<div class="container-fluid all">
+			<section class="_all_wrap container">
+				<div class="row">
+					<section class="_sidebar col-md-1" style="background-color:rgb(245,246,247);min-width: 200px;">
+						<div class="panel-group" style="position: absolute;left: 0;right: 0;">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" 
+									   href="#collapse1">
+										视频预览
+									</a>
+								</h4>
+								</div>
+								<div id="collapse1" class="panel-collapse collapse out">
+									<div class="panel-body" style="border: none;" id="menu1_1">
+										设备1
+									</div>
+									<div class="panel-body" style="border-top: 1px solid #333;" id="menu1_2">
+										设备2
+									</div>
+									<div class="panel-body" style="border-top: 1px solid #333;" id="menu1_3">
+										设备3
+									</div>
+									<div class="panel-body" style="border-top: 1px solid #333;" id="menu1_4">
+										设备4
+									</div>
+								</div>
+							</div>
+
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" 
+									   href="#collapse2">
+										录像检索
+									</a>
+								</h4>
+								</div>
+								<div id="collapse2" class="panel-collapse collapse out">
+									<div class="panel-body" style="border: none;" id="menu6_1">
+										增删查改
+									</div>
+									<div class="panel-body" style="border-top: 1px solid #333;" id="menu6_1">
+										实时数据监控
+									</div>
+								</div>
+							</div>
+
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" 
+									   href="#collapse3">
+										轨迹回放
+									</a>
+								</h4>
+								</div>
+								<div id="collapse3" class="panel-collapse collapse out">
+									<div class="panel-body" style="border: none;" id="menu2_1">
+										本地存储
+									</div>
+									<div class="panel-body" style="border-top: 1px solid #333;" id="menu2_2">
+										前端存储
+									</div>
+									<div class="panel-body" style="border-top: 1px solid #333;" id="menu2_3">
+										平台存储
+									</div>
+								</div>
+							</div>
+
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" 
+									   href="#collapse4">
+										电子地图
+									</a>
+								</h4>
+								</div>
+								<div id="collapse4" class="panel-collapse collapse out">
+									<div class="panel-body" style="border: none;" id="menu3_1">
+										考试成绩预测
+									</div>
+									<div class="panel-body" style="border-top: 1px solid #333;" id="menu3_2">
+										考试题目生成
+									</div>
+								</div>
+							</div>
+
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" 
+									   href="#collapse5">
+										集群通话
+									</a>
+								</h4>
+								</div>
+								<div id="collapse5" class="panel-collapse collapse out">
+									<div class="panel-body" style="border: none;" id="menu4_1">
+										成绩统计
+									</div>
+									<div class="panel-body" style="border-top: 1px solid #333;" id="menu4_2">
+										行为统计
+									</div>
+								</div>
+							</div>
+
+							
+						</div>
+					</section>
+
+	</body>
+
+</html>
